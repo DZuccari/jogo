@@ -417,7 +417,7 @@ function newGame(hostPid, players, settings){
 }
 function gWords(G){ return BANK[G.queue[G.round]][1].split(' '); }
 function gHidden(G){ var c=0; G.revealed.forEach(function(r){ if(!r)c++; }); return c; }
-function gValue(G){ return Math.max(1, gHidden(G) - G.errors); }
+function gValue(G){ return G.revealed.length; }
 function gDone(G){ return G.phase==='solved' || G.phase==='unsolved'; }
 
 function gStart(G){
@@ -483,7 +483,6 @@ function gGuess(G,text){
   if(isCorrect(text, BANK[G.queue[G.round]][2])) return gAward(G,v);
   G.lastGuess = text;
   G.pending = v;
-  G.errors++;
   G.phase = 'wrong';
   G.seq++;
 }
@@ -534,7 +533,7 @@ function applyIntent(G, from, it, hostActor, localMode){
       if(G.phase==='wrong'){ gPass(G,''); return true; }
       break;
     case 'override':
-      if(hostActor && G.phase==='wrong'){ G.errors--; gAward(G,G.pending); return true; }
+      if(hostActor && G.phase==='wrong'){ gAward(G,G.pending); return true; }
       break;
     case 'next':
       if(gDone(G)){ gNextRound(G); return true; }
@@ -974,13 +973,13 @@ function settingsHtml(su){
 function heroHtml(){
   var sample = [null,null,'amarela',null,'macacos',null,null];
   return '<section class="hero"><h1>Pergunta Escondida</h1>'
-    + '<p class="lede">A pergunta fica coberta. O grupo revela uma palavra por vez e ganha mais quem responder vendo menos.</p>'
+    + '<p class="lede">A pergunta fica coberta. O grupo revela uma palavra por vez e leva os pontos quem descobrir a resposta primeiro.</p>'
     + '<div class="sample"><div class="board" aria-hidden="true">'+tilesHtml(sample,false,-1)+'</div>'
     + '<small>Exemplo: com duas palavras na tela, alguém já arrisca banana.</small></div>'
     + '<ol class="rules">'
     + '<li><span>Na sua vez, escolha uma casinha numerada. A palavra daquela posição aparece para todos.</span></li>'
     + '<li><span>Depois de revelar, digite a resposta ou passe a vez. Cada jogador tem uma tentativa por vez.</span></li>'
-    + '<li><span>A pergunta vale 1 ponto para cada palavra ainda escondida. Cada resposta errada tira 1 ponto desse valor.</span></li>'
+    + '<li><span>A pergunta vale 1 ponto para cada palavra que ela tem. Uma pergunta de 9 palavras vale 9 pontos do começo ao fim. Errar não tira pontos de ninguém, só passa a vez.</span></li>'
     + '<li><span>Quem acertar leva os pontos em jogo. Vence quem somar mais pontos no fim da partida.</span></li>'
     + '</ol></section>';
 }
@@ -1130,7 +1129,7 @@ function renderGame(V){
     }
   }else if(V.phase==='wrong'){
     h += '<p class="verdict bad">'+esc(V.lastGuess)+' não é a resposta.</p>';
-    h += '<p class="do">'+tn+' errou. '+(V.lastChance ? 'Essa era a última tentativa desta pergunta.' : 'A pergunta agora vale '+pts(Number(V.value)||0)+'.')+'</p>';
+    h += '<p class="do">'+tn+' errou. '+(V.lastChance ? 'Essa era a última tentativa desta pergunta.' : 'A pergunta continua valendo '+pts(Number(V.value)||0)+'.')+'</p>';
     h += '<div class="actions"><button type="button" class="btn" id="go" data-act="cont">'
       + (V.lastChance ? 'Ver a resposta' : 'Passar a vez para '+esc(V.nextName))+'</button>';
     if(host) h += '<button type="button" class="btn ghost" data-act="override">Contar como certa</button>';
