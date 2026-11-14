@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pergunta Escondida</title>
-<meta name="description" content="Jogo de perguntas para grupos. A pergunta fica escondida e aparece uma palavra por vez.">
+<title>Noite de Jogos</title>
+<meta name="description" content="Sete jogos de conversa para grupos de amigos, cada pessoa no próprio celular.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -203,6 +203,55 @@ button.tile:hover{transform:translateY(-4px);background:var(--hot);border-color:
   .tile.just{animation:none}
   .btn,button.tile{transition:none}
 }
+
+/* ---- Noite de Jogos additions ---- */
+h3{margin:0;font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:1.3rem;line-height:1}
+.menu{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;border-top:3px solid var(--ink);max-width:36em}
+.menu li{display:grid;grid-template-columns:minmax(0,11.5em) 1fr;gap:14px;padding:10px 2px;border-bottom:2px solid var(--ink);align-items:baseline}
+.menu strong{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:1.2rem;line-height:1.05}
+.picker{display:flex;flex-wrap:wrap;gap:8px}
+.pick{font-family:var(--display);text-transform:uppercase;font-size:1.05rem;line-height:1;padding:.6em .8em;border:3px solid var(--ink);border-radius:4px;background:transparent}
+.pick[aria-pressed="true"]{background:var(--ink);color:var(--sun)}
+.about{display:flex;flex-direction:column;gap:10px}
+.how{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:6px}
+.value-row,.counter{display:flex;align-items:baseline;gap:10px}
+.value-row .num,.counter .num{font-family:var(--display);font-size:3.4rem;line-height:.85;font-variant-numeric:tabular-nums}
+.value-row .lab,.counter .lab{font-weight:700}
+.theme{display:flex;flex-direction:column;gap:6px}
+.theme .lab{font-weight:700;font-size:.9rem;text-transform:uppercase;letter-spacing:.07em}
+.theme .big{font-family:var(--display);text-transform:uppercase;font-size:clamp(2rem,5.2vw,3.6rem);line-height:.98;text-wrap:balance;overflow-wrap:anywhere}
+.btn.hotbtn{background:var(--hot);border-color:var(--hot);color:#fff}
+.btn.armed{background:var(--go);border-color:var(--go);color:#fff}
+.taboo{background:var(--ink);color:var(--sun);border-radius:6px;padding:18px 20px;display:flex;flex-direction:column;gap:8px}
+.taboo .word{font-family:var(--display);text-transform:uppercase;font-size:clamp(2.2rem,6vw,3.4rem);line-height:.95}
+.taboo .lab{font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.07em;color:#fff}
+.taboo ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.taboo li{border:2px solid var(--sun);border-radius:999px;padding:.2em .7em;font-weight:700}
+.pad{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.pad .btn{padding:.7em 0;font-size:1.3rem}
+.slots{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.slots li{display:grid;grid-template-columns:2.4em 1fr auto;gap:12px;align-items:center;background:var(--ink);color:var(--sun);border:3px solid var(--ink);border-radius:4px;padding:8px 12px}
+.slots li.open{background:var(--paper);color:var(--ink)}
+.slots .rk{font-family:var(--display);font-size:1.4rem;line-height:1}
+.slots .an{font-family:var(--display);text-transform:uppercase;font-size:1.5rem;line-height:1;overflow-wrap:anywhere}
+.slots .by{font-weight:600;font-size:.85rem}
+.maincol{display:flex;flex-direction:column;gap:24px;min-width:0}
+.maincol .quiet{margin-top:-6px}
+.game .turn{min-height:0}
+.result{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;font-size:1.08rem}
+.cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.card{background:var(--paper);border:3px solid var(--ink);border-radius:6px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:6px;min-height:9.6em}
+.card .pn{font-weight:700;font-size:.82rem;text-transform:uppercase;letter-spacing:.07em}
+.card .idn{font-family:var(--display);text-transform:uppercase;font-size:clamp(1.7rem,3vw,2.3rem);line-height:1;overflow-wrap:anywhere}
+.card .ds{font-size:.92rem}
+.card .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:8px}
+.tag{font-size:.76rem;font-weight:700;padding:.15em .6em;border:2px solid currentColor;border-radius:999px}
+.tag.hot{background:var(--hot);border-color:var(--hot);color:#fff}
+.tag.go{background:var(--go);border-color:var(--go);color:#fff}
+.card.secret{background:var(--ink);color:var(--sun)}
+.card.secret .idn.q{font-size:4.6rem;line-height:.85}
+.card.now{box-shadow:0 0 0 5px var(--hot)}
+@media (max-width:860px){ .menu li{grid-template-columns:minmax(0,1fr);gap:2px} .pad{grid-template-columns:repeat(4,minmax(0,1fr))} }
 </style>
 </head>
 <body>
@@ -229,7 +278,7 @@ safe-buffer/index.js:
 */
 </script>
 <script>
-var CATS = {
+var PE_CATS = {
   geo:'Geografia',
   his:'História e artes',
   cie:'Ciência e natureza',
@@ -240,7 +289,7 @@ var CATS = {
 };
 
 /* Each entry: category, hidden question without the question mark, accepted answers. The first answer is the one shown on screen. */
-var BANK = [
+var PE_BANK = [
   ['geo','Qual é a capital do país que tem formato de bota',['Roma']],
   ['geo','Qual é o maior oceano do planeta Terra',['Pacífico','oceano Pacífico']],
   ['geo','Em qual continente fica o deserto do Saara',['África']],
@@ -339,6 +388,219 @@ var BANK = [
   ['dia','Qual é o resultado de sete vezes oito',['56','cinquenta e seis']]
 ];
 
+var QS_CATS = {
+  esp:'Esportes',
+  mus:'Música',
+  tv:'TV e cinema',
+  his:'História e artes',
+  per:'Personagens',
+  des:'Desenhos e games'
+};
+
+/* Each entry: category, identity, a short description that helps the group answer questions. */
+var QS_BANK = [
+  ['esp','Pelé','jogador de futebol'],
+  ['esp','Ayrton Senna','piloto de Fórmula 1'],
+  ['esp','Marta','jogadora de futebol'],
+  ['esp','Neymar','jogador de futebol'],
+  ['esp','Ronaldo Fenômeno','jogador de futebol'],
+  ['esp','Ronaldinho Gaúcho','jogador de futebol'],
+  ['esp','Zico','jogador de futebol'],
+  ['esp','Romário','jogador de futebol'],
+  ['esp','Lionel Messi','jogador de futebol argentino'],
+  ['esp','Cristiano Ronaldo','jogador de futebol português'],
+  ['esp','Maradona','jogador de futebol argentino'],
+  ['esp','Usain Bolt','velocista jamaicano'],
+  ['esp','Michael Jordan','jogador de basquete'],
+  ['esp','LeBron James','jogador de basquete'],
+  ['esp','Oscar Schmidt','jogador de basquete'],
+  ['esp','Hortência','jogadora de basquete'],
+  ['esp','Serena Williams','tenista americana'],
+  ['esp','Rafael Nadal','tenista espanhol'],
+  ['esp','Guga','tenista brasileiro'],
+  ['esp','Rebeca Andrade','ginasta'],
+  ['esp','Daiane dos Santos','ginasta'],
+  ['esp','Simone Biles','ginasta americana'],
+  ['esp','Gabriel Medina','surfista'],
+  ['esp','Michael Phelps','nadador americano'],
+  ['esp','Lewis Hamilton','piloto de Fórmula 1'],
+  ['esp','Anderson Silva','lutador de MMA'],
+  ['esp','Muhammad Ali','boxeador'],
+  ['esp','Mike Tyson','boxeador'],
+
+  ['mus','Anitta','cantora'],
+  ['mus','Ivete Sangalo','cantora'],
+  ['mus','Roberto Carlos','cantor'],
+  ['mus','Caetano Veloso','cantor e compositor'],
+  ['mus','Gilberto Gil','cantor e compositor'],
+  ['mus','Chico Buarque','cantor e compositor'],
+  ['mus','Rita Lee','cantora de rock'],
+  ['mus','Raul Seixas','cantor de rock'],
+  ['mus','Tim Maia','cantor'],
+  ['mus','Elis Regina','cantora'],
+  ['mus','Alcione','cantora de samba'],
+  ['mus','Zeca Pagodinho','sambista'],
+  ['mus','Marília Mendonça','cantora sertaneja'],
+  ['mus','Luan Santana','cantor sertanejo'],
+  ['mus','Gusttavo Lima','cantor sertanejo'],
+  ['mus','Wesley Safadão','cantor de forró'],
+  ['mus','Ludmilla','cantora'],
+  ['mus','Pabllo Vittar','cantora e drag queen'],
+  ['mus','Michael Jackson','cantor, o rei do pop'],
+  ['mus','Elvis Presley','cantor, o rei do rock'],
+  ['mus','Madonna','cantora'],
+  ['mus','Beyoncé','cantora'],
+  ['mus','Shakira','cantora colombiana'],
+  ['mus','Taylor Swift','cantora'],
+  ['mus','Lady Gaga','cantora'],
+  ['mus','Rihanna','cantora'],
+  ['mus','Justin Bieber','cantor canadense'],
+  ['mus','Freddie Mercury','vocalista da banda Queen'],
+  ['mus','John Lennon','integrante dos Beatles'],
+  ['mus','Bob Marley','cantor de reggae'],
+
+  ['tv','Xuxa','apresentadora de TV'],
+  ['tv','Silvio Santos','apresentador de TV'],
+  ['tv','Faustão','apresentador de TV'],
+  ['tv','Ana Maria Braga','apresentadora de TV'],
+  ['tv','Luciano Huck','apresentador de TV'],
+  ['tv','Marcos Mion','apresentador de TV'],
+  ['tv','Fátima Bernardes','apresentadora e jornalista'],
+  ['tv','William Bonner','jornalista de TV'],
+  ['tv','Galvão Bueno','narrador esportivo'],
+  ['tv','Jô Soares','apresentador e humorista'],
+  ['tv','Renato Aragão','humorista, o Didi'],
+  ['tv','Whindersson Nunes','humorista'],
+  ['tv','Tatá Werneck','atriz e humorista'],
+  ['tv','Paulo Gustavo','ator e humorista'],
+  ['tv','Fernanda Montenegro','atriz'],
+  ['tv','Taís Araújo','atriz'],
+  ['tv','Bruna Marquezine','atriz'],
+  ['tv','Wagner Moura','ator'],
+  ['tv','Rodrigo Santoro','ator'],
+  ['tv','Lázaro Ramos','ator'],
+  ['tv','Tony Ramos','ator'],
+  ['tv','Selton Mello','ator'],
+  ['tv','Gisele Bündchen','modelo'],
+  ['tv','Leonardo DiCaprio','ator americano'],
+  ['tv','Brad Pitt','ator americano'],
+  ['tv','Angelina Jolie','atriz americana'],
+  ['tv','Tom Cruise','ator americano'],
+  ['tv','Will Smith','ator americano'],
+  ['tv','Jackie Chan','ator de filmes de luta'],
+  ['tv','Arnold Schwarzenegger','ator e fisiculturista'],
+  ['tv','Marilyn Monroe','atriz americana'],
+  ['tv','Charlie Chaplin','ator do cinema mudo'],
+
+  ['his','Albert Einstein','cientista'],
+  ['his','Isaac Newton','cientista'],
+  ['his','Galileu Galilei','cientista'],
+  ['his','Marie Curie','cientista'],
+  ['his','Charles Darwin','cientista'],
+  ['his','Santos Dumont','inventor e aviador'],
+  ['his','Neil Armstrong','astronauta'],
+  ['his','Dom Pedro I','imperador do Brasil'],
+  ['his','Princesa Isabel','princesa do Brasil'],
+  ['his','Tiradentes','herói da Inconfidência Mineira'],
+  ['his','Zumbi dos Palmares','líder quilombola'],
+  ['his','Pedro Álvares Cabral','navegador português'],
+  ['his','Cristóvão Colombo','navegador'],
+  ['his','Cleópatra','rainha do Egito'],
+  ['his','Júlio César','líder romano'],
+  ['his','Napoleão Bonaparte','imperador francês'],
+  ['his','Joana d\'Arc','heroína francesa'],
+  ['his','Nelson Mandela','líder sul-africano'],
+  ['his','Gandhi','líder indiano'],
+  ['his','Leonardo da Vinci','pintor e inventor'],
+  ['his','Pablo Picasso','pintor'],
+  ['his','Van Gogh','pintor'],
+  ['his','Frida Kahlo','pintora mexicana'],
+  ['his','Tarsila do Amaral','pintora brasileira'],
+  ['his','William Shakespeare','escritor inglês'],
+  ['his','Machado de Assis','escritor brasileiro'],
+  ['his','Mozart','compositor'],
+  ['his','Beethoven','compositor'],
+  ['his','Carmen Miranda','cantora e atriz'],
+  ['his','Walt Disney','criador de desenhos animados'],
+  ['his','Steve Jobs','fundador da Apple'],
+
+  ['per','Harry Potter','bruxo dos livros e filmes'],
+  ['per','Hermione Granger','bruxa, amiga do Harry Potter'],
+  ['per','Darth Vader','vilão de Star Wars'],
+  ['per','Mestre Yoda','mestre Jedi de Star Wars'],
+  ['per','Homem-Aranha','super-herói'],
+  ['per','Batman','super-herói'],
+  ['per','Super-Homem','super-herói'],
+  ['per','Mulher-Maravilha','super-heroína'],
+  ['per','Homem de Ferro','super-herói'],
+  ['per','Hulk','super-herói'],
+  ['per','Wolverine','super-herói'],
+  ['per','Coringa','vilão do Batman'],
+  ['per','Sherlock Holmes','detetive'],
+  ['per','James Bond','agente secreto'],
+  ['per','Indiana Jones','arqueólogo aventureiro'],
+  ['per','Jack Sparrow','pirata'],
+  ['per','Gandalf','mago de O Senhor dos Anéis'],
+  ['per','Frodo','hobbit de O Senhor dos Anéis'],
+  ['per','Shrek','ogro'],
+  ['per','Elsa','rainha de Frozen'],
+  ['per','Simba','leão de O Rei Leão'],
+  ['per','Woody','caubói de Toy Story'],
+  ['per','Buzz Lightyear','astronauta de Toy Story'],
+  ['per','Chaves','menino que mora no barril'],
+  ['per','Seu Madruga','vizinho do Chaves'],
+  ['per','Chapolin Colorado','herói atrapalhado'],
+  ['per','Capitão Nascimento','policial de Tropa de Elite'],
+  ['per','Dona Hermínia','mãe de Minha Mãe é uma Peça'],
+  ['per','Emília','boneca do Sítio do Picapau Amarelo'],
+  ['per','Saci-Pererê','personagem do folclore'],
+  ['per','Dom Quixote','cavaleiro dos livros'],
+  ['per','Drácula','vampiro'],
+  ['per','Tarzan','homem criado na selva'],
+  ['per','Zorro','herói mascarado'],
+  ['per','Branca de Neve','princesa dos contos'],
+  ['per','Cinderela','princesa dos contos'],
+  ['per','Pinóquio','boneco de madeira'],
+  ['per','Peter Pan','menino que não cresce'],
+  ['per','Chapeuzinho Vermelho','menina dos contos'],
+  ['per','Papai Noel','bom velhinho do Natal'],
+
+  ['des','Mickey Mouse','rato dos desenhos'],
+  ['des','Pato Donald','pato dos desenhos'],
+  ['des','Pernalonga','coelho dos desenhos'],
+  ['des','Pica-Pau','pássaro dos desenhos'],
+  ['des','Bob Esponja','esponja que mora no mar'],
+  ['des','Homer Simpson','pai dos Simpsons'],
+  ['des','Bart Simpson','filho dos Simpsons'],
+  ['des','Scooby-Doo','cachorro medroso'],
+  ['des','Garfield','gato que ama lasanha'],
+  ['des','Snoopy','cachorro dos quadrinhos'],
+  ['des','Popeye','marinheiro que come espinafre'],
+  ['des','Fred Flintstone','homem das cavernas'],
+  ['des','Pantera Cor-de-Rosa','pantera dos desenhos'],
+  ['des','Mônica','dona do coelho Sansão'],
+  ['des','Cebolinha','menino da Turma da Mônica'],
+  ['des','Cascão','menino que não toma banho'],
+  ['des','Magali','menina comilona'],
+  ['des','Chico Bento','menino da roça'],
+  ['des','Zé Carioca','papagaio brasileiro'],
+  ['des','Menino Maluquinho','menino com a panela na cabeça'],
+  ['des','Peppa Pig','porquinha dos desenhos'],
+  ['des','Galinha Pintadinha','galinha das músicas infantis'],
+  ['des','Pikachu','Pokémon amarelo'],
+  ['des','Goku','herói de Dragon Ball'],
+  ['des','Naruto','ninja dos animes'],
+  ['des','Mario','encanador dos videogames'],
+  ['des','Sonic','ouriço azul dos videogames'],
+  ['des','Pac-Man','come-come dos videogames'],
+  ['des','Lara Croft','aventureira dos videogames'],
+  ['des','Dora Aventureira','menina exploradora']
+];
+
+/* ================= Noite de Jogos: shared room, lobby and network layer ================= */
+var GAMES = {};
+var GAME_ORDER = ['pergunta','quem','duvido','proibido','nota','tem','limite'];
+
 /* Free public message servers. The last character of a room code says which one the room uses. */
 var BROKERS = [
   'wss://broker.emqx.io:8084/mqtt',
@@ -348,10 +610,9 @@ var BROKERS = [
 var devBroker = null;
 try{ devBroker = new URLSearchParams(location.search).get('broker'); }catch(e){}
 if(devBroker) BROKERS = [devBroker];
-
 var MAX_PLAYERS = 8;
 
-/* ---------- Pure helpers ---------- */
+/* ---------- Helpers shared with the games ---------- */
 function norm(s){
   var t = String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
   t = t.replace(/[^a-z0-9]+/g,' ').trim();
@@ -394,7 +655,7 @@ function esc(s){
     return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
   });
 }
-function pts(n){ return n===1 ? '1 ponto' : n+' pontos'; }
+function pts(n){ n = Number(n)||0; return n===1 ? '1 ponto' : n+' pontos'; }
 function rid(n){
   var a='abcdefghijklmnopqrstuvwxyz0123456789', s='';
   for(var i=0;i<n;i++) s+=a[Math.floor(Math.random()*a.length)];
@@ -404,189 +665,152 @@ function cleanName(s){ return String(s==null?'':s).replace(/\s+/g,' ').trim().sl
 function store(k,v){ try{ if(v===null) localStorage.removeItem(k); else localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
 function load(k){ try{ return JSON.parse(localStorage.getItem(k)||'null'); }catch(e){ return null; } }
 
-/* ---------- Game engine. G is the full game, held by one device only. ---------- */
-function defaultSettings(){
-  var cats = {};
-  Object.keys(CATS).forEach(function(k){ cats[k]=true; });
-  return {rounds:8, timer:0, cats:cats};
-}
-function newGame(hostPid, players, settings){
-  return {status:'lobby', hostPid:hostPid, players:players, settings:settings, seq:0,
-    queue:[], round:-1, revealed:[], errors:0, finalLeft:0, turn:0, phase:'', note:'',
-    just:-1, timeLeft:0, lastGuess:'', pending:0, gained:0, solver:''};
-}
-function gWords(G){ return BANK[G.queue[G.round]][1].split(' '); }
-function gHidden(G){ var c=0; G.revealed.forEach(function(r){ if(!r)c++; }); return c; }
-function gValue(G){ return G.revealed.length; }
-function gDone(G){ return G.phase==='solved' || G.phase==='unsolved'; }
-
-function gStart(G){
-  var su = G.settings;
-  var chosen = Object.keys(CATS).filter(function(k){ return su.cats[k]; });
-  if(!chosen.length || !G.players.length) return false;
-  var used = load('pe-used'); if(!Array.isArray(used)) used = [];
+/* Picks n items out of a bank, avoiding the ones this device already used in earlier games. */
+function pickQueue(key, total, n, filter){
+  var used = load('nj-used-'+key); if(!Array.isArray(used)) used = [];
   var all = [];
-  BANK.forEach(function(q,i){ if(su.cats[q[0]]) all.push(i); });
+  for(var i=0;i<total;i++) if(!filter || filter(i)) all.push(i);
   var pool = all.filter(function(i){ return used.indexOf(i)<0; });
-  if(pool.length < Math.min(su.rounds, all.length)){
+  if(pool.length < Math.min(n, all.length)){
     used = used.filter(function(i){ return all.indexOf(i)<0; });
     pool = all.slice();
   }
-  G.queue = shuffle(pool).slice(0, su.rounds);
-  store('pe-used', used.concat(G.queue));
-  G.players.forEach(function(p){ p.score = 0; });
-  G.status = 'play';
-  G.round = -1;
-  gNextRound(G);
-  return true;
+  var q = shuffle(pool).slice(0, n);
+  store('nj-used-'+key, used.concat(q));
+  return q;
 }
-function gNextRound(G){
-  G.round++;
-  G.seq++;
-  G.just = -1; G.note = '';
-  if(G.round >= G.queue.length){ G.status = 'end'; return; }
-  G.revealed = gWords(G).map(function(){ return false; });
-  G.errors = 0;
-  G.finalLeft = 0;
-  G.turn = G.round % G.players.length;
-  G.phase = 'pick';
-  G.timeLeft = G.settings.timer;
+function nameOf(S,pid){
+  for(var i=0;i<S.players.length;i++) if(S.players[i].pid===pid) return S.players[i].name;
+  return '';
 }
-function gReveal(G,i){
-  G.revealed[i] = true;
-  G.just = i; G.note = '';
-  if(gHidden(G)===0) G.finalLeft = G.players.length;
-  G.phase = 'answer';
-  G.seq++;
+function orderOf(S){ return S.players.map(function(p){ return p.pid; }); }
+function addScore(G,pid,n){ G.score[pid] = Math.max(0, (G.score[pid]||0) + n); }
+/* Removes a player from a turn order and keeps the turn index on the same person. */
+function dropFromOrder(G,pid){
+  var i = G.order.indexOf(pid);
+  if(i<0) return;
+  var cur = G.order[G.ti];
+  G.order.splice(i,1);
+  var k = G.order.indexOf(cur);
+  G.ti = k>=0 ? k : (G.order.length ? i % G.order.length : 0);
 }
-function gPass(G,note){
-  G.note = note || ''; G.just = -1;
-  G.seq++;
-  if(gHidden(G)===0){
-    G.finalLeft--;
-    if(G.finalLeft<=0){ G.phase = 'unsolved'; return; }
-  }
-  G.turn = (G.turn+1) % G.players.length;
-  G.phase = gHidden(G)===0 ? 'answer' : 'pick';
-  G.timeLeft = G.settings.timer;
+/* Small HTML builders used by the games. */
+function gBtn(label, it, cls){
+  return '<button type="button" class="btn'+(cls?' '+cls:'')+'" data-g="'+esc(JSON.stringify(it))+'">'+esc(label)+'</button>';
 }
-function gAward(G,v){
-  var p = G.players[G.turn];
-  p.score += v;
-  G.gained = v; G.solver = p.name;
-  G.phase = 'solved'; G.just = -1;
-  G.seq++;
+function gLink(label, it){
+  return '<button type="button" class="link" data-g="'+esc(JSON.stringify(it))+'">'+esc(label)+'</button>';
 }
-function gGuess(G,text){
-  G.note = ''; G.just = -1;
-  var v = gValue(G);
-  if(isCorrect(text, BANK[G.queue[G.round]][2])) return gAward(G,v);
-  G.lastGuess = text;
-  G.pending = v;
-  G.phase = 'wrong';
-  G.seq++;
+function gArm(key, label, armedLabel, it, cls){
+  var on = app.armed===key;
+  return '<button type="button" class="'+(cls||'btn')+(on?' armed':'')+'" data-arm="'+esc(key)+'" data-g="'+esc(JSON.stringify(it))+'">'+esc(on?armedLabel:label)+'</button>';
 }
-function gRemove(G,pid){
-  var idx = -1;
-  G.players.forEach(function(p,i){ if(p.pid===pid) idx=i; });
-  if(idx<0 || pid===G.hostPid) return false;
-  var name = G.players[idx].name;
-  if(G.status==='play'){
-    if(idx===G.turn && !gDone(G)) gPass(G, name+' saiu da partida.');
-    G.players.splice(idx,1);
-    if(G.turn>idx) G.turn--;
-    if(G.turn>=G.players.length) G.turn = 0;
-    if(G.finalLeft>G.players.length) G.finalLeft = G.players.length;
-  }else{
-    G.players.splice(idx,1);
-  }
-  return true;
+function clockText(t){
+  t = Math.max(0, Number(t)||0);
+  return Math.floor(t/60)+':'+String(t%60).padStart(2,'0');
 }
 
-/* An intent is one thing a player asks for. Returns true when the game changed. */
-function applyIntent(G, from, it, hostActor, localMode){
+/* ---------- Room state. S lives only on the device that created the room. ---------- */
+function defaultsFor(id){
+  var M = GAMES[id], su = {};
+  (M.opts||[]).forEach(function(o){ su[o.k] = o.def; });
+  if(M.cats){ su.cats = {}; Object.keys(M.cats).forEach(function(k){ su.cats[k] = true; }); }
+  return su;
+}
+function newRoom(hostPid, name){
+  var S = {status:'lobby', hostPid:hostPid, players:[{pid:hostPid, name:name, wins:0}], sel:GAME_ORDER[0], settings:{}, game:null, G:null, seq:0};
+  GAME_ORDER.forEach(function(id){ S.settings[id] = defaultsFor(id); });
+  return S;
+}
+function applyRoom(S, from, it, host){
   if(!it || typeof it!=='object') return false;
-  if(it.t==='set'){
-    if(!hostActor || G.status!=='lobby') return false;
-    if([5,8,10,15].indexOf(it.rounds)>=0) G.settings.rounds = it.rounds;
-    if([0,20,30,45].indexOf(it.timer)>=0) G.settings.timer = it.timer;
-    if(it.cat && CATS[it.cat]) G.settings.cats[it.cat] = !G.settings.cats[it.cat];
-    return true;
-  }
-  if(it.t==='start') return hostActor && G.status!=='play' ? gStart(G) : false;
-  if(it.t==='lobby'){ if(hostActor && G.status==='end'){ G.status='lobby'; G.seq++; return true; } return false; }
-  if(it.t==='remove') return hostActor ? gRemove(G, it.pid) : false;
-  if(G.status!=='play' || it.seq!==G.seq) return false;
-  var cur = G.players[G.turn];
-  var mine = localMode || (cur && cur.pid===from);
+  var M;
   switch(it.t){
-    case 'reveal':
-      if(mine && G.phase==='pick' && Number.isInteger(it.i) && it.i>=0 && it.i<G.revealed.length && !G.revealed[it.i]){ gReveal(G,it.i); return true; }
-      break;
-    case 'guess':
-      if(mine && G.phase==='answer' && typeof it.text==='string' && it.text.trim()){ gGuess(G, it.text.trim().slice(0,60)); return true; }
-      break;
-    case 'pass':
-      if((mine||hostActor) && (G.phase==='pick'||G.phase==='answer')){ gPass(G, mine ? '' : cur.name+' perdeu a vez.'); return true; }
-      break;
-    case 'cont':
-      if(G.phase==='wrong'){ gPass(G,''); return true; }
-      break;
-    case 'override':
-      if(hostActor && G.phase==='wrong'){ gAward(G,G.pending); return true; }
-      break;
-    case 'next':
-      if(gDone(G)){ gNextRound(G); return true; }
-      break;
-    case 'skip':
-      if(hostActor && !gDone(G)){ G.phase='unsolved'; G.just=-1; G.seq++; return true; }
-      break;
-    case 'end':
-      if(hostActor){ G.status='end'; G.seq++; return true; }
-      break;
+    case 'sel':
+      if(!host || S.status!=='lobby' || !GAMES[it.id]) return false;
+      S.sel = it.id; return true;
+    case 'opt':
+      if(!host || S.status!=='lobby') return false;
+      M = GAMES[S.sel];
+      var o = (M.opts||[]).filter(function(x){ return x.k===it.k; })[0];
+      if(!o || !o.vals.some(function(v){ return v[0]===it.v; })) return false;
+      S.settings[S.sel][it.k] = it.v; return true;
+    case 'cat':
+      if(!host || S.status!=='lobby') return false;
+      M = GAMES[S.sel];
+      if(!M.cats || !M.cats[it.k]) return false;
+      S.settings[S.sel].cats[it.k] = !S.settings[S.sel].cats[it.k]; return true;
+    case 'start':
+      if(!host) return false;
+      if(S.status==='play' && !(S.G && S.G.over)) return false;
+      M = GAMES[S.sel];
+      if(S.players.length < M.min) return false;
+      var G = M.start(S, S.settings[S.sel]);
+      if(!G) return false;
+      G.score = {};
+      G.order.forEach(function(pid){ G.score[pid] = 0; });
+      S.game = S.sel; S.G = G; S.status = 'play';
+      return true;
+    case 'back':
+      if(!host || S.status!=='play') return false;
+      S.status = 'lobby'; S.G = null; S.game = null;
+      return true;
+    case 'remove':
+      if(!host || it.pid===S.hostPid) return false;
+      if(!S.players.some(function(p){ return p.pid===it.pid; })) return false;
+      if(S.status==='play' && S.G && S.G.order.indexOf(it.pid)>=0){
+        M = GAMES[S.game];
+        if(M.drop) M.drop(S.G, S, it.pid);
+        if(!S.G.order.length) S.G.over = true;
+      }
+      S.players = S.players.filter(function(p){ return p.pid!==it.pid; });
+      return true;
   }
-  return false;
+  if(S.status!=='play' || !S.G || S.G.over) return false;
+  M = GAMES[S.game];
+  if(!(M.free && M.free[it.t]) && it.seq!==S.seq) return false;
+  if(S.G.order.indexOf(from)<0) return false;
+  return !!M.apply(S.G, S, from, it, host);
 }
-
-/* The view is what every player may see. Hidden words and the answer stay out of it until the round ends. */
-function viewOf(G, code){
-  var V = {
-    code:code||'', ts:Date.now(), seq:G.seq, status:G.status, hostPid:G.hostPid,
-    settings:G.settings,
-    players:G.players.map(function(p){ return {pid:p.pid, name:p.name, score:p.score, on:isOn(p.pid)}; })
-  };
-  if(G.status==='play'){
-    var q = BANK[G.queue[G.round]], list = gWords(G), done = gDone(G), hid = gHidden(G);
-    var cur = G.players[G.turn] || {pid:'',name:''};
-    var nxt = G.players[(G.turn+1) % G.players.length] || cur;
-    V.round = G.round; V.total = G.queue.length; V.cat = q[0];
-    V.words = list.map(function(w,i){ return (done || G.revealed[i]) ? w : null; });
-    V.phase = G.phase; V.turnPid = cur.pid; V.turnName = cur.name; V.nextName = nxt.name;
-    V.value = gValue(G); V.allOpen = hid===0; V.lastChance = hid===0 && G.finalLeft<=1;
-    V.lastGuess = G.phase==='wrong' ? G.lastGuess : '';
-    V.gained = G.gained; V.solver = G.solver; V.note = G.note; V.just = G.just;
-    V.timeLeft = G.timeLeft;
-    V.answer = done ? q[2][0] : null;
+/* When a game ends, whoever has the most points takes one win for the night. */
+function settle(S){
+  var G = S.G;
+  if(!G || !G.over || G.counted) return;
+  G.counted = true;
+  var best = 0;
+  G.order.forEach(function(pid){ best = Math.max(best, G.score[pid]||0); });
+  if(best<=0) return;
+  S.players.forEach(function(p){ if(G.order.indexOf(p.pid)>=0 && (G.score[p.pid]||0)===best) p.wins = (p.wins||0)+1; });
+}
+function viewOf(S, code){
+  var V = {code:code||'', ts:Date.now(), seq:S.seq, status:S.status, hostPid:S.hostPid, sel:S.sel,
+    settings:S.settings[S.sel],
+    players:S.players.map(function(p){ return {pid:p.pid, name:p.name, wins:p.wins||0, on:isOn(p.pid)}; })};
+  if(S.status==='play' && S.G){
+    V.game = S.game;
+    V.g = GAMES[S.game].view(S.G, S) || {};
+    V.g.score = S.G.score; V.g.order = S.G.order; V.g.over = !!S.G.over;
   }
   return V;
+}
+function privOf(S, pid){
+  var M = S.status==='play' && S.G ? GAMES[S.game] : null;
+  return {s:S.seq, g: M && M.priv ? M.priv(S.G, S, pid) : null};
 }
 
 /* ---------- App state ---------- */
 var app = {
-  screen:'home',      /* home | local | connecting | room */
-  mode:null,          /* local | host | guest */
-  me:null, name:'', code:'', bi:0,
-  G:null, V:null,
-  setup:null, error:'', msg:'', armed:'', conn:'ok', copied:false,
-  invite:''
+  screen:'home', mode:null, me:null, tok:null, name:'', code:'', bi:0,
+  S:null, V:null, P:null,
+  error:'', msg:'', armed:'', conn:'ok', copied:false, invite:''
 };
 var net = {client:null, base:''};
-var seen = {}, online = {};
+var seen = {}, online = {}, toks = {};
 var timers = [];
 var pendingIntent = null;
-var lastSeqRendered = -1;
 var wake = null;
 var gen = 0;
+var lastSeq = -1;
 
 function isOn(pid){
   if(app.mode!=='host') return true;
@@ -603,80 +827,13 @@ function setHash(code){
   try{ history.replaceState(null,'', location.pathname + location.search + (code ? '#'+code : '')); }catch(e){}
 }
 function roomLink(){ return location.href.split('#')[0] + '#' + app.code; }
-
 function goHome(error){
   stopAll();
-  app.screen='home'; app.mode=null; app.G=null; app.V=null; app.code=''; app.invite='';
+  app.screen='home'; app.mode=null; app.S=null; app.V=null; app.P=null; app.code=''; app.invite='';
   app.error = error || ''; app.armed=''; app.conn='ok';
   setHash('');
   render();
 }
-
-/* ---------- Local play on one screen ---------- */
-function freshLocalSetup(){
-  var s = {names:['Jogador 1','Jogador 2','Jogador 3'], settings:defaultSettings()};
-  var saved = load('pe-setup');
-  if(saved && Array.isArray(saved.names) && saved.names.length>=2){
-    s.names = saved.names.slice(0,MAX_PLAYERS).map(String);
-    if(saved.settings){
-      if([5,8,10,15].indexOf(saved.settings.rounds)>=0) s.settings.rounds = saved.settings.rounds;
-      if([0,20,30,45].indexOf(saved.settings.timer)>=0) s.settings.timer = saved.settings.timer;
-      if(saved.settings.cats) Object.keys(CATS).forEach(function(k){ s.settings.cats[k] = saved.settings.cats[k]!==false; });
-    }
-  }
-  return s;
-}
-function startLocal(){
-  var su = app.setup;
-  var names = su.names.map(cleanName).filter(Boolean);
-  if(names.length<2){ app.error='Escreva o nome de pelo menos dois jogadores.'; return render(); }
-  if(!Object.keys(CATS).some(function(k){ return su.settings.cats[k]; })){ app.error='Escolha pelo menos um tema.'; return render(); }
-  su.names = names;
-  store('pe-setup', su);
-  app.error='';
-  app.mode='local';
-  app.G = newGame(null, names.map(function(n,i){ return {pid:'p'+i, name:n, score:0}; }), JSON.parse(JSON.stringify(su.settings)));
-  gStart(app.G);
-  app.screen='room';
-  startClock();
-  commit();
-}
-
-/* ---------- Authority side: local play and room host ---------- */
-function commit(){
-  if(app.mode==='host') store('pe-host', {code:app.code, bi:app.bi, name:app.name, G:app.G, at:Date.now()});
-  app.V = viewOf(app.G, app.code);
-  render();
-  if(app.mode==='host') publishState();
-}
-function publishState(){
-  if(!net.client || app.mode!=='host') return;
-  try{ net.client.publish(net.base+'/s', JSON.stringify({v:viewOf(app.G, app.code)}), {qos:1, retain:true}); }catch(e){}
-}
-function startClock(){
-  every(1000, function(){
-    var G = app.G;
-    if(!G || G.status!=='play' || !G.settings.timer) return;
-    if(G.phase!=='pick' && G.phase!=='answer') return;
-    G.timeLeft--;
-    if(G.timeLeft<=0){
-      var who = G.players[G.turn] ? G.players[G.turn].name : '';
-      gPass(G, 'O tempo de '+who+' acabou.');
-      return commit();
-    }
-    if(app.V) app.V.timeLeft = G.timeLeft;
-    paintClock();
-    if(app.mode==='host' && G.timeLeft % 5 === 0) publishState();
-  });
-}
-function act(it){
-  app.armed = '';
-  if(app.mode==='guest') return sendIntent(it);
-  it.seq = app.G.seq;
-  if(applyIntent(app.G, app.me, it, true, app.mode==='local')) commit(); else render();
-}
-
-/* ---------- Online: shared pieces ---------- */
 function makeCode(bi){
   var a='ABCDEFGHJKLMNPQRSTUVWXYZ', s='';
   for(var i=0;i<4;i++) s+=a[Math.floor(Math.random()*a.length)];
@@ -689,14 +846,18 @@ function parseCode(raw){
   if(bi>=BROKERS.length) return null;
   return {code:c, bi:bi};
 }
-function topicBase(code){ return 'pergunta-escondida/v1/'+code; }
+function topicBase(code){ return 'noite-de-jogos/v1/'+code; }
 function connect(bi){
-  return mqtt.connect(BROKERS[bi], {clientId:'pe_'+rid(12), clean:true, keepalive:20, reconnectPeriod:2000, connectTimeout:8000});
+  return mqtt.connect(BROKERS[bi], {clientId:'nj_'+rid(12), clean:true, keepalive:20, reconnectPeriod:2000, connectTimeout:8000});
 }
 function ensureIdentity(){
   if(!app.me){
-    app.me = load('pe-pid');
-    if(typeof app.me!=='string' || app.me.length<8){ app.me = rid(10); store('pe-pid', app.me); }
+    app.me = load('nj-pid');
+    if(typeof app.me!=='string' || app.me.length<8){ app.me = rid(10); store('nj-pid', app.me); }
+  }
+  if(!app.tok){
+    app.tok = load('nj-tok');
+    if(typeof app.tok!=='string' || app.tok.length<16){ app.tok = rid(20); store('nj-tok', app.tok); }
   }
 }
 function keepAwake(){
@@ -708,11 +869,36 @@ function keepAwake(){
   }catch(e){}
 }
 
-/* ---------- Online: host ---------- */
+/* ---------- Host ---------- */
+function commit(){
+  settle(app.S);
+  store('nj-host', {code:app.code, bi:app.bi, name:app.name, S:app.S, toks:toks, at:Date.now()});
+  app.V = viewOf(app.S, app.code);
+  app.P = privOf(app.S, app.me);
+  render();
+  publishAll();
+}
+function publishState(){
+  if(!net.client || app.mode!=='host') return;
+  try{ net.client.publish(net.base+'/s', JSON.stringify({v:viewOf(app.S, app.code)}), {qos:1, retain:true}); }catch(e){}
+}
+function publishPrivate(pid){
+  if(!net.client || app.mode!=='host' || !toks[pid]) return;
+  try{ net.client.publish(net.base+'/u/'+toks[pid], JSON.stringify({p:privOf(app.S, pid)}), {qos:1, retain:true}); }catch(e){}
+}
+function publishAll(){
+  publishState();
+  app.S.players.forEach(function(p){ if(p.pid!==app.me) publishPrivate(p.pid); });
+}
+function act(it){
+  if(app.mode==='guest') return sendIntent(it);
+  it.seq = app.S.seq;
+  if(applyRoom(app.S, app.me, it, true)){ app.S.seq++; commit(); } else render();
+}
 function createRoom(){
   var name = cleanName(app.name);
   if(!name){ app.error='Escreva o seu nome para criar a sala.'; return render(); }
-  app.name = name; store('pe-name', name);
+  app.name = name; store('nj-name', name);
   ensureIdentity();
   app.error=''; app.screen='connecting'; app.msg='Criando a sala.';
   render();
@@ -734,7 +920,7 @@ function tryCreate(bi, attempt, g){
       if(t!==base+'/s') return;
       try{
         var m = JSON.parse(p.toString());
-        if(m && m.v && !m.closed && m.v.hostPid!==app.me && Date.now()-m.v.ts < 2*3600e3) taken = true;
+        if(m && m.v && m.v.hostPid!==app.me && Date.now()-m.v.ts < 2*3600e3) taken = true;
       }catch(e){}
     };
     c.on('message', probe);
@@ -744,7 +930,7 @@ function tryCreate(bi, attempt, g){
       c.unsubscribe(base+'/s');
       if(g!==gen || net.client!==c) return;
       if(taken && attempt<3){ try{ c.end(true); }catch(e){} return tryCreate(bi, attempt+1, g); }
-      becomeHost(c, code, bi, null);
+      becomeHost(c, code, bi, null, null);
     }, 900);
   });
 }
@@ -760,31 +946,44 @@ function resumeHost(saved){
   c.on('connect', function(){
     if(settled || g!==gen || net.client!==c) return;
     settled = true; clearTimeout(giveUp);
-    becomeHost(c, saved.code, saved.bi, saved.G);
+    becomeHost(c, saved.code, saved.bi, saved.S, saved.toks);
   });
 }
-function becomeHost(c, code, bi, G){
+function becomeHost(c, code, bi, S, savedToks){
   app.mode='host'; app.code=code; app.bi=bi; app.conn='ok';
-  app.G = G || newGame(app.me, [{pid:app.me, name:app.name, score:0}], defaultSettings());
+  app.S = S || newRoom(app.me, app.name);
   net.base = topicBase(code);
-  seen = {}; online = {};
+  seen = {}; online = {}; toks = (savedToks && typeof savedToks==='object') ? savedToks : {};
   var now = Date.now();
-  app.G.players.forEach(function(p){ seen[p.pid] = now; });
+  app.S.players.forEach(function(p){ seen[p.pid] = now; });
   c.subscribe(net.base+'/i', {qos:1});
   c.on('message', hostMessage);
-  c.on('connect', function(){ if(net.client!==c) return; app.conn='ok'; publishState(); render(); });
+  c.on('connect', function(){ if(net.client!==c) return; app.conn='ok'; publishAll(); render(); });
   c.on('close', function(){ if(net.client!==c) return; app.conn='lost'; render(); });
   app.screen='room';
   setHash(code);
-  startClock();
   every(4000, function(){
     var changed = false, t = Date.now();
-    app.G.players.forEach(function(p){
+    app.S.players.forEach(function(p){
       if(p.pid===app.me) return;
       var on = t - (seen[p.pid]||0) < 20000;
       if((online[p.pid]!==false) !== on){ online[p.pid] = on; changed = true; }
     });
-    if(changed){ app.V = viewOf(app.G, app.code); render(); publishState(); }
+    if(changed){ app.V = viewOf(app.S, app.code); render(); publishState(); }
+  });
+  /* One clock for every timed game: the host counts, everyone else follows. */
+  every(1000, function(){
+    var S = app.S;
+    if(!S || S.status!=='play' || !S.G || S.G.over) return;
+    var M = GAMES[S.game];
+    if(!M.tick) return;
+    var before = S.G.t;
+    if(M.tick(S.G, S)){ S.seq++; return commit(); }
+    if(S.G.t!==before){
+      if(app.V && app.V.g) app.V.g.t = S.G.t;
+      paintClock();
+      if(S.G.t % 5 === 0) publishState();
+    }
   });
   commit();
 }
@@ -793,32 +992,31 @@ function hostMessage(topic, payload){
   var m;
   try{ m = JSON.parse(payload.toString()); }catch(e){ return; }
   if(!m || typeof m.pid!=='string' || m.pid.length<8 || m.pid.length>24 || m.pid===app.me) return;
-  var G = app.G, known = G.players.some(function(p){ return p.pid===m.pid; });
+  var S = app.S, known = S.players.some(function(p){ return p.pid===m.pid; });
   if(m.k==='j'){
     var name = cleanName(m.name) || 'Jogador';
+    if(typeof m.tok!=='string' || !/^[a-z0-9]{16,32}$/.test(m.tok)) return;
     seen[m.pid] = Date.now();
     if(known){
-      var changed = online[m.pid]===false;
-      online[m.pid] = true;
-      G.players.forEach(function(p){ if(p.pid===m.pid && p.name!==name && G.status==='lobby'){ p.name = name; changed = true; } });
-      return changed ? commit() : publishState();
+      var changed = online[m.pid]===false || toks[m.pid]!==m.tok;
+      online[m.pid] = true; toks[m.pid] = m.tok;
+      S.players.forEach(function(p){ if(p.pid===m.pid && p.name!==name && S.status==='lobby'){ p.name = name; changed = true; } });
+      if(changed) return commit();
+      publishState(); return publishPrivate(m.pid);
     }
-    if(G.players.length>=MAX_PLAYERS) return publishState();
-    G.players.push({pid:m.pid, name:name, score:0});
+    if(S.players.length>=MAX_PLAYERS) return publishState();
+    toks[m.pid] = m.tok;
+    S.players.push({pid:m.pid, name:name, wins:0});
     online[m.pid] = true;
     return commit();
   }
   if(!known) return;
   seen[m.pid] = Date.now();
-  if(m.k==='l'){ seen[m.pid] = 0; online[m.pid] = false; app.V = viewOf(G, app.code); render(); return publishState(); }
+  if(m.k==='l'){ seen[m.pid] = 0; online[m.pid] = false; app.V = viewOf(S, app.code); render(); return publishState(); }
   if(m.k==='i'){
     var it = m.it || {};
-    if(['reveal','guess','pass','cont','next'].indexOf(it.t)<0) return;
-    if(it.t==='pass'){
-      var cur = G.players[G.turn];
-      if(!cur || cur.pid!==m.pid) return;
-    }
-    if(applyIntent(G, m.pid, it, false, false)) commit();
+    if(typeof it.t!=='string' || ['sel','opt','cat','start','back','remove'].indexOf(it.t)>=0) return;
+    if(applyRoom(S, m.pid, it, false)){ S.seq++; commit(); }
   }
 }
 function closeRoom(){
@@ -826,37 +1024,39 @@ function closeRoom(){
     try{
       net.client.publish(net.base+'/s', JSON.stringify({closed:true}), {qos:1, retain:false});
       net.client.publish(net.base+'/s', '', {qos:1, retain:true});
+      Object.keys(toks).forEach(function(pid){ net.client.publish(net.base+'/u/'+toks[pid], '', {qos:1, retain:true}); });
     }catch(e){}
   }
-  store('pe-host', null);
+  store('nj-host', null);
   var c = net.client;
-  setTimeout(function(){ if(c){ try{ c.end(); }catch(e){} } }, 600);
+  setTimeout(function(){ if(c){ try{ c.end(); }catch(e){} } }, 700);
   net.client = null;
   goHome('');
 }
 
-/* ---------- Online: guest ---------- */
+/* ---------- Guest ---------- */
 function joinRoom(rawCode){
   var name = cleanName(app.name);
   var pc = parseCode(rawCode);
   if(!name){ app.error='Escreva o seu nome para entrar na sala.'; return render(); }
   if(!pc){ app.error='O código da sala tem quatro letras e um número, como KQTM1.'; return render(); }
-  app.name = name; store('pe-name', name);
+  app.name = name; store('nj-name', name);
   ensureIdentity();
   stopAll();
-  app.mode='guest'; app.code=pc.code; app.bi=pc.bi; app.V=null; app.error=''; app.conn='ok';
+  app.mode='guest'; app.code=pc.code; app.bi=pc.bi; app.V=null; app.P=null; app.error=''; app.conn='ok';
   app.screen='connecting'; app.msg='Entrando na sala '+pc.code+'.';
   net.base = topicBase(pc.code);
   var c = connect(pc.bi);
   net.client = c;
   setHash(pc.code);
   render();
-  var sendJoin = function(){ sendRaw({k:'j', pid:app.me, name:app.name}); };
+  var sendJoin = function(){ sendRaw({k:'j', pid:app.me, name:app.name, tok:app.tok}); };
   c.on('error', function(){});
   c.on('connect', function(){
     if(net.client!==c) return;
     app.conn='ok';
     c.subscribe(net.base+'/s', {qos:1});
+    c.subscribe(net.base+'/u/'+app.tok, {qos:1});
     sendJoin();
     render();
   });
@@ -865,10 +1065,9 @@ function joinRoom(rawCode){
   every(2500, function(){ if(!isMember()) sendJoin(); retryIntent(); });
   every(8000, function(){ if(isMember()) sendRaw({k:'h', pid:app.me}); });
   every(1000, function(){
-    var V = app.V;
-    if(!V || V.status!=='play' || !V.settings.timer) return;
-    if(V.phase!=='pick' && V.phase!=='answer') return;
-    V.timeLeft = Math.max(0, V.timeLeft-1);
+    var g = app.V && app.V.status==='play' ? app.V.g : null;
+    if(!g || !g.timed || g.over) return;
+    g.t = Math.max(0, (Number(g.t)||0)-1);
     paintClock();
   });
   var g = gen;
@@ -887,105 +1086,85 @@ function sendRaw(m){
   try{ net.client.publish(net.base+'/i', JSON.stringify(m), {qos:1}); }catch(e){}
 }
 function guestMessage(topic, payload){
-  if(topic!==net.base+'/s' || app.mode!=='guest') return;
+  if(app.mode!=='guest') return;
   var m;
   try{ m = JSON.parse(payload.toString()); }catch(e){ return; }
   if(!m) return;
-  if(m.closed){ store('pe-guest', null); return goHome('A sala foi encerrada por quem a criou.'); }
+  if(topic===net.base+'/u/'+app.tok){
+    if(m.p && typeof m.p==='object'){ app.P = m.p; render(); }
+    return;
+  }
+  if(topic!==net.base+'/s') return;
+  if(m.closed){ store('nj-guest', null); return goHome('A sala foi encerrada por quem a criou.'); }
   var V = m.v;
   if(!V || !Array.isArray(V.players) || !V.settings) return;
   var was = isMember();
   app.V = V;
-  if(pendingIntent && pendingIntent.it.seq!==V.seq) pendingIntent = null;
+  checkPending();
   if(isMember()){
+    if(app.screen!=='room') app.msg = '';
     app.screen='room';
-    store('pe-guest', {code:app.code, name:app.name, at:Date.now()});
+    store('nj-guest', {code:app.code, name:app.name, at:Date.now()});
   }else if(was){
-    store('pe-guest', null);
+    store('nj-guest', null);
     return goHome('Você foi removido da sala.');
   }else if(V.players.length>=MAX_PLAYERS){
     return goHome('A sala '+app.code+' já está cheia.');
   }
   render();
 }
+/* A guest keeps an intent pending until the room state shows it took effect. */
+function intentDone(p){
+  var V = app.V;
+  if(!V) return true;
+  if(p.free){
+    if(V.status!=='play' || !V.g || V.game!==p.game) return true;
+    var M = GAMES[V.game];
+    return M.done ? !!M.done(V.g, app.me, p.it) : true;
+  }
+  return V.seq!==p.it.seq;
+}
+function checkPending(){ if(pendingIntent && intentDone(pendingIntent)) pendingIntent = null; }
 function sendIntent(it){
-  if(!app.V) return;
-  it.seq = app.V.seq;
-  pendingIntent = {it:it, tries:0};
+  var V = app.V;
+  if(!V) return;
+  it.seq = V.seq;
+  var M = V.status==='play' ? GAMES[V.game] : null;
+  var free = !!(M && M.free && M.free[it.t]);
   sendRaw({k:'i', pid:app.me, it:it});
+  if(!(free && M.noWait && M.noWait[it.t])) pendingIntent = {it:it, tries:0, free:free, game:V.game};
   render();
 }
 function retryIntent(){
   if(!pendingIntent) return;
-  if(!app.V || app.V.seq!==pendingIntent.it.seq){ pendingIntent = null; return; }
+  if(intentDone(pendingIntent)){ pendingIntent = null; return; }
   pendingIntent.tries++;
   if(pendingIntent.tries>4){ pendingIntent = null; app.msg = 'Sem resposta de quem criou a sala. Tente de novo em instantes.'; return render(); }
   sendRaw({k:'i', pid:app.me, it:pendingIntent.it});
 }
 function leaveRoom(){
   sendRaw({k:'l', pid:app.me});
-  store('pe-guest', null);
+  store('nj-guest', null);
   var c = net.client;
   net.client = null;
   setTimeout(function(){ if(c){ try{ c.end(); }catch(e){} } }, 400);
   goHome('');
 }
 
-/* ---------- Render ---------- */
-function clockText(t){
-  t = Math.max(0, Number(t)||0);
-  return Math.floor(t/60)+':'+String(t%60).padStart(2,'0');
-}
+/* ---------- Render: shell ---------- */
 function paintClock(){
-  var el = document.getElementById('clock'), V = app.V;
-  if(!el || !V) return;
-  el.textContent = clockText(V.timeLeft);
-  el.classList.toggle('low', V.timeLeft<=5);
+  var el = document.getElementById('clock'), g = app.V && app.V.g;
+  if(!el || !g) return;
+  el.textContent = clockText(g.t);
+  el.classList.toggle('low', g.t<=5);
 }
-function tilesHtml(list, pickable, flash){
-  var h = '';
-  list.forEach(function(w,i){
-    if(w!==null && w!==undefined){
-      h += '<span class="tile open'+(i===flash?' just':'')+'"><span class="n">'+(i+1)+'</span>'+esc(w)+'</span>';
-    }else if(pickable){
-      h += '<button type="button" class="tile" data-act="reveal" data-i="'+i+'" aria-label="Revelar a palavra '+(i+1)+'">'+(i+1)+'</button>';
-    }else{
-      h += '<span class="tile locked" aria-label="Palavra '+(i+1)+' escondida">'+(i+1)+'</span>';
-    }
-  });
-  return h + '<span class="qmark" aria-hidden="true">?</span>';
-}
-function settingsHtml(su){
-  var h = '<div class="field"><span class="lab">Quantas perguntas?</span><div class="seg">';
-  [5,8,10,15].forEach(function(v){
-    h += '<button type="button" class="chip" data-act="rounds" data-v="'+v+'" aria-pressed="'+(su.rounds===v)+'">'+v+'</button>';
-  });
-  h += '</div></div><div class="field"><span class="lab">Tempo por vez</span><div class="seg">';
-  [[0,'Sem tempo'],[20,'20 segundos'],[30,'30 segundos'],[45,'45 segundos']].forEach(function(o){
-    h += '<button type="button" class="chip" data-act="timer" data-v="'+o[0]+'" aria-pressed="'+(su.timer===o[0])+'">'+o[1]+'</button>';
-  });
-  h += '</div></div><div class="field"><span class="lab">Temas</span><div class="seg">';
-  Object.keys(CATS).forEach(function(k){
-    h += '<button type="button" class="chip" data-act="cat" data-v="'+k+'" aria-pressed="'+(!!su.cats[k])+'">'+CATS[k]+'</button>';
-  });
-  return h + '</div></div>';
-}
-function heroHtml(){
-  var sample = [null,null,'amarela',null,'macacos',null,null];
-  return '<section class="hero"><h1>Pergunta Escondida</h1>'
-    + '<p class="lede">A pergunta fica coberta. O grupo revela uma palavra por vez e leva os pontos quem descobrir a resposta primeiro.</p>'
-    + '<div class="sample"><div class="board" aria-hidden="true">'+tilesHtml(sample,false,-1)+'</div>'
-    + '<small>Exemplo: com duas palavras na tela, alguém já arrisca banana.</small></div>'
-    + '<ol class="rules">'
-    + '<li><span>Na sua vez, escolha uma casinha numerada. A palavra daquela posição aparece para todos.</span></li>'
-    + '<li><span>Depois de revelar, digite a resposta ou passe a vez. Cada jogador tem uma tentativa por vez.</span></li>'
-    + '<li><span>A pergunta vale 1 ponto para cada palavra que ela tem. Uma pergunta de 9 palavras vale 9 pontos do começo ao fim. Errar não tira pontos de ninguém, só passa a vez.</span></li>'
-    + '<li><span>Quem acertar leva os pontos em jogo. Vence quem somar mais pontos no fim da partida.</span></li>'
-    + '</ol></section>';
-}
-
+function winsText(n){ n = Number(n)||0; return n===1 ? '1 vitória' : n+' vitórias'; }
 function renderHome(){
-  var h = '<div class="setup">'+heroHtml()+'<section class="panel">';
+  var h = '<div class="setup"><section class="hero"><h1>Noite de Jogos</h1>'
+    + '<p class="lede">Sete jogos de conversa para a turma. Cada pessoa entra pelo próprio celular e o grupo troca de jogo sem sair da sala.</p>'
+    + '<ol class="menu">';
+  GAME_ORDER.forEach(function(id){ h += '<li><strong>'+esc(GAMES[id].name)+'</strong><span>'+esc(GAMES[id].blurb)+'</span></li>'; });
+  h += '</ol></section><section class="panel">';
   var nameField = '<div class="field"><label class="lab" for="my-name">Seu nome</label>'
     + '<div class="name-row"><input class="text" id="my-name" type="text" maxlength="18" autocomplete="off" value="'+esc(app.name)+'" placeholder="Como você quer aparecer no placar"></div></div>';
   if(app.invite){
@@ -995,9 +1174,9 @@ function renderHome(){
     h += '<div><button type="button" class="link" data-act="drop-invite">Ir para a tela inicial</button></div>';
     return h + '</section></div>';
   }
-  h += '<h2>Cada um no seu celular</h2>' + nameField;
-  var hs = load('pe-host');
-  if(hs && hs.code && hs.G && Date.now()-hs.at < 6*3600e3){
+  h += '<h2>Monte a sala</h2><p>Vários jogos são falados em voz alta. Fiquem no mesmo lugar ou em uma chamada de voz.</p>' + nameField;
+  var hs = load('nj-host');
+  if(hs && hs.code && hs.S && Date.now()-hs.at < 6*3600e3){
     h += '<div class="actions"><button type="button" class="btn" data-act="resume">Reabrir a sala '+esc(hs.code)+'</button></div>';
   }
   h += '<div class="actions"><button type="button" class="btn big" data-act="create">Criar uma sala</button></div>';
@@ -1005,167 +1184,98 @@ function renderHome(){
     + '<div class="name-row"><input class="text code" id="room-code" type="text" maxlength="5" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="KQTM1">'
     + '<button type="button" class="btn ghost" data-act="join">Entrar na sala</button></div></div>';
   if(app.error) h += '<p class="error" role="alert">'+esc(app.error)+'</p>';
-  h += '<hr><h2>Todos na mesma tela</h2>'
-    + '<p>Use esta opção com o grupo em volta de uma TV ou em uma chamada com a tela compartilhada.</p>'
-    + '<div class="actions"><button type="button" class="btn ghost" data-act="local">Montar partida em uma tela</button></div>';
   return h + '</section></div>';
 }
-
-function renderLocalSetup(){
-  var su = app.setup;
-  var h = '<div class="setup">'+heroHtml()+'<section class="panel"><h2>Monte a partida</h2>';
-  h += '<div class="field"><span class="lab">Quem vai jogar?</span><div class="names">';
-  su.names.forEach(function(n,i){
-    h += '<div class="name-row"><input class="text" id="name-'+i+'" data-name="'+i+'" type="text" maxlength="18" autocomplete="off" aria-label="Nome do jogador '+(i+1)+'" value="'+esc(n)+'">';
-    if(su.names.length>2) h += '<button type="button" class="icon" data-act="rm" data-i="'+i+'" aria-label="Remover jogador '+(i+1)+'">X</button>';
-    h += '</div>';
-  });
-  h += '</div>';
-  if(su.names.length<MAX_PLAYERS) h += '<div><button type="button" class="link" data-act="add">Adicionar jogador</button></div>';
-  h += '<span class="hint">Para jogar em duplas ou times, escreva o nome de cada time.</span></div>';
-  h += settingsHtml(su.settings);
-  if(app.error) h += '<p class="error" role="alert">'+esc(app.error)+'</p>';
-  h += '<div class="actions"><button type="button" class="btn big" data-act="start-local">Começar a partida</button></div>';
-  h += '<div><button type="button" class="link" data-act="home">Voltar</button></div>';
-  return h + '</section></div>';
-}
-
 function renderConnecting(){
   return '<div class="wait"><h1>Só um instante</h1><p class="lede">'+esc(app.msg)+'</p>'
     + '<div><button type="button" class="link" data-act="home">Cancelar</button></div></div>';
 }
-
-function playersHtml(V, showScore, done){
+function playersHtml(V, g){
   var host = app.mode==='host';
   var h = '<ol>';
   V.players.forEach(function(pl){
-    var now = showScore && !done && pl.pid===V.turnPid;
+    var playing = !g || (g.order||[]).indexOf(pl.pid)>=0;
     var tags = [];
-    if(now) tags.push('<small class="turnmark">Na vez</small>');
-    if(app.mode!=='local' && pl.pid===app.me) tags.push('<small>Você</small>');
-    if(app.mode!=='local' && pl.pid===V.hostPid && pl.pid!==app.me) tags.push('<small>Criou a sala</small>');
+    if(pl.pid===app.me) tags.push('<small>Você</small>');
+    if(pl.pid===V.hostPid && pl.pid!==app.me) tags.push('<small>Criou a sala</small>');
+    if(!g && pl.wins) tags.push('<small>'+winsText(pl.wins)+'</small>');
+    if(g && !playing) tags.push('<small>Entra no próximo jogo</small>');
     if(pl.on===false) tags.push('<small>Sem conexão</small>');
-    h += '<li class="'+(now?'now ':'')+(pl.on===false?'off':'')+'"><span class="nm">'+esc(pl.name)+tags.join('')
+    h += '<li class="'+(pl.on===false?'off':'')+'"><span class="nm">'+esc(pl.name)+tags.join('')
       + (host && pl.on===false ? '<button type="button" class="link" data-act="remove" data-pid="'+esc(pl.pid)+'">Remover da sala</button>' : '')
-      + '</span>' + (showScore ? '<span class="pt">'+(Number(pl.score)||0)+'</span>' : '') + '</li>';
+      + '</span>' + (g && playing ? '<span class="pt">'+(Number(g.score && g.score[pl.pid])||0)+'</span>' : '') + '</li>';
   });
   return h + '</ol>';
 }
-
+function settingsHtml(M, su, editable){
+  var h = '';
+  (M.opts||[]).forEach(function(o){
+    if(editable){
+      h += '<div class="field"><span class="lab">'+esc(o.label)+'</span><div class="seg">';
+      o.vals.forEach(function(v){
+        h += '<button type="button" class="chip" data-act="opt" data-k="'+esc(o.k)+'" data-v="'+esc(v[0])+'" aria-pressed="'+(su[o.k]===v[0])+'">'+esc(v[1])+'</button>';
+      });
+      h += '</div></div>';
+    }else{
+      var cur = o.vals.filter(function(v){ return v[0]===su[o.k]; })[0];
+      h += '<p><strong>'+esc(o.label)+'</strong> '+esc(cur ? cur[1] : '')+'</p>';
+    }
+  });
+  if(M.cats && editable){
+    h += '<div class="field"><span class="lab">'+esc(M.catLabel||'Temas')+'</span><div class="seg">';
+    Object.keys(M.cats).forEach(function(k){
+      h += '<button type="button" class="chip" data-act="cat" data-k="'+esc(k)+'" aria-pressed="'+(!!(su.cats && su.cats[k]))+'">'+esc(M.cats[k])+'</button>';
+    });
+    h += '</div></div>';
+  }
+  return h;
+}
 function renderLobby(V){
   var host = app.mode==='host';
+  var M = GAMES[V.sel] || GAMES[GAME_ORDER[0]];
   var h = '<div class="lobby"><section class="lobby-main"><h1><span>Sala de espera</span>'+esc(V.code)+'</h1>';
   if(host){
     var link = roomLink();
-    var wa = 'https://wa.me/?text=' + encodeURIComponent('Vem jogar Pergunta Escondida comigo. Entre na sala '+V.code+' por este link: '+link);
-    h += '<div class="share"><p class="do">Mande o link para os seus amigos. Quem preferir pode abrir o jogo e digitar o código da sala.</p>'
+    var wa = 'https://wa.me/?text=' + encodeURIComponent('Vem para a Noite de Jogos. Entre na sala '+V.code+' por este link: '+link);
+    h += '<div class="share"><p class="do">Mande o link para os seus amigos. Quem preferir pode abrir o site e digitar o código da sala.</p>'
       + '<div class="row"><input class="text" id="share-link" type="text" readonly aria-label="Link da sala" value="'+esc(link)+'"></div>'
       + '<div class="row"><button type="button" class="btn" data-act="copy">'+(app.copied?'Link copiado':'Copiar link')+'</button>'
       + '<a class="btn ghost" href="'+esc(wa)+'" target="_blank" rel="noopener">Enviar pelo WhatsApp</a></div></div>';
   }else{
-    h += '<p class="do">Você entrou como '+esc(app.name)+'. A partida começa quando quem criou a sala der a largada.</p>';
+    h += '<p class="do">Você entrou como '+esc(app.name)+'. Quem criou a sala escolhe o jogo e dá a largada.</p>';
   }
-  h += '<aside class="scores"><h2>Jogadores na sala ('+V.players.length+' de '+MAX_PLAYERS+')</h2>'+playersHtml(V,false,false)+'</aside>';
+  h += '<aside class="scores"><h2>Jogadores na sala ('+V.players.length+' de '+MAX_PLAYERS+')</h2>'+playersHtml(V,null)+'</aside>';
   h += '<footer class="quiet">';
   if(host) h += '<button type="button" class="link'+(app.armed==='close'?' armed':'')+'" data-act="close">'+(app.armed==='close'?'Clique de novo para encerrar a sala':'Encerrar a sala')+'</button>';
   else h += '<button type="button" class="link" data-act="leave">Sair da sala</button>';
   h += '</footer></section>';
 
-  h += '<section class="panel"><h2>'+(host?'Regras da partida':'Regras escolhidas')+'</h2>';
+  h += '<section class="panel"><h2>'+(host?'Escolha o jogo':'Próximo jogo')+'</h2>';
   if(host){
-    h += settingsHtml(V.settings);
+    h += '<div class="picker">';
+    GAME_ORDER.forEach(function(id){
+      h += '<button type="button" class="pick" data-act="sel" data-id="'+id+'" aria-pressed="'+(id===V.sel)+'">'+esc(GAMES[id].name)+'</button>';
+    });
+    h += '</div>';
+  }
+  h += '<div class="about"><h3>'+esc(M.name)+'</h3><ul class="how">';
+  M.how.forEach(function(line){ h += '<li>'+esc(line)+'</li>'; });
+  h += '</ul></div>';
+  h += settingsHtml(M, V.settings||{}, host);
+  if(host){
     if(app.error) h += '<p class="error" role="alert">'+esc(app.error)+'</p>';
-    if(V.players.length<2) h += '<p class="hint">A partida precisa de pelo menos dois jogadores na sala.</p>';
-    h += '<div class="actions"><button type="button" class="btn big" data-act="start">Começar a partida</button></div>';
-  }else{
-    var cats = Object.keys(CATS).filter(function(k){ return V.settings.cats && V.settings.cats[k]; }).map(function(k){ return CATS[k]; });
-    h += '<p>A partida terá '+(Number(V.settings.rounds)||0)+' perguntas. '
-      + (V.settings.timer ? 'Cada vez dura '+(Number(V.settings.timer)||0)+' segundos.' : 'Não há limite de tempo por vez.')+'</p>'
-      + '<p>Os temas são: '+esc(cats.join(', '))+'.</p>';
+    if(V.players.length<M.min) h += '<p class="hint">Este jogo precisa de pelo menos '+M.min+' jogadores na sala.</p>';
+    h += '<div class="actions"><button type="button" class="btn big" data-act="start">Começar '+esc(M.name)+'</button></div>';
   }
   return h + '</section></div>';
 }
-
-function renderGame(V){
-  var local = app.mode==='local', host = local || app.mode==='host';
-  var list = Array.isArray(V.words) ? V.words : [];
-  var done = V.phase==='solved' || V.phase==='unsolved';
-  var canAct = local || V.turnPid===app.me;
-  var waiting = !!pendingIntent;
-  var isLastQ = V.round === V.total-1;
-  var nextLabel = isLastQ ? 'Ver o resultado' : 'Próxima pergunta';
-  var tn = esc(V.turnName);
-  var flash = V.seq!==lastSeqRendered ? V.just : -1;
-
-  var h = '<div class="game">';
-  h += '<header class="bar"><div class="where"><span class="round">Pergunta '+(V.round+1)+' de '+(Number(V.total)||0)+'</span>'
-    + '<span class="cat">'+esc(CATS[V.cat]||'')+', '+list.length+' palavras</span></div>';
-  if(!done) h += '<div class="value"><span class="num">'+(Number(V.value)||0)+'</span><span class="lab">'+(V.value===1?'ponto em jogo':'pontos em jogo')+'</span></div>';
-  h += '</header>';
-
-  h += '<section class="board" aria-label="Pergunta escondida">'+tilesHtml(list, V.phase==='pick' && canAct && !waiting, flash)+'</section>';
-
-  h += '<div class="lower"><section class="turn'+(!local && canAct && !done && V.phase!=='wrong' ? ' mine':'')+'" aria-live="polite">';
-  if(V.phase==='pick' || V.phase==='answer'){
-    h += '<div class="turn-top"><p class="who">'+(!local && canAct ? 'Sua vez, '+tn : 'Vez de '+tn)+'</p>';
-    if(V.settings.timer) h += '<span id="clock" class="clock'+(V.timeLeft<=5?' low':'')+'" aria-label="Tempo restante">'+clockText(V.timeLeft)+'</span>';
-    h += '</div>';
-    if(V.note) h += '<p class="note">'+esc(V.note)+'</p>';
-  }
-  if(V.phase==='pick'){
-    h += '<p class="do">'+(canAct ? 'Escolha uma casinha para revelar uma palavra da pergunta.' : tn+' está escolhendo uma casinha.')+'</p>';
-  }else if(V.phase==='answer'){
-    if(canAct){
-      h += '<p class="do">'+(V.allOpen
-        ? 'Todas as palavras já apareceram. Esta é a última chance de '+tn+' nesta pergunta.'
-        : 'Sabe a resposta? Digite abaixo ou passe a vez sem perder nada.')+'</p>';
-      h += '<form class="guess" id="guess-form"><input id="guess" type="text" maxlength="60" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Sua resposta" placeholder="Digite a resposta">'
-        + '<button type="submit" class="btn">Responder</button></form>';
-      h += '<div class="actions"><button type="button" class="btn ghost" data-act="pass">Passar a vez</button></div>';
-    }else{
-      h += '<p class="do">'+(V.allOpen
-        ? 'Todas as palavras já apareceram. '+tn+' tem uma última chance de responder.'
-        : tn+' revelou uma palavra e está pensando na resposta.')+'</p>';
-    }
-  }else if(V.phase==='wrong'){
-    h += '<p class="verdict bad">'+esc(V.lastGuess)+' não é a resposta.</p>';
-    h += '<p class="do">'+tn+' errou. '+(V.lastChance ? 'Essa era a última tentativa desta pergunta.' : 'A pergunta continua valendo '+pts(Number(V.value)||0)+'.')+'</p>';
-    h += '<div class="actions"><button type="button" class="btn" id="go" data-act="cont">'
-      + (V.lastChance ? 'Ver a resposta' : 'Passar a vez para '+esc(V.nextName))+'</button>';
-    if(host) h += '<button type="button" class="btn ghost" data-act="override">Contar como certa</button>';
-    h += '</div>';
-    if(host) h += '<p class="hint">Use o segundo botão se o grupo concordar que a resposta de '+tn+' valia.</p>';
-  }else if(V.phase==='solved'){
-    h += '<p class="verdict good">'+esc(V.solver)+' acertou e ganhou '+pts(Number(V.gained)||0)+'.</p>';
-    h += '<p class="answer">Resposta: <strong>'+esc(V.answer)+'</strong></p>';
-    h += '<div class="actions"><button type="button" class="btn" id="go" data-act="next">'+nextLabel+'</button></div>';
-  }else{
-    h += '<p class="verdict bad">Ninguém levou os pontos desta pergunta.</p>';
-    h += '<p class="answer">Resposta: <strong>'+esc(V.answer)+'</strong></p>';
-    h += '<div class="actions"><button type="button" class="btn" id="go" data-act="next">'+nextLabel+'</button></div>';
-  }
-  if(waiting) h += '<p class="hint">Enviando a sua jogada.</p>';
-  else if(app.mode==='guest' && app.msg) h += '<p class="note">'+esc(app.msg)+'</p>';
-  h += '</section>';
-
-  h += '<aside class="scores"><h2>Placar'+(V.code?' da sala '+esc(V.code):'')+'</h2>'+playersHtml(V,true,done)+'</aside></div>';
-
-  h += '<footer class="quiet">';
-  if(host){
-    if(!local && !canAct && (V.phase==='pick'||V.phase==='answer')) h += '<button type="button" class="link" data-act="pass">Passar a vez de '+tn+'</button>';
-    if(!done) h += '<button type="button" class="link'+(app.armed==='skip'?' armed':'')+'" data-act="skip">'+(app.armed==='skip'?'Clique de novo para mostrar a resposta e pular':'Pular esta pergunta')+'</button>';
-    h += '<button type="button" class="link'+(app.armed==='end'?' armed':'')+'" data-act="end">'+(app.armed==='end'?'Clique de novo para encerrar a partida':'Encerrar a partida')+'</button>';
-  }else{
-    h += '<button type="button" class="link'+(app.armed==='leave'?' armed':'')+'" data-act="leave">'+(app.armed==='leave'?'Clique de novo para sair da sala':'Sair da sala')+'</button>';
-  }
-  return h + '</footer></div>';
-}
-
-function renderEnd(V){
-  var local = app.mode==='local', host = local || app.mode==='host';
-  var ranked = V.players.slice().sort(function(a,b){ return (Number(b.score)||0)-(Number(a.score)||0); });
-  var best = ranked.length ? Number(ranked[0].score)||0 : 0;
-  var winners = ranked.filter(function(p){ return (Number(p.score)||0)===best; }).map(function(p){ return p.name; });
+function renderOver(V, g){
+  var host = app.mode==='host';
+  var ranked = V.players.filter(function(p){ return (g.order||[]).indexOf(p.pid)>=0; })
+    .map(function(p){ return {name:p.name, score:Number(g.score && g.score[p.pid])||0}; })
+    .sort(function(a,b){ return b.score-a.score; });
+  var best = ranked.length ? ranked[0].score : 0;
+  var winners = ranked.filter(function(p){ return p.score===best; }).map(function(p){ return p.name; });
   var title, sub;
   if(best===0){ title='Fim de jogo'; sub='Ninguém pontuou nesta partida. Vale uma revanche.'; }
   else if(winners.length===1){ title=esc(winners[0])+' venceu'; sub='A vitória veio com '+pts(best)+'.'; }
@@ -1173,50 +1283,81 @@ function renderEnd(V){
   var h = '<div class="end"><h1>'+title+'</h1><p class="sub">'+sub+'</p><ol class="rank">';
   var pos = 0, prev = null;
   ranked.forEach(function(p,i){
-    var sc = Number(p.score)||0;
-    if(sc!==prev){ pos = i+1; prev = sc; }
-    h += '<li class="'+(sc===best && best>0?'top':'')+'"><span class="pos">'+pos+'º</span><span class="nm">'+esc(p.name)+'</span><span class="pt">'+sc+'</span></li>';
+    if(p.score!==prev){ pos = i+1; prev = p.score; }
+    h += '<li class="'+(p.score===best && best>0?'top':'')+'"><span class="pos">'+pos+'º</span><span class="nm">'+esc(p.name)+'</span><span class="pt">'+p.score+'</span></li>';
   });
   h += '</ol><div class="actions">';
   if(host){
-    h += '<button type="button" class="btn big" data-act="start">Jogar de novo</button>'
-      + '<button type="button" class="btn ghost" data-act="'+(local?'local':'to-lobby')+'">'+(local?'Mudar jogadores ou regras':'Mudar as regras')+'</button>';
+    h += '<button type="button" class="btn big" data-act="back">Escolher outro jogo</button>'
+      + '<button type="button" class="btn ghost" data-act="start">Jogar de novo</button>';
   }else{
-    h += '<p class="do">Aguarde. Quem criou a sala pode começar outra partida.</p>';
+    h += '<p class="do">Aguarde. Quem criou a sala escolhe o próximo jogo.</p>';
   }
-  h += '</div><footer class="quiet">';
-  if(app.mode==='host') h += '<button type="button" class="link'+(app.armed==='close'?' armed':'')+'" data-act="close">'+(app.armed==='close'?'Clique de novo para encerrar a sala':'Encerrar a sala')+'</button>';
-  if(app.mode==='guest') h += '<button type="button" class="link" data-act="leave">Sair da sala</button>';
-  if(local) h += '<button type="button" class="link" data-act="home">Voltar à tela inicial</button>';
+  return h + '</div></div>';
+}
+function renderPlay(V){
+  var host = app.mode==='host';
+  var M = GAMES[V.game], g = V.g || {};
+  if(!M) return renderConnecting();
+  var fresh = app.P && app.P.s===V.seq;
+  var ctx = {
+    me:app.me, host:host,
+    playing:(g.order||[]).indexOf(app.me)>=0,
+    pending:!!pendingIntent,
+    name:function(pid){
+      for(var i=0;i<V.players.length;i++) if(V.players[i].pid===pid) return V.players[i].name;
+      return 'Alguém';
+    }
+  };
+  var h = '<div class="game">';
+  h += '<header class="bar"><div class="where"><span class="round">'+esc(M.name)+'</span>'
+    + '<span class="cat">'+esc(g.over ? 'Partida encerrada' : (g.head||''))+'</span></div>';
+  if(g.timed && !g.over) h += '<span id="clock" class="clock'+(g.t<=5?' low':'')+'" aria-label="Tempo restante">'+clockText(g.t)+'</span>';
+  h += '</header>';
+  h += '<div class="lower"><div class="maincol">';
+  if(g.over) h += renderOver(V, g);
+  else{
+    h += M.render(g, fresh ? app.P.g : null, ctx);
+    if(!ctx.playing) h += '<p class="hint">Você entrou com a partida em andamento. No próximo jogo você participa.</p>';
+    if(ctx.pending) h += '<p class="hint">Enviando a sua jogada.</p>';
+    else if(app.mode==='guest' && app.msg) h += '<p class="note">'+esc(app.msg)+'</p>';
+  }
+  h += '</div><aside class="scores"><h2>Placar da sala '+esc(V.code)+'</h2>'+playersHtml(V, g)+'</aside></div>';
+  h += '<footer class="quiet">';
+  if(host){
+    if(!g.over) h += '<button type="button" class="link'+(app.armed==='back'?' armed':'')+'" data-act="back" data-arm="back">'+(app.armed==='back'?'Clique de novo para encerrar este jogo':'Encerrar este jogo e voltar para a sala')+'</button>';
+  }else{
+    h += '<button type="button" class="link'+(app.armed==='leave'?' armed':'')+'" data-act="leave">'+(app.armed==='leave'?'Clique de novo para sair da sala':'Sair da sala')+'</button>';
+  }
   return h + '</footer></div>';
 }
-
 function render(){
   var root = document.getElementById('app');
-  var old = document.getElementById('guess');
-  var keep = old ? old.value : '';
+  var sq = app.V ? app.V.seq : -1;
+  var same = sq===lastSeq;
+  if(!same){ app.armed = ''; lastSeq = sq; }
+  var keep = {}, focusId = document.activeElement && document.activeElement.id;
+  Array.prototype.forEach.call(root.querySelectorAll('input[id]'), function(el){ keep[el.id] = el.value; });
   var h = '';
   try{
     if(app.conn==='lost' && app.screen==='room') h += '<p class="banner" role="status">Sem conexão com o servidor do jogo. Estou tentando reconectar.</p>';
     if(app.screen==='home') h += renderHome();
-    else if(app.screen==='local') h += renderLocalSetup();
     else if(app.screen==='connecting') h += renderConnecting();
-    else if(app.V && app.V.status==='lobby') h += renderLobby(app.V);
-    else if(app.V && app.V.status==='play') h += renderGame(app.V);
-    else if(app.V) h += renderEnd(app.V);
+    else if(app.V && app.V.status==='play' && app.V.g) h += renderPlay(app.V);
+    else if(app.V) h += renderLobby(app.V);
   }catch(e){
     h = '<div class="wait"><h1>Algo deu errado</h1><p class="lede">Não consegui mostrar esta tela. Recarregue a página para voltar ao jogo.</p></div>';
+    try{ console.error(e); }catch(_){}
   }
   root.innerHTML = h;
-  var V = app.V, seq = V ? V.seq : -1;
-  var input = document.getElementById('guess'), go = document.getElementById('go');
-  if(input){
-    if(seq===lastSeqRendered) input.value = keep;
-    input.focus();
-  }else if(go && seq!==lastSeqRendered && app.screen==='room'){
-    go.focus();
-  }
-  lastSeqRendered = app.screen==='room' ? seq : -1;
+  /* Text someone is typing must survive a redraw caused by another player's move. */
+  Object.keys(keep).forEach(function(id){
+    var el = document.getElementById(id);
+    if(el && !el.readOnly) el.value = keep[id];
+  });
+  var f = focusId ? document.getElementById(focusId) : null;
+  if(!f && app.screen==='room') f = root.querySelector('[data-autofocus]');
+  if(f && f.tagName==='INPUT') f.focus();
 }
 
 /* ---------- Events ---------- */
@@ -1224,67 +1365,73 @@ function armed(name){
   if(app.armed===name){ app.armed=''; return true; }
   app.armed = name; render(); return false;
 }
+function parseVal(v){ return /^-?\d+$/.test(v) ? Number(v) : v; }
 document.addEventListener('click', function(e){
+  var gb = e.target.closest('[data-g]');
+  if(gb){
+    if(app.screen==='room') keepAwake();
+    if(app.mode==='guest') app.msg = '';
+    var it;
+    try{ it = JSON.parse(gb.dataset.g); }catch(err){ return; }
+    if(gb.dataset.arm){ if(!armed(gb.dataset.arm)) return; }
+    else app.armed = '';
+    return act(it);
+  }
   var b = e.target.closest('[data-act]');
   if(!b) return;
-  var a = b.dataset.act, su = app.setup;
+  var a = b.dataset.act;
   if(app.screen==='room') keepAwake();
-  if(['skip','end','close','leave'].indexOf(a)<0) app.armed = '';
+  if(['back','close','leave'].indexOf(a)<0) app.armed = '';
   app.copied = false;
   if(app.mode==='guest') app.msg = '';
   switch(a){
     case 'home': goHome(''); break;
-    case 'local': stopAll(); app.mode=null; app.G=null; app.V=null; app.setup = freshLocalSetup(); app.error=''; app.screen='local'; render(); break;
-    case 'add': su.names.push('Jogador '+(su.names.length+1)); render();
-      var last = document.getElementById('name-'+(su.names.length-1)); if(last){ last.focus(); last.select(); } break;
-    case 'rm': su.names.splice(+b.dataset.i,1); render(); break;
-    case 'rounds':
-      if(app.screen==='local'){ su.settings.rounds = +b.dataset.v; render(); } else act({t:'set', rounds:+b.dataset.v}); break;
-    case 'timer':
-      if(app.screen==='local'){ su.settings.timer = +b.dataset.v; render(); } else act({t:'set', timer:+b.dataset.v}); break;
-    case 'cat':
-      if(app.screen==='local'){ su.settings.cats[b.dataset.v] = !su.settings.cats[b.dataset.v]; app.error=''; render(); } else { app.error=''; act({t:'set', cat:b.dataset.v}); } break;
-    case 'start-local': startLocal(); break;
+    case 'sel': app.error=''; act({t:'sel', id:b.dataset.id}); break;
+    case 'opt': act({t:'opt', k:b.dataset.k, v:parseVal(b.dataset.v)}); break;
+    case 'cat': app.error=''; act({t:'cat', k:b.dataset.k}); break;
     case 'create': createRoom(); break;
     case 'join': joinRoom((document.getElementById('room-code')||{}).value); break;
     case 'join-invite': joinRoom(app.invite); break;
     case 'drop-invite': app.invite=''; app.error=''; setHash(''); render(); break;
-    case 'resume': var hs = load('pe-host'); if(hs) resumeHost(hs); break;
+    case 'resume': var hs = load('nj-host'); if(hs) resumeHost(hs); break;
     case 'copy':
       var done = function(){ app.copied = true; render(); };
       var fallback = function(){ var el = document.getElementById('share-link'); if(el){ el.focus(); el.select(); } };
       try{ navigator.clipboard.writeText(roomLink()).then(done, fallback); }catch(err){ fallback(); }
       break;
     case 'start':
-      if(app.mode==='host' && app.V.status==='lobby'){
-        if(app.G.players.length<2){ app.error='Espere pelo menos mais uma pessoa entrar na sala.'; return render(); }
-        if(!Object.keys(CATS).some(function(k){ return app.G.settings.cats[k]; })){ app.error='Escolha pelo menos um tema.'; return render(); }
-      }
-      app.error=''; act({t:'start'}); break;
-    case 'to-lobby': act({t:'lobby'}); break;
+      if(app.mode!=='host') break;
+      var M = GAMES[app.S.sel];
+      if(app.S.players.length<M.min){ app.error='Este jogo precisa de pelo menos '+M.min+' jogadores na sala.'; return render(); }
+      app.error='';
+      var before = app.S.seq;
+      act({t:'start'});
+      if(app.S.seq===before){ app.error='Escolha pelo menos um tema para começar.'; render(); }
+      break;
+    case 'back': if(app.S && app.S.G && !app.S.G.over){ if(armed('back')) act({t:'back'}); } else act({t:'back'}); break;
     case 'remove': act({t:'remove', pid:b.dataset.pid}); break;
-    case 'reveal': act({t:'reveal', i:+b.dataset.i}); break;
-    case 'pass': act({t:'pass'}); break;
-    case 'cont': act({t:'cont'}); break;
-    case 'override': act({t:'override'}); break;
-    case 'next': act({t:'next'}); break;
-    case 'skip': if(armed('skip')) act({t:'skip'}); break;
-    case 'end': if(armed('end')) act({t:'end'}); break;
     case 'close': if(armed('close')) closeRoom(); break;
     case 'leave': if(app.V && app.V.status==='play'){ if(armed('leave')) leaveRoom(); } else leaveRoom(); break;
   }
 });
-document.addEventListener('input', function(e){
-  var t = e.target;
-  if(t.id==='my-name') app.name = t.value;
-  else if(t.dataset && t.dataset.name!==undefined && app.screen==='local') app.setup.names[+t.dataset.name] = t.value;
-});
 document.addEventListener('submit', function(e){
+  var f = e.target.closest('form[data-gform]');
+  if(!f) return;
   e.preventDefault();
-  if(e.target.id==='guess-form'){
-    var v = document.getElementById('guess').value;
-    if(v.trim()) act({t:'guess', text:v});
-  }
+  var it = {t:f.dataset.gform}, ok = true;
+  Array.prototype.forEach.call(f.querySelectorAll('input[name]'), function(el){
+    var v = el.value.trim();
+    if(!v) ok = false;
+    it[el.name] = el.type==='number' ? Number(v) : v;
+  });
+  if(!ok) return;
+  if(app.mode==='guest') app.msg = '';
+  app.armed = '';
+  act(it);
+  Array.prototype.forEach.call(f.querySelectorAll('input[name]'), function(el){ el.value = ''; });
+});
+document.addEventListener('input', function(e){
+  if(e.target.id==='my-name') app.name = e.target.value;
 });
 document.addEventListener('keydown', function(e){
   if(e.key!=='Enter' || app.screen!=='home') return;
@@ -1295,19 +1442,990 @@ document.addEventListener('visibilitychange', function(){
   if(document.visibilityState==='visible' && app.screen==='room') keepAwake();
 });
 
-/* ---------- Boot ---------- */
-(function boot(){
-  var n = load('pe-name');
+function boot(){
+  var n = load('nj-name');
+  if(typeof n!=='string') n = load('pe-name');
   if(typeof n==='string') app.name = n;
   var pc = parseCode((location.hash||'').slice(1));
   if(pc){
-    var hs = load('pe-host'), gs = load('pe-guest');
-    if(hs && hs.code===pc.code && hs.G && Date.now()-hs.at < 6*3600e3) return resumeHost(hs);
+    var hs = load('nj-host'), gs = load('nj-guest');
+    if(hs && hs.code===pc.code && hs.S && Date.now()-hs.at < 6*3600e3) return resumeHost(hs);
     if(gs && gs.code===pc.code && gs.name && Date.now()-gs.at < 6*3600e3){ app.name = gs.name; return joinRoom(pc.code); }
     app.invite = pc.code;
   }
   render();
-})();
+}
+
+/* ================= Pergunta Escondida ================= */
+GAMES.pergunta = {
+  name:'Pergunta Escondida', min:2,
+  blurb:'A pergunta fica coberta e aparece uma palavra por vez.',
+  how:[
+    'Na sua vez, escolha uma casinha numerada para revelar uma palavra da pergunta.',
+    'Depois de revelar, digite a resposta ou passe a vez.',
+    'A pergunta vale 1 ponto para cada palavra que ela tem. Errar não tira pontos, só passa a vez.'
+  ],
+  opts:[
+    {k:'rounds', label:'Quantas perguntas?', vals:[[5,'5'],[8,'8'],[10,'10'],[15,'15']], def:8},
+    {k:'timer', label:'Tempo por vez', vals:[[0,'Sem tempo'],[20,'20 segundos'],[30,'30 segundos'],[45,'45 segundos']], def:0}
+  ],
+  cats:PE_CATS, catLabel:'Temas',
+  words:function(G){ return PE_BANK[G.queue[G.round]][1].split(' '); },
+  hidden:function(G){ var c=0; G.rev.forEach(function(r){ if(!r)c++; }); return c; },
+  start:function(S,su){
+    var q = pickQueue('pe', PE_BANK.length, su.rounds, function(i){ return su.cats[PE_BANK[i][0]]; });
+    if(!q.length) return null;
+    var G = {order:orderOf(S), queue:q, round:-1, timer:su.timer, ti:0};
+    this.nextRound(G);
+    return G;
+  },
+  nextRound:function(G){
+    G.round++; G.note=''; G.just=-1;
+    if(G.round>=G.queue.length){ G.over = true; return; }
+    G.rev = this.words(G).map(function(){ return false; });
+    G.finalLeft = 0;
+    G.ti = G.round % G.order.length;
+    G.phase = 'pick';
+    G.t = G.timer;
+  },
+  pass:function(G,note){
+    G.note = note||''; G.just = -1;
+    if(this.hidden(G)===0){
+      G.finalLeft--;
+      if(G.finalLeft<=0){ G.phase = 'unsolved'; return; }
+    }
+    G.ti = (G.ti+1) % G.order.length;
+    G.phase = this.hidden(G)===0 ? 'answer' : 'pick';
+    G.t = G.timer;
+  },
+  award:function(G,S){
+    var pid = G.order[G.ti], v = G.rev.length;
+    addScore(G,pid,v);
+    G.gained = v; G.solver = pid; G.phase = 'solved'; G.just = -1;
+  },
+  apply:function(G,S,from,it,host){
+    var mine = G.order[G.ti]===from;
+    switch(it.t){
+      case 'reveal':
+        if(mine && G.phase==='pick' && Number.isInteger(it.i) && it.i>=0 && it.i<G.rev.length && !G.rev[it.i]){
+          G.rev[it.i] = true; G.just = it.i; G.note = '';
+          if(this.hidden(G)===0) G.finalLeft = G.order.length;
+          G.phase = 'answer'; return true;
+        }
+        break;
+      case 'guess':
+        if(mine && G.phase==='answer' && typeof it.text==='string' && it.text.trim()){
+          G.note = ''; G.just = -1;
+          var text = it.text.trim().slice(0,60);
+          if(isCorrect(text, PE_BANK[G.queue[G.round]][2])){ this.award(G,S); return true; }
+          G.lastGuess = text; G.phase = 'wrong'; return true;
+        }
+        break;
+      case 'pass':
+        if((mine||host) && (G.phase==='pick'||G.phase==='answer')){
+          this.pass(G, mine ? '' : nameOf(S,G.order[G.ti])+' perdeu a vez.'); return true;
+        }
+        break;
+      case 'cont': if(G.phase==='wrong'){ this.pass(G,''); return true; } break;
+      case 'override': if(host && G.phase==='wrong'){ this.award(G,S); return true; } break;
+      case 'next': if(G.phase==='solved'||G.phase==='unsolved'){ this.nextRound(G); return true; } break;
+      case 'skip': if(host && G.phase!=='solved' && G.phase!=='unsolved'){ G.phase='unsolved'; G.just=-1; return true; } break;
+    }
+    return false;
+  },
+  tick:function(G,S){
+    if(!G.timer || (G.phase!=='pick' && G.phase!=='answer')) return false;
+    G.t--;
+    if(G.t<=0){ this.pass(G, 'O tempo de '+nameOf(S,G.order[G.ti])+' acabou.'); return true; }
+    return false;
+  },
+  drop:function(G,S,pid){
+    var live = G.phase==='pick'||G.phase==='answer'||G.phase==='wrong';
+    if(live && G.order[G.ti]===pid) this.pass(G, nameOf(S,pid)+' saiu do jogo.');
+    dropFromOrder(G,pid);
+    if(G.finalLeft>G.order.length) G.finalLeft = G.order.length;
+  },
+  view:function(G,S){
+    var q = PE_BANK[G.queue[G.round]];
+    if(!q) return {};
+    var list = this.words(G), done = G.phase==='solved'||G.phase==='unsolved', hid = this.hidden(G);
+    return {
+      head:'Pergunta '+(G.round+1)+' de '+G.queue.length+', '+PE_CATS[q[0]],
+      last:G.round===G.queue.length-1,
+      words:list.map(function(w,i){ return (done||G.rev[i]) ? w : null; }),
+      phase:G.phase, turn:G.order[G.ti], next:G.order[(G.ti+1)%G.order.length],
+      value:list.length, allOpen:hid===0, lastChance:hid===0 && G.finalLeft<=1,
+      lastGuess:G.phase==='wrong' ? G.lastGuess : '', gained:G.gained, solver:G.solver,
+      note:G.note, just:G.just, t:G.t, timed:!!G.timer && (G.phase==='pick'||G.phase==='answer'),
+      answer:done ? q[2][0] : null
+    };
+  },
+  render:function(g,P,ctx){
+    var list = g.words||[], done = g.phase==='solved'||g.phase==='unsolved';
+    var can = g.turn===ctx.me, tn = esc(ctx.name(g.turn));
+    var h = '<div class="value-row"><span class="num">'+(Number(g.value)||0)+'</span><span class="lab">pontos em jogo</span></div>';
+    h += '<section class="board" aria-label="Pergunta escondida">';
+    list.forEach(function(w,i){
+      if(w!==null && w!==undefined) h += '<span class="tile open'+(i===g.just?' just':'')+'"><span class="n">'+(i+1)+'</span>'+esc(w)+'</span>';
+      else if(g.phase==='pick' && can && !ctx.pending) h += '<button type="button" class="tile" data-g="'+esc(JSON.stringify({t:'reveal',i:i}))+'" aria-label="Revelar a palavra '+(i+1)+'">'+(i+1)+'</button>';
+      else h += '<span class="tile locked" aria-label="Palavra '+(i+1)+' escondida">'+(i+1)+'</span>';
+    });
+    h += '<span class="qmark" aria-hidden="true">?</span></section>';
+    h += '<section class="turn'+(can && !done && g.phase!=='wrong' ? ' mine':'')+'" aria-live="polite">';
+    if(g.phase==='pick'||g.phase==='answer'){
+      h += '<p class="who">'+(can ? 'Sua vez, '+tn : 'Vez de '+tn)+'</p>';
+      if(g.note) h += '<p class="note">'+esc(g.note)+'</p>';
+    }
+    if(g.phase==='pick'){
+      h += '<p class="do">'+(can ? 'Escolha uma casinha para revelar uma palavra da pergunta.' : tn+' está escolhendo uma casinha.')+'</p>';
+    }else if(g.phase==='answer'){
+      if(can){
+        h += '<p class="do">'+(g.allOpen ? 'Todas as palavras já apareceram. Esta é a sua última chance nesta pergunta.' : 'Sabe a resposta? Digite abaixo ou passe a vez sem perder nada.')+'</p>'
+          + '<form class="guess" data-gform="guess"><input id="guess" name="text" type="text" maxlength="60" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Sua resposta" placeholder="Digite a resposta" data-autofocus>'
+          + '<button type="submit" class="btn">Responder</button></form>'
+          + '<div class="actions">'+gBtn('Passar a vez',{t:'pass'},'ghost')+'</div>';
+      }else{
+        h += '<p class="do">'+(g.allOpen ? 'Todas as palavras já apareceram. '+tn+' tem uma última chance de responder.' : tn+' revelou uma palavra e está pensando na resposta.')+'</p>';
+      }
+    }else if(g.phase==='wrong'){
+      h += '<p class="verdict bad">'+esc(g.lastGuess)+' não é a resposta.</p>'
+        + '<p class="do">'+tn+' errou. '+(g.lastChance ? 'Essa era a última tentativa desta pergunta.' : 'A pergunta continua valendo '+pts(g.value)+'.')+'</p>'
+        + '<div class="actions">'+gBtn(g.lastChance ? 'Ver a resposta' : 'Passar a vez para '+ctx.name(g.next),{t:'cont'})
+        + (ctx.host ? gBtn('Contar como certa',{t:'override'},'ghost') : '')+'</div>';
+      if(ctx.host) h += '<p class="hint">Use o segundo botão se o grupo concordar que a resposta valia.</p>';
+    }else if(g.phase==='solved'){
+      h += '<p class="verdict good">'+esc(ctx.name(g.solver))+' acertou e ganhou '+pts(g.gained)+'.</p>'
+        + '<p class="answer">Resposta: <strong>'+esc(g.answer)+'</strong></p>'
+        + '<div class="actions">'+gBtn(g.last?'Ver o resultado':'Próxima pergunta',{t:'next'})+'</div>';
+    }else{
+      h += '<p class="verdict bad">Ninguém levou os pontos desta pergunta.</p>'
+        + '<p class="answer">Resposta: <strong>'+esc(g.answer)+'</strong></p>'
+        + '<div class="actions">'+gBtn(g.last?'Ver o resultado':'Próxima pergunta',{t:'next'})+'</div>';
+    }
+    h += '</section>';
+    if(ctx.host && !done){
+      h += '<div class="quiet">';
+      if(!can && (g.phase==='pick'||g.phase==='answer')) h += gLink('Passar a vez de '+ctx.name(g.turn),{t:'pass'});
+      h += gArm('pe-skip','Pular esta pergunta','Clique de novo para mostrar a resposta e pular',{t:'skip'},'link')+'</div>';
+    }
+    return h;
+  }
+};
+
+/* ================= Quem Sou Eu ================= */
+GAMES.quem = {
+  name:'Quem Sou Eu?', min:2,
+  blurb:'Todos veem a sua identidade secreta, menos você.',
+  how:[
+    'O jogo sorteia uma identidade para cada jogador. Só os outros conseguem ver a sua.',
+    'Na sua vez, faça em voz alta uma pergunta de sim ou não, ou arrisque um chute.',
+    'Quem descobre antes ganha mais pontos. O último fica com a lanterna da rodada e não pontua.'
+  ],
+  opts:[
+    {k:'rounds', label:'Quantas rodadas?', vals:[[1,'1'],[3,'3'],[5,'5']], def:3},
+    {k:'qlimit', label:'Perguntas por jogador em cada rodada', vals:[[0,'Sem limite'],[10,'Até 10'],[15,'Até 15']], def:0}
+  ],
+  cats:QS_CATS, catLabel:'De onde saem as identidades?',
+  entry:function(i){ var e = QS_BANK[i]; return e ? [e[1], e[2]] : null; },
+  searching:function(G){ return G.order.filter(function(pid){ return G.found.indexOf(pid)<0; }); },
+  start:function(S,su){
+    var n = S.players.length;
+    var q = pickQueue('qs', QS_BANK.length, n*su.rounds, function(i){ return su.cats[QS_BANK[i][0]]; });
+    if(q.length < n) return null;
+    var G = {order:orderOf(S), deck:q, round:-1, rounds:Math.min(su.rounds, Math.floor(q.length/n)), qlimit:su.qlimit, lant:{}, ti:0};
+    this.nextRound(G);
+    return G;
+  },
+  nextRound:function(G){
+    G.round++;
+    if(G.round>=G.rounds || G.deck.length<G.order.length){ G.over = true; return; }
+    G.ids = {}; G.order.forEach(function(pid){ G.ids[pid] = G.deck.shift(); });
+    G.found = []; G.q = {}; G.gains = {}; G.lantern = ''; G.note = '';
+    G.ti = G.round % G.order.length;
+    G.phase = 'ask';
+  },
+  advance:function(G){
+    var n = G.order.length;
+    for(var k=1;k<=n;k++){
+      var i = (G.ti+k) % n;
+      if(G.found.indexOf(G.order[i])<0){ G.ti = i; return; }
+    }
+  },
+  finish:function(G,withLantern){
+    var rest = this.searching(G);
+    G.lantern = '';
+    if(withLantern && rest.length===1){ G.lantern = rest[0]; G.lant[rest[0]] = (G.lant[rest[0]]||0)+1; }
+    G.phase = 'roundEnd';
+  },
+  apply:function(G,S,from,it,host){
+    var cur = G.order[G.ti], mine = cur===from, lim = G.qlimit, name = nameOf(S,cur);
+    switch(it.t){
+      case 'asked':
+        if(mine && G.phase==='ask' && (!lim || (G.q[cur]||0)<lim)){
+          G.q[cur] = (G.q[cur]||0)+1; G.note = name+' fez uma pergunta.'; this.advance(G); return true;
+        }
+        break;
+      case 'guess': if(mine && G.phase==='ask'){ G.phase='guess'; G.note=''; return true; } break;
+      case 'cancel': if((mine||host) && G.phase==='guess'){ G.phase='ask'; return true; } break;
+      case 'judge':
+        if(G.phase==='guess' && !mine && typeof it.ok==='boolean'){
+          if(!it.ok){ G.note = name+' chutou e errou.'; G.phase='ask'; this.advance(G); return true; }
+          var gain = Math.max(0, this.searching(G).length-1);
+          G.found.push(cur); addScore(G,cur,gain); G.gains[cur] = gain;
+          G.note = name+' descobriu quem era.';
+          if(this.searching(G).length<=1) this.finish(G,true);
+          else { G.phase='ask'; this.advance(G); }
+          return true;
+        }
+        break;
+      case 'pass':
+        if((mine||host) && G.phase==='ask'){ G.note = name+(mine?' passou a vez.':' perdeu a vez.'); this.advance(G); return true; }
+        break;
+      case 'next': if(G.phase==='roundEnd'){ this.nextRound(G); return true; } break;
+      case 'endround':
+        if(host && G.phase!=='roundEnd'){ this.finish(G,false); G.note='A rodada foi encerrada antes do fim.'; return true; }
+        break;
+    }
+    return false;
+  },
+  drop:function(G,S,pid){
+    var live = G.phase!=='roundEnd';
+    if(live && G.order[G.ti]===pid){ G.phase='ask'; this.advance(G); }
+    dropFromOrder(G,pid);
+    delete G.ids[pid]; delete G.q[pid];
+    G.found = G.found.filter(function(x){ return x!==pid; });
+    if(live){
+      G.note = nameOf(S,pid)+' saiu do jogo.';
+      if(this.searching(G).length<=1) this.finish(G,true);
+    }
+  },
+  view:function(G,S){
+    var self = this, left = this.searching(G).length;
+    var g = {
+      head:'Rodada '+(G.round+1)+' de '+G.rounds, last:G.round===G.rounds-1,
+      phase:G.phase, turn:G.order[G.ti], found:G.found.slice(), q:G.q, note:G.note, left:left,
+      qlimit:G.qlimit, lant:G.lant
+    };
+    if(G.phase==='roundEnd'){
+      g.reveal = {};
+      G.order.forEach(function(pid){ g.reveal[pid] = self.entry(G.ids[pid]); });
+      g.gains = G.gains; g.lantern = G.lantern;
+    }
+    return g;
+  },
+  priv:function(G,S,pid){
+    var self = this, P = {r:G.round, ids:{}, mine:null};
+    G.order.forEach(function(p){ if(p!==pid) P.ids[p] = self.entry(G.ids[p]); });
+    if(G.ids[pid]!=null && (G.found.indexOf(pid)>=0 || G.phase==='roundEnd')) P.mine = this.entry(G.ids[pid]);
+    return P;
+  },
+  card:function(o){
+    var h = '<li class="card'+(o.hidden?' secret':'')+(o.now?' now':'')+'"><span class="pn">'+esc(o.who)+'</span>';
+    if(o.hidden) h += '<span class="idn q" aria-label="Identidade escondida">?</span><span class="ds">'+esc(o.desc)+'</span>';
+    else h += '<span class="idn">'+esc(o.idn)+'</span><span class="ds">'+esc(o.desc)+'</span>';
+    if(o.tags && o.tags.length) h += '<span class="tags">'+o.tags.map(function(t){ return '<span class="tag'+(t[1]?' '+t[1]:'')+'">'+esc(t[0])+'</span>'; }).join('')+'</span>';
+    return h + '</li>';
+  },
+  render:function(g,P,ctx){
+    var self = this, me = ctx.me, ended = g.phase==='roundEnd', found = g.found||[];
+    var fresh = !!P && P.r!==undefined;
+    var myTurn = g.turn===me && !ended, iFound = found.indexOf(me)>=0, lim = Number(g.qlimit)||0;
+    var qOf = function(pid){ return (g.q && Number(g.q[pid])) || 0; };
+    var idOf = function(pid){
+      if(ended && g.reveal && g.reveal[pid]) return g.reveal[pid];
+      if(!fresh) return null;
+      if(pid===me) return P.mine || null;
+      return (P.ids && P.ids[pid]) || null;
+    };
+    var tn = esc(ctx.name(g.turn)), turnId = idOf(g.turn);
+    var h = '<section class="turn'+(myTurn?' mine':'')+'" aria-live="polite">';
+    if(ended){
+      h += '<p class="who">Fim da rodada</p><ol class="result">';
+      found.forEach(function(pid,i){
+        var e = idOf(pid); if(!e) return;
+        h += '<li><strong>'+(i+1)+'º '+esc(ctx.name(pid))+'</strong> era '+esc(e[0])+' e ganhou '+pts(g.gains && g.gains[pid])+'.</li>';
+      });
+      (g.order||[]).forEach(function(pid){
+        if(found.indexOf(pid)>=0) return;
+        var e = idOf(pid); if(!e) return;
+        h += '<li><strong>'+esc(ctx.name(pid))+'</strong> era '+esc(e[0])+(pid===g.lantern ? ' e ficou com a lanterna da rodada.' : ' e não descobriu.')+'</li>';
+      });
+      h += '</ol><div class="actions">'+gBtn(g.last?'Ver o resultado':'Próxima rodada',{t:'next'})+'</div>';
+    }else if(g.phase==='guess'){
+      if(myTurn){
+        h += '<p class="who">Valendo, '+tn+'</p><p class="do">Diga o seu chute em voz alta. Os outros jogadores confirmam se você acertou.</p>'
+          + '<div class="actions">'+gBtn('Desistir do chute',{t:'cancel'},'ghost')+'</div>';
+      }else{
+        h += '<p class="who">'+tn+' vai chutar</p><p class="do">'+(turnId ? tn+' é '+esc(turnId[0])+'. ' : '')+'O chute foi certo?</p>';
+        if(ctx.playing) h += '<div class="actions">'+gArm('qs-yes','Acertou','Confirmar que acertou',{t:'judge',ok:true},'btn confirmable')+gBtn('Errou',{t:'judge',ok:false},'ghost')+'</div>';
+      }
+    }else if(myTurn){
+      var left = lim ? lim-qOf(me) : -1;
+      h += '<p class="who">Sua vez, '+tn+'</p>';
+      if(left===0) h += '<p class="do">Você já usou as suas '+lim+' perguntas. Agora só vale chutar.</p>';
+      else h += '<p class="do">Faça em voz alta uma pergunta de sim ou não. Depois que responderem, toque no primeiro botão.'+(left>0 ? ' Você ainda tem '+(left===1?'1 pergunta':left+' perguntas')+'.' : '')+'</p>';
+      h += '<div class="actions">'+(left!==0 ? gBtn('Já fiz minha pergunta',{t:'asked'}) : '')+gBtn('Quero chutar',{t:'guess'},left===0?'':'ghost')+'</div>'
+        + '<div>'+gLink('Passar a vez sem perguntar',{t:'pass'})+'</div>';
+    }else{
+      h += '<p class="who">Vez de '+tn+'</p><p class="do">'+(turnId ? tn+' é '+esc(turnId[0])+'. ' : '')
+        + (iFound ? 'Você já descobriu a sua identidade. Continue ajudando com as respostas.' : 'Responda à pergunta só com sim ou não.')+'</p>';
+    }
+    if(!ended && g.note) h += '<p class="note">'+esc(g.note)+'</p>';
+    h += '</section><ul class="cards" aria-label="Identidades na mesa">';
+    var order = (g.order||[]).slice().sort(function(a,b){ return (b===me)-(a===me); });
+    order.forEach(function(pid){
+      var e = idOf(pid), mine = pid===me, done = found.indexOf(pid)>=0, tags = [];
+      if(!ended && pid===g.turn) tags.push(['Na vez','hot']);
+      if(done) tags.push([(found.indexOf(pid)+1)+'º a descobrir','go']);
+      if(ended && pid===g.lantern) tags.push(['Lanterna','']);
+      if(g.lant && g.lant[pid]) tags.push([g.lant[pid]===1?'1 lanterna no jogo':g.lant[pid]+' lanternas no jogo','']);
+      if(!ended && !done){ var n = qOf(pid); tags.push([n===1?'1 pergunta':n+' perguntas','']); }
+      var who = mine ? ctx.name(pid)+' (você)' : ctx.name(pid), now = !ended && pid===g.turn;
+      if(e) h += self.card({who:who, idn:e[0], desc:e[1], now:now, tags:tags});
+      else h += self.card({who:who, hidden:true, desc:mine ? 'Só os outros veem quem você é.' : 'Carregando a identidade.', now:now, tags:tags});
+    });
+    h += '</ul>';
+    if(ctx.host && !ended){
+      h += '<div class="quiet">';
+      if(!myTurn && g.phase==='ask') h += gLink('Passar a vez de '+ctx.name(g.turn),{t:'pass'});
+      if(!myTurn && g.phase==='guess') h += gLink('Cancelar o chute de '+ctx.name(g.turn),{t:'cancel'});
+      h += gArm('qs-end','Encerrar a rodada','Clique de novo para revelar tudo e encerrar a rodada',{t:'endround'},'link')+'</div>';
+    }
+    return h;
+  }
+};
+
+/* ================= Duvido ================= */
+var DV_THEMES = [
+  'Capitais de países da Europa','Estados do Brasil','Capitais de estados brasileiros','Países da América do Sul','Países da África','Países da Ásia',
+  'Países que falam espanhol','Cidades brasileiras com praia','Pontos turísticos do mundo','Rios do Brasil','Idiomas','Moedas de países',
+  'Times de futebol do Brasil','Seleções que já jogaram uma Copa do Mundo','Jogadores que já vestiram a camisa da seleção brasileira','Esportes olímpicos',
+  'Marcas de carro','Modelos de carro','Marcas de roupa ou de tênis','Marcas de chocolate','Aplicativos de celular','Redes sociais e sites famosos',
+  'Sabores de pizza','Sabores de sorvete','Frutas','Legumes e verduras','Comidas típicas do Brasil','Tipos de massa','Bebidas sem álcool','Doces e sobremesas',
+  'Raças de cachorro','Animais que vivem no mar','Animais da fauna brasileira','Aves','Insetos','Flores e plantas',
+  'Instrumentos musicais','Cantores ou cantoras do Brasil','Bandas de rock','Duplas sertanejas','Novelas brasileiras','Programas de TV brasileiros','Apresentadores de TV',
+  'Filmes de animação','Filmes de super-herói','Séries de TV ou de streaming','Desenhos animados','Super-heróis','Vilões de filmes',
+  'Personagens da Turma da Mônica','Personagens dos Simpsons','Personagens de Harry Potter','Princesas e heroínas de animação','Pokémon',
+  'Jogos de videogame','Jogos de tabuleiro ou de cartas','Brincadeiras de criança','Profissões','Matérias da escola','Partes do corpo humano','Ossos do corpo humano',
+  'Planetas, luas e estrelas com nome','Elementos da tabela periódica','Cores','Ferramentas','Meios de transporte','Objetos que existem em uma cozinha',
+  'Coisas que se leva para a praia','Feriados e datas comemorativas','Escritores ou escritoras','Pintores ou pintoras','Presidentes do Brasil',
+  'Monstros e criaturas de lendas','Nomes de pessoa que começam com a letra M','Palavras que terminam em ão'
+];
+GAMES.duvido = {
+  name:'Duvido', min:2,
+  blurb:'Um leilão de quantos itens de um tema você consegue dizer.',
+  how:[
+    'Aparece um tema. Na sua vez, aposte quantos itens você consegue dizer, sempre mais que a aposta anterior, ou diga que duvida.',
+    'Quando alguém duvida, quem apostou precisa dizer os itens em voz alta contra o relógio. Quem duvidou conta os acertos no celular.',
+    'Se cumprir a aposta, quem apostou ganha 1 ponto. Se não cumprir, o ponto vai para quem duvidou.'
+  ],
+  opts:[
+    {k:'target', label:'Vence quem fizer', vals:[[3,'3 pontos'],[5,'5 pontos'],[7,'7 pontos']], def:3},
+    {k:'time', label:'Tempo para provar', vals:[[30,'30 segundos'],[45,'45 segundos'],[60,'60 segundos']], def:45}
+  ],
+  free:{inc:true}, noWait:{inc:true},
+  start:function(S,su){
+    var G = {order:orderOf(S), queue:pickQueue('dv', DV_THEMES.length, 40), round:-1, target:su.target, time:su.time, ti:0};
+    this.nextRound(G);
+    return G;
+  },
+  nextRound:function(G){
+    G.round++;
+    if(G.round>=G.queue.length){ G.over = true; return; }
+    G.bid = null; G.doubter = ''; G.count = 0; G.res = null; G.note = ''; G.t = 0;
+    G.ti = G.round % G.order.length;
+    G.phase = 'bid';
+  },
+  finish:function(G,ok){
+    G.res = {ok:ok, bidder:G.bid.pid, doubter:G.doubter, n:G.bid.n, count:G.count};
+    addScore(G, ok ? G.bid.pid : G.doubter, 1);
+    G.phase = 'result';
+  },
+  apply:function(G,S,from,it,host){
+    var cur = G.order[G.ti], mine = cur===from;
+    switch(it.t){
+      case 'bid':
+        if(mine && G.phase==='bid' && Number.isInteger(it.n) && it.n>=1 && it.n<=99 && (!G.bid || it.n>G.bid.n)){
+          G.bid = {pid:cur, n:it.n}; G.note = '';
+          G.ti = (G.ti+1) % G.order.length; return true;
+        }
+        break;
+      case 'doubt':
+        if(mine && G.phase==='bid' && G.bid && G.bid.pid!==cur){
+          G.doubter = cur; G.count = 0; G.t = G.time; G.phase = 'prove'; return true;
+        }
+        break;
+      case 'inc':
+        if(G.phase==='prove' && from!==G.bid.pid && (from===G.doubter || host) && (it.d===1 || it.d===-1)){
+          G.count = Math.max(0, G.count+it.d);
+          if(G.count>=G.bid.n) this.finish(G,true);
+          return true;
+        }
+        break;
+      case 'giveup': if(G.phase==='prove' && from===G.bid.pid){ this.finish(G,false); return true; } break;
+      case 'next':
+        if(G.phase==='result'){
+          var won = G.order.some(function(pid){ return (G.score[pid]||0)>=G.target; });
+          if(won) G.over = true; else this.nextRound(G);
+          return true;
+        }
+        break;
+    }
+    return false;
+  },
+  tick:function(G,S){
+    if(G.phase!=='prove') return false;
+    G.t--;
+    if(G.t<=0){ this.finish(G,false); return true; }
+    return false;
+  },
+  drop:function(G,S,pid){
+    if((G.phase==='prove' && (pid===G.bid.pid || pid===G.doubter)) || (G.phase==='bid' && G.bid && G.bid.pid===pid)){
+      G.bid = null; G.phase = 'bid'; G.note = nameOf(S,pid)+' saiu do jogo. As apostas recomeçam.';
+    }
+    dropFromOrder(G,pid);
+  },
+  view:function(G,S){
+    return {head:'Tema '+(G.round+1)+', vence quem fizer '+pts(G.target), theme:DV_THEMES[G.queue[G.round]],
+      phase:G.phase, turn:G.order[G.ti], bid:G.bid, doubter:G.doubter, count:G.count, res:G.res, note:G.note,
+      t:G.t, timed:G.phase==='prove', target:G.target};
+  },
+  render:function(g,P,ctx){
+    var me = ctx.me, can = g.turn===me, tn = esc(ctx.name(g.turn));
+    var h = '<div class="theme"><span class="lab">O tema é</span><p class="big">'+esc(g.theme)+'</p></div>';
+    h += '<section class="turn'+(((g.phase==='bid'&&can)||(g.phase==='prove'&&g.bid&&g.bid.pid===me))?' mine':'')+'" aria-live="polite">';
+    if(g.phase==='bid'){
+      var cur = g.bid ? g.bid.n : 0;
+      h += '<p class="who">'+(can ? 'Sua vez, '+tn : 'Vez de '+tn)+'</p>';
+      if(g.note) h += '<p class="note">'+esc(g.note)+'</p>';
+      h += '<p class="do">'+(g.bid ? esc(ctx.name(g.bid.pid))+' diz que consegue dizer '+g.bid.n+'.' : 'Ninguém apostou ainda.')+'</p>';
+      if(can){
+        var quick = g.bid ? [cur+1,cur+2,cur+3,cur+5] : [3,5,8,10];
+        h += '<div class="actions">'+quick.map(function(n){ return gBtn('Consigo '+n,{t:'bid',n:n},'ghost'); }).join('')+'</div>'
+          + '<form class="guess" data-gform="bid"><input id="bid" name="n" type="number" inputmode="numeric" min="'+(cur+1)+'" max="99" aria-label="Outra quantidade" placeholder="Outra quantidade"><button type="submit" class="btn ghost">Apostar</button></form>';
+        if(g.bid) h += '<div class="actions">'+gBtn('Duvido',{t:'doubt'},'hotbtn')+'</div>';
+      }else{
+        h += '<p class="do">'+tn+' decide se aumenta a aposta ou se duvida.</p>';
+      }
+    }else if(g.phase==='prove'){
+      var bn = esc(ctx.name(g.bid.pid)), dn = esc(ctx.name(g.doubter));
+      h += '<p class="who">'+(g.bid.pid===me ? 'Prove, '+bn : bn+' precisa provar')+'</p>'
+        + '<div class="counter"><span class="num">'+(Number(g.count)||0)+'</span><span class="lab">de '+g.bid.n+' itens</span></div>';
+      if(g.bid.pid===me){
+        h += '<p class="do">Diga os itens em voz alta. '+dn+' está contando.</p><div class="actions">'+gBtn('Desisto',{t:'giveup'},'ghost')+'</div>';
+      }else if(g.doubter===me || ctx.host){
+        h += '<p class="do">'+(g.doubter===me ? 'Você duvidou, então você conta. ' : dn+' duvidou e está contando. Você também pode ajustar. ')+'Toque a cada item válido.</p>'
+          + '<div class="actions">'+gBtn('Valeu, mais 1',{t:'inc',d:1},'big')+gBtn('Tirar 1',{t:'inc',d:-1},'ghost')+'</div>';
+      }else{
+        h += '<p class="do">'+dn+' duvidou e está contando os itens.</p>';
+      }
+    }else if(g.res){
+      var r = g.res;
+      h += '<p class="verdict '+(r.ok?'good':'bad')+'">'+(r.ok
+        ? esc(ctx.name(r.bidder))+' cumpriu a aposta de '+r.n+' e ganhou 1 ponto.'
+        : esc(ctx.name(r.bidder))+' parou em '+r.count+' de '+r.n+'. O ponto vai para '+esc(ctx.name(r.doubter))+'.')+'</p>'
+        + '<div class="actions">'+gBtn('Continuar',{t:'next'})+'</div>';
+    }
+    return h + '</section>';
+  }
+};
+
+/* ================= Proibido ================= */
+var PB_CARDS = [
+  ['Praia',['mar','areia','sol','verão','onda']],['Futebol',['bola','gol','time','jogador','campo']],['Pizza',['queijo','massa','fatia','forno','italiana']],
+  ['Cachorro',['latir','animal','osso','gato','pet']],['Escola',['aluno','professor','aula','estudar','sala']],['Chuva',['água','guarda-chuva','nuvem','molhar','céu']],
+  ['Carnaval',['samba','fantasia','desfile','bloco','fevereiro']],['Avião',['voar','piloto','aeroporto','asa','céu']],['Celular',['telefone','ligar','aplicativo','tela','mensagem']],
+  ['Café',['xícara','manhã','bebida','cafeína','preto']],['Churrasco',['carne','carvão','espeto','fogo','picanha']],['Casamento',['noiva','noivo','aliança','festa','igreja']],
+  ['Hospital',['médico','doente','enfermeira','cirurgia','saúde']],['Dentista',['dente','boca','cárie','broca','aparelho']],['Natal',['Papai Noel','presente','dezembro','árvore','Jesus']],
+  ['Aniversário',['bolo','parabéns','vela','festa','idade']],['Cinema',['filme','pipoca','tela','ingresso','ator']],['Geladeira',['frio','cozinha','comida','gelo','porta']],
+  ['Bicicleta',['pedal','roda','andar','ciclista','guidão']],['Violão',['corda','música','tocar','instrumento','guitarra']],['Lua',['noite','céu','satélite','cheia','astronauta']],
+  ['Sol',['calor','dia','estrela','luz','verão']],['Chocolate',['cacau','doce','barra','Páscoa','ao leite']],['Banana',['fruta','amarela','macaco','casca','cacho']],
+  ['Sorvete',['gelado','casquinha','sabor','picolé','verão']],['Brigadeiro',['chocolate','festa','leite condensado','granulado','doce']],['Feijoada',['feijão','preto','porco','arroz','sábado']],
+  ['Dinheiro',['pagar','nota','moeda','banco','rico']],['Supermercado',['compras','carrinho','caixa','comida','prateleira']],['Academia',['malhar','peso','músculo','treino','exercício']],
+  ['Chuveiro',['banho','água','banheiro','quente','lavar']],['Travesseiro',['cama','dormir','cabeça','fronha','macio']],['Despertador',['acordar','relógio','manhã','tocar','alarme']],
+  ['Trânsito',['carro','engarrafamento','buzina','rua','sinal']],['Ônibus',['motorista','passageiro','ponto','transporte','passagem']],['Elevador',['subir','andar','prédio','botão','escada']],
+  ['Bombeiro',['fogo','incêndio','mangueira','caminhão','vermelho']],['Astronauta',['espaço','foguete','lua','NASA','capacete']],['Pirata',['navio','tesouro','tapa-olho','mar','papagaio']],
+  ['Vampiro',['sangue','dente','morcego','Drácula','pescoço']],['Fantasma',['assombração','lençol','medo','morto','espírito']],['Dinossauro',['extinto','jurássico','réptil','fóssil','gigante']],
+  ['Elefante',['tromba','grande','África','orelha','marfim']],['Girafa',['pescoço','alta','manchas','África','zoológico']],['Pinguim',['gelo','ave','Antártida','preto','nadar']],
+  ['Tubarão',['mar','dente','peixe','barbatana','ataque']],['Abelha',['mel','ferrão','colmeia','zumbido','inseto']],['Borboleta',['asa','lagarta','casulo','voar','colorida']],
+  ['Vulcão',['lava','erupção','montanha','fogo','cratera']],['Deserto',['areia','seco','camelo','calor','Saara']],['Floresta',['árvore','Amazônia','mata','verde','animal']],
+  ['Cachoeira',['água','queda','rio','banho','pedra']],['Neve',['frio','branca','inverno','boneco','esquiar']],['Arco-íris',['cores','chuva','sol','pote','sete']],
+  ['Relógio',['hora','tempo','ponteiro','pulso','minuto']],['Espelho',['reflexo','imagem','vidro','olhar','banheiro']],['Óculos',['ver','lente','olho','armação','grau']],
+  ['Chave',['porta','abrir','fechadura','trancar','cadeado']],['Mochila',['costas','escola','carregar','alça','bolsa']],['Tesoura',['cortar','papel','lâmina','cabelo','ponta']],
+  ['Livro',['ler','página','capa','autor','biblioteca']],['Jornal',['notícia','papel','ler','manchete','repórter']],['Internet',['rede','wi-fi','site','online','computador']],
+  ['Selfie',['foto','celular','câmera','rosto','braço']],['Meme',['internet','engraçado','imagem','piada','viral']],['Novela',['televisão','capítulo','ator','canal','vilão']],
+  ['Karaokê',['cantar','microfone','música','letra','bar']],['Olimpíadas',['medalha','esporte','atleta','ouro','jogos']],['Xadrez',['tabuleiro','rei','peça','xeque','rainha']],
+  ['Surfe',['onda','prancha','mar','praia','manobra']],['Skate',['rodinha','manobra','pista','rampa','tênis']],['Capoeira',['luta','roda','berimbau','ginga','Bahia']],
+  ['Vestibular',['prova','faculdade','estudar','Enem','passar']],['Férias',['descanso','viagem','escola','julho','trabalho']],['Segunda-feira',['semana','domingo','trabalho','dia','começo']],
+  ['Saudade',['falta','sentir','longe','lembrança','ausência']],['Preguiça',['cansaço','bicho','dormir','vontade','lento']],['Professor',['escola','ensinar','aluno','aula','lousa']]
+];
+GAMES.proibido = {
+  name:'Proibido', min:2,
+  blurb:'Explique a palavra sem dizer as cinco palavras proibidas.',
+  how:[
+    'Na sua vez, só você vê a palavra e as cinco proibidas. Explique em voz alta para os outros adivinharem, sem dizer nenhuma delas.',
+    'Cada acerto vale 1 ponto para você e 1 ponto para quem adivinhou. Você pode pular cartas.',
+    'Com três ou mais jogadores, o jogador anterior vira fiscal: ele também vê a carta e tira 1 ponto seu se você disser uma palavra proibida.'
+  ],
+  opts:[
+    {k:'laps', label:'Cada jogador explica', vals:[[1,'1 vez'],[2,'2 vezes'],[3,'3 vezes']], def:1},
+    {k:'time', label:'Tempo de cada vez', vals:[[45,'45 segundos'],[60,'60 segundos'],[90,'90 segundos']], def:60}
+  ],
+  start:function(S,su){
+    var order = orderOf(S);
+    return {order:order, deck:pickQueue('pb', PB_CARDS.length, 60), ci:0, turnNo:0, total:order.length*su.laps, time:su.time, ti:0, phase:'ready', hits:0, t:0, note:''};
+  },
+  fiscal:function(G){ var n = G.order.length; return n>=3 ? G.order[(G.ti-1+n)%n] : ''; },
+  guessers:function(G){ var e = G.order[G.ti], f = this.fiscal(G); return G.order.filter(function(p){ return p!==e && p!==f; }); },
+  card:function(G){ return PB_CARDS[G.deck[G.ci % G.deck.length]]; },
+  award:function(G,S,pid){
+    addScore(G, G.order[G.ti], 1); addScore(G, pid, 1);
+    G.hits++; G.ci++; G.note = nameOf(S,pid)+' acertou.'; G.phase = 'run';
+  },
+  apply:function(G,S,from,it,host){
+    var cur = G.order[G.ti], mine = cur===from;
+    switch(it.t){
+      case 'go': if(mine && G.phase==='ready'){ G.phase='run'; G.t=G.time; G.hits=0; G.note=''; return true; } break;
+      case 'hit':
+        if(mine && G.phase==='run'){
+          var gs = this.guessers(G);
+          if(gs.length===1) this.award(G,S,gs[0]); else G.phase = 'pick';
+          return true;
+        }
+        break;
+      case 'who': if(mine && G.phase==='pick' && this.guessers(G).indexOf(it.pid)>=0){ this.award(G,S,it.pid); return true; } break;
+      case 'nohit': if(mine && G.phase==='pick'){ G.phase='run'; return true; } break;
+      case 'skip': if(mine && G.phase==='run'){ G.ci++; G.note='Carta pulada.'; return true; } break;
+      case 'foul':
+        if(from===this.fiscal(G) && G.phase==='run'){
+          addScore(G,cur,-1); G.ci++; G.note = nameOf(S,cur)+' disse uma palavra proibida e perdeu 1 ponto.'; return true;
+        }
+        break;
+      case 'next':
+        if(G.phase==='turnEnd'){
+          G.turnNo++; G.ci++;
+          if(G.turnNo>=G.total){ G.over = true; return true; }
+          G.ti = (G.ti+1) % G.order.length; G.phase = 'ready'; G.note = ''; return true;
+        }
+        break;
+      case 'endturn': if(host && (G.phase==='run'||G.phase==='pick'||G.phase==='ready')){ G.phase='turnEnd'; return true; } break;
+    }
+    return false;
+  },
+  tick:function(G,S){
+    if(G.phase!=='run') return false;
+    G.t--;
+    if(G.t<=0){ G.phase = 'turnEnd'; return true; }
+    return false;
+  },
+  drop:function(G,S,pid){
+    var wasTurn = G.order[G.ti]===pid;
+    dropFromOrder(G,pid);
+    if(wasTurn || G.phase==='pick'){ G.phase = 'ready'; G.note = nameOf(S,pid)+' saiu do jogo.'; }
+  },
+  view:function(G,S){
+    var g = {head:'Vez '+(Math.min(G.turnNo+1,G.total))+' de '+G.total, last:G.turnNo>=G.total-1, phase:G.phase, turn:G.order[G.ti], fiscal:this.fiscal(G),
+      guessers:this.guessers(G), hits:G.hits, note:G.note, t:G.t, timed:G.phase==='run'};
+    if(G.phase==='turnEnd') g.card = this.card(G);
+    return g;
+  },
+  priv:function(G,S,pid){
+    if((G.phase==='run'||G.phase==='pick') && (pid===G.order[G.ti] || pid===this.fiscal(G))) return {card:this.card(G)};
+    return null;
+  },
+  cardHtml:function(c){
+    return '<div class="taboo"><p class="word">'+esc(c[0])+'</p><p class="lab">Não pode dizer</p><ul>'
+      + c[1].map(function(w){ return '<li>'+esc(w)+'</li>'; }).join('')+'</ul></div>';
+  },
+  render:function(g,P,ctx){
+    var me = ctx.me, exp = g.turn===me, fis = g.fiscal===me, tn = esc(ctx.name(g.turn));
+    var card = P && P.card ? P.card : null;
+    var h = '<section class="turn'+(exp && g.phase!=='turnEnd' ? ' mine':'')+'" aria-live="polite">';
+    if(g.phase==='ready'){
+      h += '<p class="who">'+(exp ? 'Sua vez de explicar, '+tn : tn+' vai explicar')+'</p>';
+      if(g.note) h += '<p class="note">'+esc(g.note)+'</p>';
+      if(exp) h += '<p class="do">A carta aparece só para você'+(g.fiscal ? ' e para '+esc(ctx.name(g.fiscal))+', que é fiscal nesta vez' : '')+'. O relógio começa quando você tocar no botão.</p><div class="actions">'+gBtn('Começar',{t:'go'},'big')+'</div>';
+      else h += '<p class="do">'+(fis ? 'Você é fiscal nesta vez. Você vai ver a carta e não pode adivinhar.' : 'Prepare-se para adivinhar as palavras em voz alta.')+'</p>';
+    }else if(g.phase==='run'||g.phase==='pick'){
+      h += '<p class="who">'+(exp ? 'Explique, '+tn : fis ? 'Você é fiscal' : tn+' está explicando')+'</p>';
+      if(exp||fis){
+        h += card ? this.cardHtml(card) : '<p class="do">Carregando a carta.</p>';
+      }else{
+        h += '<p class="do">Adivinhe em voz alta. Acertos nesta vez: '+(Number(g.hits)||0)+'.</p>';
+      }
+      if(g.phase==='pick'){
+        if(exp) h += '<p class="do">Quem acertou?</p><div class="actions">'+(g.guessers||[]).map(function(pid){ return gBtn(ctx.name(pid),{t:'who',pid:pid}); }).join('')+gBtn('Ninguém, voltar',{t:'nohit'},'ghost')+'</div>';
+        else h += '<p class="do">'+tn+' está marcando quem acertou.</p>';
+      }else if(exp){
+        h += '<div class="actions">'+gBtn('Acertaram',{t:'hit'},'big')+gBtn('Pular carta',{t:'skip'},'ghost')+'</div>';
+      }else if(fis){
+        h += '<div class="actions">'+gBtn('Falou palavra proibida',{t:'foul'},'hotbtn')+'</div>';
+      }
+      if(g.note) h += '<p class="note">'+esc(g.note)+'</p>';
+    }else{
+      h += '<p class="who">Tempo esgotado</p><p class="do">'+tn+' conseguiu '+(g.hits===1?'1 acerto':(Number(g.hits)||0)+' acertos')+' nesta vez.</p>';
+      if(g.card) h += '<p class="hint">A última carta era '+esc(g.card[0])+'.</p>';
+      h += '<div class="actions">'+gBtn(g.last?'Ver o resultado':'Próximo jogador',{t:'next'})+'</div>';
+    }
+    h += '</section>';
+    if(ctx.host && g.phase!=='turnEnd' && !exp) h += '<div class="quiet">'+gArm('pb-end','Encerrar a vez de '+ctx.name(g.turn),'Clique de novo para encerrar esta vez',{t:'endturn'},'link')+'</div>';
+    return h;
+  }
+};
+
+/* ================= Nota ================= */
+var NT_TOPICS = [
+  'Pizza de abacaxi','Acordar às 5 da manhã','Segunda-feira','Praia lotada no verão','Dias de chuva','Filmes de terror','Karaokê','Academia','Trabalhar de casa','Viajar de avião',
+  'Acampar','Festa de casamento','Festa surpresa','Almoço de família no domingo','Grupo da família no WhatsApp','Áudio de 5 minutos','Ligação em vez de mensagem','Coentro','Jiló','Fígado acebolado',
+  'Sushi','Comida apimentada','Café sem açúcar','Doce de leite','Panetone com frutas','Uva-passa no arroz','Ketchup na pizza','Feijão por cima do arroz','Churrasco','Brigadeiro de colher',
+  'Açaí','Pastel de feira','Macarrão instantâneo','Carnaval','Festa junina','Natal','Réveillon na praia','Amigo secreto','Inverno','Calor de 40 graus',
+  'Banho gelado','Dormir depois do almoço','Dirigir','Andar de bicicleta na cidade','Transporte público','Fazer faxina','Lavar louça','Cozinhar','Ir ao dentista','Fila de banco',
+  'Reality show','Novela','Futebol na TV','Fórmula 1','Sertanejo','Funk','Rock','Pagode','Música clássica','Stand-up',
+  'Séries longas','Filmes dublados','Ler livros','Videogame','Jogos de tabuleiro','Redes sociais','Cachorros','Gatos','Tatuagem','Cabelo colorido',
+  'Chinelo com meia','Viajar sem roteiro','Parque de diversões','Montanha-russa','Cidade grande','Vida no campo','Shopping no fim de semana','Black Friday','Festa de aniversário no trabalho','Reunião que podia ser um e-mail'
+];
+GAMES.nota = {
+  name:'Nota', min:2,
+  blurb:'O narrador dá uma nota secreta e o grupo tenta adivinhar.',
+  how:[
+    'O narrador da vez recebe um assunto e dá uma nota de 0 a 10 em segredo.',
+    'Os outros jogadores tentam adivinhar a nota, cada um no próprio celular.',
+    'Quem crava a nota ganha 3 pontos e quem erra por 1 ganha 1 ponto. O narrador ganha 1 ponto para cada jogador que chegou perto.'
+  ],
+  opts:[{k:'laps', label:'Cada jogador é narrador', vals:[[1,'1 vez'],[2,'2 vezes'],[3,'3 vezes']], def:1}],
+  free:{submit:true},
+  done:function(g,me,it){ return g.phase!=='guess' || (g.sub||[]).indexOf(me)>=0; },
+  start:function(S,su){
+    var order = orderOf(S), total = order.length*su.laps;
+    return {order:order, deck:pickQueue('nt', NT_TOPICS.length, total*2), di:0, turnNo:0, total:total, ti:0, phase:'grade', redrew:false, grade:null, guesses:{}};
+  },
+  allIn:function(G){
+    var nar = G.order[G.ti], n = 0, ok = true;
+    G.order.forEach(function(p){ if(p!==nar){ if(G.guesses[p]===undefined) ok = false; else n++; } });
+    return ok && n>0;
+  },
+  reveal:function(G){
+    var nar = G.order[G.ti], near = 0;
+    G.gains = {};
+    G.order.forEach(function(p){
+      if(p===nar || G.guesses[p]===undefined) return;
+      var d = Math.abs(G.guesses[p]-G.grade), v = d===0 ? 3 : d===1 ? 1 : 0;
+      if(d<=1) near++;
+      G.gains[p] = v; addScore(G,p,v);
+    });
+    G.gains[nar] = near; addScore(G,nar,near);
+    G.phase = 'reveal';
+  },
+  apply:function(G,S,from,it,host){
+    var nar = G.order[G.ti], mine = nar===from;
+    switch(it.t){
+      case 'redraw': if(mine && G.phase==='grade' && !G.redrew){ G.di++; G.redrew = true; return true; } break;
+      case 'grade':
+        if(mine && G.phase==='grade' && Number.isInteger(it.n) && it.n>=0 && it.n<=10){ G.grade = it.n; G.guesses = {}; G.phase = 'guess'; return true; }
+        break;
+      case 'submit':
+        if(!mine && G.phase==='guess' && Number.isInteger(it.n) && it.n>=0 && it.n<=10){
+          G.guesses[from] = it.n;
+          if(this.allIn(G)) this.reveal(G);
+          return true;
+        }
+        break;
+      case 'force': if(host && G.phase==='guess' && Object.keys(G.guesses).length){ this.reveal(G); return true; } break;
+      case 'next':
+        if(G.phase==='reveal'){
+          G.turnNo++;
+          if(G.turnNo>=G.total){ G.over = true; return true; }
+          G.ti = (G.ti+1) % G.order.length; G.di++;
+          G.phase = 'grade'; G.redrew = false; G.grade = null; G.guesses = {}; return true;
+        }
+        break;
+    }
+    return false;
+  },
+  drop:function(G,S,pid){
+    var wasNar = G.order[G.ti]===pid;
+    delete G.guesses[pid];
+    dropFromOrder(G,pid);
+    if(G.phase==='reveal') return;
+    if(wasNar){ G.phase='grade'; G.redrew=false; G.grade=null; G.guesses={}; }
+    else if(G.phase==='guess' && this.allIn(G)) this.reveal(G);
+  },
+  view:function(G,S){
+    var g = {head:'Rodada '+(Math.min(G.turnNo+1,G.total))+' de '+G.total, last:G.turnNo>=G.total-1, phase:G.phase, turn:G.order[G.ti],
+      topic:NT_TOPICS[G.deck[G.di % G.deck.length]], redrew:G.redrew, sub:Object.keys(G.guesses)};
+    if(G.phase==='reveal'){ g.grade = G.grade; g.guesses = G.guesses; g.gains = G.gains; }
+    return g;
+  },
+  priv:function(G,S,pid){
+    if(pid===G.order[G.ti] && G.phase==='guess') return {grade:G.grade};
+    if(G.phase==='guess' && G.guesses[pid]!==undefined) return {mine:G.guesses[pid]};
+    return null;
+  },
+  pad:function(t){
+    var h = '<div class="pad">';
+    for(var n=0;n<=10;n++) h += gBtn(String(n),{t:t,n:n},'ghost');
+    return h + '</div>';
+  },
+  render:function(g,P,ctx){
+    var me = ctx.me, nar = g.turn===me, tn = esc(ctx.name(g.turn)), sub = g.sub||[];
+    var h = '<div class="theme"><span class="lab">'+(nar ? 'Que nota você dá para' : 'Que nota '+tn+' dá para')+'</span><p class="big">'+esc(g.topic)+'</p></div>';
+    h += '<section class="turn'+(((g.phase==='grade'&&nar)||(g.phase==='guess'&&!nar&&ctx.playing&&sub.indexOf(me)<0))?' mine':'')+'" aria-live="polite">';
+    if(g.phase==='grade'){
+      if(nar){
+        h += '<p class="who">Você é o narrador</p><p class="do">Escolha a sua nota de verdade. Ninguém vê até o fim da rodada.</p>'+this.pad('grade');
+        if(!g.redrew) h += '<div>'+gLink('Trocar de assunto, só uma vez',{t:'redraw'})+'</div>';
+      }else{
+        h += '<p class="who">'+tn+' é o narrador</p><p class="do">'+tn+' está escolhendo a nota em segredo.</p>';
+      }
+    }else if(g.phase==='guess'){
+      if(nar){
+        h += '<p class="who">Nota guardada</p><p class="do">'+(P && P.grade!==undefined ? 'Você deu nota '+P.grade+'. ' : '')+'Já responderam: '+sub.length+' de '+((g.order||[]).length-1)+'.</p>';
+      }else if(!ctx.playing){
+        h += '<p class="who">Palpites em andamento</p>';
+      }else if(sub.indexOf(me)>=0){
+        h += '<p class="who">Palpite enviado</p><p class="do">'+(P && P.mine!==undefined ? 'Você apostou na nota '+P.mine+'. ' : '')+'Aguarde os outros. Já responderam: '+sub.length+' de '+((g.order||[]).length-1)+'.</p>';
+      }else{
+        h += '<p class="who">Qual é a nota?</p><p class="do">Toque na nota que você acha que '+tn+' deu.</p>'+this.pad('submit');
+      }
+      if(ctx.host && sub.length) h += '<div>'+gArm('nt-force','Revelar sem esperar os outros','Clique de novo para revelar agora',{t:'force'},'link')+'</div>';
+    }else{
+      h += '<p class="who">'+tn+' deu nota '+g.grade+'</p><ol class="result">';
+      (g.order||[]).forEach(function(pid){
+        if(pid===g.turn || !g.guesses || g.guesses[pid]===undefined) return;
+        h += '<li><strong>'+esc(ctx.name(pid))+'</strong> apostou em '+g.guesses[pid]+' e ganhou '+pts(g.gains && g.gains[pid])+'.</li>';
+      });
+      h += '<li><strong>'+tn+'</strong> ganhou '+pts(g.gains && g.gains[g.turn])+' como narrador.</li></ol>'
+        + '<div class="actions">'+gBtn(g.last?'Ver o resultado':'Próxima rodada',{t:'next'})+'</div>';
+    }
+    return h + '</section>';
+  }
+};
+
+/* ================= Tem ou Não Tem ================= */
+/* Each entry: question, five answers from most to least expected. Each answer lists the shown text first, then accepted variations. */
+var TM_BANK = [
+  ['Coisas que as pessoas levam para a praia',[['Protetor solar','protetor','filtro solar','bloqueador'],['Toalha','canga'],['Guarda-sol','guarda sol','barraca','sombrinha'],['Cadeira','cadeira de praia'],['Óculos de sol','óculos','óculos escuros']]],
+  ['Coisas que tem em toda festa de aniversário',[['Bolo'],['Velas','vela','velinha','velinhas'],['Balões','balão','bexiga','bexigas','bola','bolas'],['Brigadeiro','docinho','docinhos','doces','doce'],['Presente','presentes']]],
+  ['Animais que as pessoas têm em casa',[['Cachorro','cão','cachorros'],['Gato','gatos'],['Passarinho','pássaro','ave','periquito','calopsita','papagaio'],['Peixe','peixes','peixinho'],['Hamster','coelho','porquinho da índia']]],
+  ['Sabores de pizza mais pedidos',[['Calabresa'],['Mussarela','muçarela','queijo','mozarela'],['Marguerita','margherita','margarita'],['Portuguesa'],['Frango com catupiry','frango','frango catupiry']]],
+  ['Coisas que se faz logo depois de acordar',[['Escovar os dentes','escovar dente','escovar dentes','escova'],['Tomar café','café','café da manhã','comer'],['Olhar o celular','celular','mexer no celular','pegar o celular'],['Tomar banho','banho'],['Ir ao banheiro','banheiro','xixi','fazer xixi']]],
+  ['Motivos para chegar atrasado',[['Trânsito','engarrafamento','congestionamento'],['Perdi a hora','dormi demais','acordei tarde','despertador','sono','dormir'],['Ônibus','ônibus atrasou','metrô','transporte','condução'],['Chuva'],['Carro quebrou','carro','pneu furou','pneu']]],
+  ['Coisas que tem em uma cozinha',[['Fogão'],['Geladeira'],['Panela','panelas'],['Pia'],['Micro-ondas','microondas','micro ondas']]],
+  ['Esportes mais lembrados no Brasil',[['Futebol'],['Vôlei','voleibol'],['Basquete','basquetebol'],['Natação'],['Tênis']]],
+  ['Profissões que usam uniforme',[['Policial','polícia'],['Bombeiro'],['Médico','enfermeiro','enfermeira','médica'],['Piloto','comissário','comissária','aeromoça'],['Cozinheiro','chef','garçom','cozinheira']]],
+  ['Coisas que as pessoas perdem com frequência',[['Chave','chaves'],['Celular'],['Guarda-chuva','guarda chuva','sombrinha'],['Óculos'],['Carteira','documento','documentos']]],
+  ['Coisas que se compra na padaria',[['Pão','pão francês','pãozinho','pães'],['Leite'],['Café'],['Bolo'],['Presunto','queijo','frios','mortadela']]],
+  ['Presentes comuns de Dia das Mães',[['Flores','flor','buquê'],['Perfume'],['Chocolate','bombom','bombons'],['Roupa','blusa','vestido','roupas'],['Joia','brinco','colar','anel','relógio']]],
+  ['Coisas que dão medo',[['Escuro'],['Barata','inseto','aranha'],['Altura'],['Cobra'],['Fantasma','espírito','assombração']]],
+  ['Coisas que ficam na bolsa ou na mochila',[['Celular'],['Carteira'],['Chave','chaves'],['Batom','maquiagem'],['Caneta','caderno']]],
+  ['Lugares para ir no fim de semana',[['Praia'],['Shopping'],['Cinema'],['Parque'],['Restaurante','bar','barzinho']]],
+  ['Comidas de festa junina',[['Pipoca'],['Pamonha'],['Canjica','mungunzá'],['Milho','milho cozido','milho verde'],['Paçoca','pé de moleque']]],
+  ['Coisas que as pessoas fazem no celular',[['Redes sociais','rede social','instagram','tiktok'],['Mensagem','whatsapp','conversar','mensagens','zap'],['Foto','fotos','tirar foto','selfie'],['Jogar','jogo','jogos'],['Ligar','ligação','telefonar']]],
+  ['Matérias da escola',[['Matemática'],['Português'],['História'],['Geografia'],['Ciências','biologia']]],
+  ['Coisas que se leva em uma viagem',[['Roupa','roupas','mala'],['Documento','documentos','passaporte','rg','identidade'],['Carregador','celular'],['Escova de dentes','escova','pasta de dente'],['Dinheiro','cartão']]],
+  ['Instrumentos musicais mais conhecidos',[['Violão'],['Piano','teclado'],['Bateria'],['Guitarra'],['Flauta']]],
+  ['Super-heróis mais famosos',[['Super-Homem','superman','super homem'],['Batman'],['Homem-Aranha','homem aranha','spider-man','spiderman'],['Mulher-Maravilha','mulher maravilha'],['Homem de Ferro','iron man']]],
+  ['Bebidas do café da manhã',[['Café'],['Leite'],['Suco','suco de laranja'],['Chá'],['Achocolatado','nescau','toddy','chocolate quente']]],
+  ['Coisas que se faz em um dia de chuva',[['Dormir'],['Ver filme','filme','série','assistir tv','tv','televisão','netflix'],['Ler','livro','ler livro'],['Comer','cozinhar','bolinho de chuva'],['Jogar','videogame','jogos']]],
+  ['Cores mais citadas como favoritas',[['Azul'],['Vermelho'],['Verde'],['Preto'],['Rosa']]],
+  ['Coisas que irritam no trânsito',[['Buzina','buzinar'],['Engarrafamento','trânsito parado','congestionamento','lentidão'],['Fechada','fechar','cortar'],['Sinal fechado','semáforo','farol','sinal','sinal vermelho'],['Motoqueiro','moto','motos','motoboy']]],
+  ['Animais de zoológico',[['Leão'],['Macaco'],['Elefante'],['Girafa'],['Zebra']]],
+  ['Sobremesas',[['Pudim'],['Sorvete'],['Brigadeiro'],['Mousse','musse'],['Bolo','torta']]],
+  ['Coisas que tem em um banheiro',[['Chuveiro'],['Vaso','privada','vaso sanitário'],['Pia'],['Espelho'],['Toalha']]],
+  ['Desculpas para não ir à academia',[['Preguiça'],['Cansaço','cansado','cansada'],['Chuva','frio'],['Trabalho','sem tempo','tempo'],['Dor','doente','machucado','machucada']]],
+  ['Presentes que crianças pedem',[['Bicicleta'],['Boneca'],['Videogame','jogo'],['Celular','tablet'],['Bola']]],
+  ['Países que os brasileiros sonham em visitar',[['Estados Unidos','eua','usa'],['França','paris'],['Itália'],['Japão'],['Portugal']]],
+  ['Frutas mais lembradas',[['Banana'],['Maçã'],['Laranja'],['Uva'],['Manga']]]
+];
+GAMES.tem = {
+  name:'Tem ou Não Tem', min:2,
+  blurb:'Descubra as cinco respostas da lista antes dos outros.',
+  how:[
+    'Cada pergunta esconde cinco respostas. Na sua vez, digite um palpite.',
+    'Se a resposta estiver na lista, ela aparece e você pontua. A primeira da lista vale 5 pontos e a última vale 1.',
+    'A rodada acaba quando as cinco aparecem ou quando os erros chegam ao limite. As listas foram escritas para o jogo e não vêm de pesquisa real.'
+  ],
+  opts:[{k:'rounds', label:'Quantas perguntas?', vals:[[3,'3'],[5,'5'],[8,'8']], def:5}],
+  start:function(S,su){
+    var G = {order:orderOf(S), queue:pickQueue('tm', TM_BANK.length, su.rounds), round:-1, ti:0};
+    this.nextRound(G);
+    return G;
+  },
+  nextRound:function(G){
+    G.round++;
+    if(G.round>=G.queue.length){ G.over = true; return; }
+    G.found = [null,null,null,null,null]; G.misses = 0; G.max = Math.max(4, G.order.length*2);
+    G.ti = G.round % G.order.length; G.phase = 'play'; G.last = null;
+  },
+  after:function(G){
+    var all = G.found.every(function(x){ return x!==null; });
+    if(all || G.misses>=G.max) G.phase = 'reveal';
+    else G.ti = (G.ti+1) % G.order.length;
+  },
+  apply:function(G,S,from,it,host){
+    var cur = G.order[G.ti], mine = cur===from;
+    switch(it.t){
+      case 'guess':
+        if(mine && G.phase==='play' && typeof it.text==='string' && it.text.trim()){
+          var text = it.text.trim().slice(0,40), list = TM_BANK[G.queue[G.round]][1], hit = -1;
+          for(var i=0;i<list.length;i++) if(G.found[i]===null && isCorrect(text, list[i])){ hit = i; break; }
+          var dup = hit<0 && list.some(function(a,i){ return G.found[i]!==null && isCorrect(text,a); });
+          if(hit>=0){ G.found[hit] = from; addScore(G,from,5-hit); } else G.misses++;
+          G.last = {pid:from, text:text, hit:hit, dup:dup};
+          this.after(G); return true;
+        }
+        break;
+      case 'pass':
+        if((mine||host) && G.phase==='play'){ G.misses++; G.last = {pid:cur, text:'', hit:-1, pass:true}; this.after(G); return true; }
+        break;
+      case 'next': if(G.phase==='reveal'){ this.nextRound(G); return true; } break;
+    }
+    return false;
+  },
+  drop:function(G,S,pid){
+    if(G.phase==='play' && G.order[G.ti]===pid) G.ti = (G.ti+1) % G.order.length;
+    dropFromOrder(G,pid);
+  },
+  view:function(G,S){
+    var e = TM_BANK[G.queue[G.round]];
+    if(!e) return {};
+    var done = G.phase==='reveal';
+    return {head:'Pergunta '+(G.round+1)+' de '+G.queue.length, last:G.round===G.queue.length-1, q:e[0], phase:G.phase, turn:G.order[G.ti],
+      slots:e[1].map(function(a,i){ return (G.found[i]!==null || done) ? {a:a[0], by:G.found[i]} : null; }),
+      misses:G.misses, max:G.max, lastTry:G.last};
+  },
+  render:function(g,P,ctx){
+    var me = ctx.me, can = g.turn===me && g.phase==='play', tn = esc(ctx.name(g.turn)), L = g.lastTry;
+    var h = '<div class="theme"><span class="lab">Tem ou não tem na lista?</span><p class="big">'+esc(g.q)+'</p></div><ol class="slots">';
+    (g.slots||[]).forEach(function(s,i){
+      h += '<li class="'+(s?'open':'')+'"><span class="rk">'+(5-i)+'</span>'+(s ? '<span class="an">'+esc(s.a)+'</span><span class="by">'+(s.by ? esc(ctx.name(s.by)) : 'ninguém')+'</span>' : '<span class="an">?</span>')+'</li>';
+    });
+    h += '</ol><section class="turn'+(can?' mine':'')+'" aria-live="polite">';
+    if(L){
+      var ln = esc(ctx.name(L.pid));
+      if(L.pass) h += '<p class="note">'+ln+' passou a vez.</p>';
+      else if(L.hit>=0) h += '<p class="verdict good">Tem. '+ln+' ganhou '+pts(5-L.hit)+' com '+esc(L.text)+'.</p>';
+      else h += '<p class="verdict bad">'+(L.dup ? esc(L.text)+' já estava na mesa.' : 'Não tem '+esc(L.text)+' na lista.')+'</p>';
+    }
+    if(g.phase==='play'){
+      h += '<p class="who">'+(can ? 'Sua vez, '+tn : 'Vez de '+tn)+'</p><p class="do">Erros até agora: '+(Number(g.misses)||0)+' de '+(Number(g.max)||0)+'.</p>';
+      if(can){
+        h += '<form class="guess" data-gform="guess"><input id="guess" name="text" type="text" maxlength="40" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Seu palpite" placeholder="Digite um palpite" data-autofocus>'
+          + '<button type="submit" class="btn">Tem?</button></form><div>'+gLink('Passar a vez, conta como erro',{t:'pass'})+'</div>';
+      }else if(ctx.host){
+        h += '<div>'+gLink('Passar a vez de '+ctx.name(g.turn),{t:'pass'})+'</div>';
+      }
+    }else{
+      h += '<p class="who">Fim da pergunta</p><div class="actions">'+gBtn(g.last?'Ver o resultado':'Próxima pergunta',{t:'next'})+'</div>';
+    }
+    return h + '</section>';
+  }
+};
+
+/* ================= Limite ================= */
+var LM_BANK = [
+  ['Quantos ossos tem o corpo de um adulto?',206],['Quantos dentes tem um adulto com a dentição completa?',32],['Quantas teclas tem um piano tradicional?',88],
+  ['Quantos estados tem o Brasil, sem contar o Distrito Federal?',26],['Quantas estrelas tem a bandeira do Brasil?',27],['Quantos países existem na América do Sul?',12],
+  ['Quantos países fazem parte da ONU?',193],['Quantos minutos tem um dia?',1440],['Quantos segundos tem uma hora?',3600],['Quantas horas tem uma semana?',168],
+  ['Quantos metros tem uma maratona?',42195],['Quantos metros de altura tem o Monte Everest, arredondando?',8849],['Quantos metros de altura tem o Cristo Redentor, contando o pedestal?',38],
+  ['Em que ano o Brasil declarou a independência?',1822],['Em que ano Brasília foi inaugurada?',1960],['Em que ano foi disputada a primeira Copa do Mundo de futebol?',1930],
+  ['Em que ano caiu o Muro de Berlim?',1989],['Em que ano o homem pisou na Lua pela primeira vez?',1969],['Em que ano o Titanic afundou?',1912],
+  ['Em que ano os portugueses chegaram ao Brasil?',1500],['Em que ano foi proclamada a República no Brasil?',1889],['Em que ano foi assinada a Lei Áurea?',1888],
+  ['Em que ano terminou a Segunda Guerra Mundial?',1945],['Em que ano começou a Primeira Guerra Mundial?',1914],['Em que ano começou a Revolução Francesa?',1789],
+  ['Em que ano foi lançado o primeiro iPhone?',2007],['Em que ano Santos Dumont voou com o 14-Bis?',1906],['Quantas cartas tem um baralho comum, sem os curingas?',52],
+  ['Quantas casas tem um tabuleiro de xadrez?',64],['Quantas peças tem um jogo de dominó comum?',28],['Quantos cromossomos tem uma célula humana?',46],
+  ['Quantos elementos tem a tabela periódica?',118],['Quantos graus tem uma volta completa?',360],['Quantos jogadores começam uma partida de futebol, somando os dois times?',22],
+  ['Quantos jogadores de cada time ficam em campo no rúgbi tradicional?',15],['Quantos centímetros de altura tem o aro da cesta de basquete?',305],['Quantos metros de comprimento tem uma piscina olímpica?',50],
+  ['Quantos senadores tem o Brasil?',81],['Quantos ministros tem o Supremo Tribunal Federal?',11],['Quantos municípios tem o Brasil?',5570],
+  ['Quantos quilômetros a luz percorre em um segundo no vácuo, arredondando?',299792],['Quantos quilômetros separam a Terra da Lua, em média?',384400],
+  ['Quantos anos dura o mandato de um senador no Brasil?',8],['Quantas casas tem um Sudoku tradicional?',81],['Quantos pontos somam todas as faces de um dado comum?',21],
+  ['Quantos ossos tem uma mão humana?',27],['Quantas letras tem o alfabeto da língua portuguesa?',26],['Quantos anos durou a Guerra dos Cem Anos?',116]
+];
+GAMES.limite = {
+  name:'Limite', min:2,
+  blurb:'Chegue o mais perto possível do número sem passar dele.',
+  how:[
+    'Aparece uma pergunta com resposta em número. Todos enviam um palpite em segredo.',
+    'Ganha 1 ponto quem chegar mais perto da resposta sem passar dela. Quem passa do limite está fora da rodada.',
+    'Cravar o número não dá bônus. Se todos passarem, ninguém pontua.'
+  ],
+  opts:[{k:'rounds', label:'Quantas perguntas?', vals:[[5,'5'],[10,'10']], def:5}],
+  free:{submit:true},
+  done:function(g,me,it){ return g.phase!=='guess' || (g.sub||[]).indexOf(me)>=0; },
+  start:function(S,su){
+    var G = {order:orderOf(S), queue:pickQueue('lm', LM_BANK.length, su.rounds), round:-1, ti:0};
+    this.nextRound(G);
+    return G;
+  },
+  nextRound:function(G){
+    G.round++;
+    if(G.round>=G.queue.length){ G.over = true; return; }
+    G.guesses = {}; G.res = null; G.phase = 'guess';
+  },
+  allIn:function(G){ return G.order.length>0 && G.order.every(function(p){ return G.guesses[p]!==undefined; }); },
+  reveal:function(G){
+    var ans = LM_BANK[G.queue[G.round]][1], best = -1;
+    G.order.forEach(function(p){ var v = G.guesses[p]; if(v!==undefined && v<=ans && v>best) best = v; });
+    var winners = best<0 ? [] : G.order.filter(function(p){ return G.guesses[p]===best; });
+    winners.forEach(function(p){ addScore(G,p,1); });
+    G.res = {ans:ans, guesses:G.guesses, winners:winners};
+    G.phase = 'reveal';
+  },
+  apply:function(G,S,from,it,host){
+    switch(it.t){
+      case 'submit':
+        if(G.phase==='guess' && Number.isInteger(it.n) && it.n>=0 && it.n<=999999999){
+          G.guesses[from] = it.n;
+          if(this.allIn(G)) this.reveal(G);
+          return true;
+        }
+        break;
+      case 'force': if(host && G.phase==='guess' && Object.keys(G.guesses).length){ this.reveal(G); return true; } break;
+      case 'next': if(G.phase==='reveal'){ this.nextRound(G); return true; } break;
+    }
+    return false;
+  },
+  drop:function(G,S,pid){
+    delete G.guesses[pid];
+    dropFromOrder(G,pid);
+    if(G.phase==='guess' && this.allIn(G)) this.reveal(G);
+  },
+  view:function(G,S){
+    var e = LM_BANK[G.queue[G.round]];
+    if(!e) return {};
+    return {head:'Pergunta '+(G.round+1)+' de '+G.queue.length, last:G.round===G.queue.length-1, q:e[0], phase:G.phase, sub:Object.keys(G.guesses), res:G.res};
+  },
+  priv:function(G,S,pid){
+    return G.phase==='guess' && G.guesses[pid]!==undefined ? {mine:G.guesses[pid]} : null;
+  },
+  render:function(g,P,ctx){
+    var me = ctx.me, sub = g.sub||[], sent = sub.indexOf(me)>=0;
+    var h = '<div class="theme"><span class="lab">Sem passar do limite</span><p class="big">'+esc(g.q)+'</p></div>';
+    h += '<section class="turn'+(g.phase==='guess' && ctx.playing && !sent ? ' mine':'')+'" aria-live="polite">';
+    if(g.phase==='guess'){
+      if(!ctx.playing) h += '<p class="who">Palpites em andamento</p>';
+      else if(sent) h += '<p class="who">Palpite enviado</p><p class="do">'+(P && P.mine!==undefined ? 'Você apostou em '+P.mine+'. ' : '')+'Aguarde os outros.</p>';
+      else h += '<p class="who">Qual é o seu palpite?</p><form class="guess" data-gform="submit"><input id="num" name="n" type="number" inputmode="numeric" min="0" max="999999999" step="1" aria-label="Seu palpite" placeholder="Digite um número" data-autofocus><button type="submit" class="btn">Enviar</button></form>';
+      h += '<p class="do">Já responderam: '+sub.length+' de '+(g.order||[]).length+'.</p>';
+      if(ctx.host && sub.length) h += '<div>'+gArm('lm-force','Revelar sem esperar os outros','Clique de novo para revelar agora',{t:'force'},'link')+'</div>';
+    }else if(g.res){
+      var r = g.res;
+      h += '<p class="who">A resposta é '+Number(r.ans).toLocaleString('pt-BR')+'</p><ol class="result">';
+      (g.order||[]).slice().sort(function(a,b){ return (r.guesses[b]===undefined?-1:r.guesses[b])-(r.guesses[a]===undefined?-1:r.guesses[a]); }).forEach(function(pid){
+        var v = r.guesses[pid];
+        if(v===undefined) return;
+        var win = r.winners.indexOf(pid)>=0;
+        h += '<li><strong>'+esc(ctx.name(pid))+'</strong> apostou em '+Number(v).toLocaleString('pt-BR')+(v>r.ans ? ' e passou do limite.' : win ? ' e ganhou 1 ponto.' : '.')+'</li>';
+      });
+      h += '</ol>';
+      if(!r.winners.length) h += '<p class="note">Todos passaram do limite. Ninguém pontua.</p>';
+      h += '<div class="actions">'+gBtn(g.last?'Ver o resultado':'Próxima pergunta',{t:'next'})+'</div>';
+    }
+    return h + '</section>';
+  }
+};
+
+boot();
 </script>
 </body>
 </html>
