@@ -255,6 +255,29 @@ h3{margin:0;font-family:var(--display);font-weight:400;text-transform:uppercase;
 .scores.hist{margin-top:4px}
 .scores.hist .nm small{font-weight:500}
 .end .scores.hist{margin-top:8px}
+
+/* Leilão Fut 7 */
+.lot{background:var(--ink);color:var(--sun);border-radius:6px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.lot-main{display:flex;flex-direction:column;gap:6px;min-width:0}
+.lot .lab{font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.07em;color:#fff}
+.lot .word{font-family:var(--display);text-transform:uppercase;font-size:clamp(1.9rem,5.4vw,3.2rem);line-height:.95;overflow-wrap:anywhere}
+.lot .ovr{font-family:var(--display);font-size:clamp(3.4rem,10vw,5.4rem);line-height:.85;font-variant-numeric:tabular-nums}
+.squads{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.squad{background:var(--paper);border:3px solid var(--ink);border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.squad .sh{display:flex;flex-direction:column;gap:2px}
+.squad .sh strong{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:1.25rem;line-height:1;overflow-wrap:anywhere}
+.squad .sh span{font-size:.85rem;font-weight:600}
+.squad ol{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+.squad ol li{display:grid;grid-template-columns:2.6em 1fr auto;gap:8px;align-items:center;padding:5px 0;border-bottom:1px solid var(--ink);font-size:.93rem}
+.squad .ps{font-weight:700;font-size:.72rem;letter-spacing:.04em}
+.squad .pl{font-weight:600;overflow-wrap:anywhere}
+.squad .ov{font-family:var(--display);font-size:1.15rem;line-height:1;font-variant-numeric:tabular-nums}
+.squad li.empty{opacity:.55}
+.table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.table th,.table td{padding:7px 6px;text-align:center;border-bottom:2px solid var(--ink)}
+.table th{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;border-bottom-width:3px}
+.table td:nth-child(2),.table th:nth-child(2){text-align:left;font-weight:700;overflow-wrap:anywhere}
+.result.games{background:var(--paper);border:3px solid var(--ink);border-radius:6px;padding:14px 18px}
 </style>
 </head>
 <body>
@@ -614,6 +637,13 @@ var devBroker = null;
 try{ devBroker = new URLSearchParams(location.search).get('broker'); }catch(e){}
 if(devBroker) BROKERS = [devBroker];
 var MAX_PLAYERS = 8;
+/* Words that change from one site to another. A build may define BRAND_CFG before this file. */
+var BRAND = (typeof BRAND_CFG!=='undefined') ? BRAND_CFG : {
+  title:'Noite de Jogos',
+  lede:'Sete jogos de conversa para a turma. Cada pessoa entra pelo próprio celular e o grupo troca de jogo sem sair da sala.',
+  note:'Vários jogos são falados em voz alta. Fiquem no mesmo lugar ou em uma chamada de voz.',
+  invite:'Vem para a Noite de Jogos.'
+};
 
 /* ---------- Helpers shared with the games ---------- */
 function norm(s){
@@ -782,23 +812,24 @@ function settle(S){
   G.counted = true;
   var best = 0;
   G.order.forEach(function(pid){ best = Math.max(best, G.score[pid]||0); });
-  histRecord(S, best);
-  if(best<=0) return;
-  S.players.forEach(function(p){ if(G.order.indexOf(p.pid)>=0 && (G.score[p.pid]||0)===best) p.wins = (p.wins||0)+1; });
+  /* A game may name its own winners, for example a league decided on goal difference. */
+  var win = Array.isArray(G.winners) ? G.winners.slice() : (best>0 ? G.order.filter(function(pid){ return (G.score[pid]||0)===best; }) : []);
+  histRecord(S, win);
+  S.players.forEach(function(p){ if(win.indexOf(p.pid)>=0) p.wins = (p.wins||0)+1; });
 }
 /* All-time ranking per game. It lives on the device that creates the rooms and identifies people by name. */
 function histLoad(){
   var h = load('nj-hist');
   return h && typeof h==='object' ? h : {};
 }
-function histRecord(S, best){
+function histRecord(S, win){
   var G = S.G, h = histLoad(), tab = h[S.game] || (h[S.game] = {});
   S.players.forEach(function(p){
     if(G.order.indexOf(p.pid)<0) return;
     var key = norm(p.name) || p.name.toLowerCase(), sc = G.score[p.pid]||0;
     var r = tab[key] || (tab[key] = {name:p.name, played:0, wins:0, points:0, best:0});
     r.name = p.name; r.played++; r.points += sc; r.best = Math.max(r.best, sc);
-    if(best>0 && sc===best) r.wins++;
+    if(win.indexOf(p.pid)>=0) r.wins++;
   });
   store('nj-hist', h);
 }
@@ -1200,11 +1231,17 @@ function paintClock(){
 }
 function winsText(n){ n = Number(n)||0; return n===1 ? '1 vitória' : n+' vitórias'; }
 function renderHome(){
-  var h = '<div class="setup"><section class="hero"><h1>Noite de Jogos</h1>'
-    + '<p class="lede">Sete jogos de conversa para a turma. Cada pessoa entra pelo próprio celular e o grupo troca de jogo sem sair da sala.</p>'
-    + '<ol class="menu">';
-  GAME_ORDER.forEach(function(id){ h += '<li><strong>'+esc(GAMES[id].name)+'</strong><span>'+esc(GAMES[id].blurb)+'</span></li>'; });
-  h += '</ol></section><section class="panel">';
+  var h = '<div class="setup"><section class="hero"><h1>'+esc(BRAND.title)+'</h1><p class="lede">'+esc(BRAND.lede)+'</p>';
+  if(GAME_ORDER.length>1){
+    h += '<ol class="menu">';
+    GAME_ORDER.forEach(function(id){ h += '<li><strong>'+esc(GAMES[id].name)+'</strong><span>'+esc(GAMES[id].blurb)+'</span></li>'; });
+    h += '</ol>';
+  }else{
+    h += '<ol class="rules">';
+    GAMES[GAME_ORDER[0]].how.forEach(function(line){ h += '<li><span>'+esc(line)+'</span></li>'; });
+    h += '</ol>';
+  }
+  h += '</section><section class="panel">';
   var nameField = '<div class="field"><label class="lab" for="my-name">Seu nome</label>'
     + '<div class="name-row"><input class="text" id="my-name" type="text" maxlength="18" autocomplete="off" value="'+esc(app.name)+'" placeholder="Como você quer aparecer no placar"></div></div>';
   if(app.invite){
@@ -1214,7 +1251,7 @@ function renderHome(){
     h += '<div><button type="button" class="link" data-act="drop-invite">Ir para a tela inicial</button></div>';
     return h + '</section></div>';
   }
-  h += '<h2>Monte a sala</h2><p>Vários jogos são falados em voz alta. Fiquem no mesmo lugar ou em uma chamada de voz.</p>' + nameField;
+  h += '<h2>Monte a sala</h2><p>'+esc(BRAND.note)+'</p>' + nameField;
   var hs = load('nj-host');
   if(hs && hs.code && hs.S && Date.now()-hs.at < 6*3600e3){
     h += '<div class="actions"><button type="button" class="btn" data-act="resume">Reabrir a sala '+esc(hs.code)+'</button></div>';
@@ -1244,6 +1281,10 @@ function playersHtml(V, g){
     h += '<li class="'+(pl.on===false?'off':'')+'"><span class="nm">'+esc(pl.name)+tags.join('')
       + (host && pl.on===false ? '<button type="button" class="link" data-act="remove" data-pid="'+esc(pl.pid)+'">Remover da sala</button>' : '')
       + '</span>' + (g && playing ? '<span class="pt">'+(Number(g.score && g.score[pl.pid])||0)+'</span>' : '') + '</li>';
+  });
+  if(g && g.names) (g.order||[]).forEach(function(pid){
+    if(!g.names[pid] || V.players.some(function(p){ return p.pid===pid; })) return;
+    h += '<li><span class="nm">'+esc(g.names[pid])+'<small>Controlado pelo jogo</small></span><span class="pt">'+(Number(g.score && g.score[pid])||0)+'</span></li>';
   });
   return h + '</ol>';
 }
@@ -1276,7 +1317,7 @@ function renderLobby(V){
   var h = '<div class="lobby"><section class="lobby-main"><h1><span>Sala de espera</span>'+esc(V.code)+'</h1>';
   if(host){
     var link = roomLink();
-    var wa = 'https://wa.me/?text=' + encodeURIComponent('Vem para a Noite de Jogos. Entre na sala '+V.code+' por este link: '+link);
+    var wa = 'https://wa.me/?text=' + encodeURIComponent(BRAND.invite+' Entre na sala '+V.code+' por este link: '+link);
     h += '<div class="share"><p class="do">Mande o link para os seus amigos. Quem preferir pode abrir o site e digitar o código da sala.</p>'
       + '<div class="row"><input class="text" id="share-link" type="text" readonly aria-label="Link da sala" value="'+esc(link)+'"></div>'
       + '<div class="row"><button type="button" class="btn" data-act="copy">'+(app.copied?'Link copiado':'Copiar link')+'</button>'
@@ -1290,42 +1331,49 @@ function renderLobby(V){
   else h += '<button type="button" class="link" data-act="leave">Sair da sala</button>';
   h += '</footer></section>';
 
-  h += '<section class="panel"><h2>'+(host?'Escolha o jogo':'Próximo jogo')+'</h2>';
-  if(host){
+  var single = GAME_ORDER.length===1;
+  h += '<section class="panel"><h2>'+(single ? (host?'Regras da partida':'Regras escolhidas') : (host?'Escolha o jogo':'Próximo jogo'))+'</h2>';
+  if(host && !single){
     h += '<div class="picker">';
     GAME_ORDER.forEach(function(id){
       h += '<button type="button" class="pick" data-act="sel" data-id="'+id+'" aria-pressed="'+(id===V.sel)+'">'+esc(GAMES[id].name)+'</button>';
     });
     h += '</div>';
   }
-  h += '<div class="about"><h3>'+esc(M.name)+'</h3><ul class="how">';
+  h += '<div class="about">'+(single ? '' : '<h3>'+esc(M.name)+'</h3>')+'<ul class="how">';
   M.how.forEach(function(line){ h += '<li>'+esc(line)+'</li>'; });
   h += '</ul></div>';
   h += settingsHtml(M, V.settings||{}, host);
   if(host){
     if(app.error) h += '<p class="error" role="alert">'+esc(app.error)+'</p>';
     if(V.players.length<M.min) h += '<p class="hint">Este jogo precisa de pelo menos '+M.min+' jogadores na sala.</p>';
-    h += '<div class="actions"><button type="button" class="btn big" data-act="start">Começar '+esc(M.name)+'</button></div>';
+    h += '<div class="actions"><button type="button" class="btn big" data-act="start">'+esc(M.startLabel || 'Começar '+M.name)+'</button></div>';
   }
   h += histHtml(V, M);
   return h + '</section></div>';
 }
+function nameIn(V, g, pid){
+  for(var i=0;i<V.players.length;i++) if(V.players[i].pid===pid) return V.players[i].name;
+  return (g && g.names && g.names[pid]) || 'Alguém';
+}
 function renderOver(V, g){
   var host = app.mode==='host';
-  var ranked = V.players.filter(function(p){ return (g.order||[]).indexOf(p.pid)>=0; })
-    .map(function(p){ return {name:p.name, score:Number(g.score && g.score[p.pid])||0}; })
-    .sort(function(a,b){ return b.score-a.score; });
+  var named = Array.isArray(g.winners) && g.winners.length ? g.winners : null;
+  var pos = function(pid){ var k = Array.isArray(g.rank) ? g.rank.indexOf(pid) : -1; return k<0 ? 99 : k; };
+  var ranked = (g.order||[])
+    .map(function(pid){ return {pid:pid, name:nameIn(V, g, pid), score:Number(g.score && g.score[pid])||0}; })
+    .sort(function(a,b){ return (b.score-a.score) || (pos(a.pid)-pos(b.pid)); });
   var best = ranked.length ? ranked[0].score : 0;
-  var winners = ranked.filter(function(p){ return p.score===best; }).map(function(p){ return p.name; });
+  var winners = ranked.filter(function(p){ return named ? named.indexOf(p.pid)>=0 : p.score===best; }).map(function(p){ return p.name; });
   var title, sub;
-  if(best===0){ title='Fim de jogo'; sub='Ninguém pontuou nesta partida. Vale uma revanche.'; }
+  if(best===0 && !named){ title='Fim de jogo'; sub='Ninguém pontuou nesta partida. Vale uma revanche.'; }
   else if(winners.length===1){ title=esc(winners[0])+' venceu'; sub='A vitória veio com '+pts(best)+'.'; }
   else { title='Empate no topo'; sub=esc(winners.join(', '))+' terminaram com '+pts(best)+'.'; }
   var h = '<div class="end"><h1>'+title+'</h1><p class="sub">'+sub+'</p><ol class="rank">';
   var pos = 0, prev = null;
   ranked.forEach(function(p,i){
     if(p.score!==prev){ pos = i+1; prev = p.score; }
-    h += '<li class="'+(p.score===best && best>0?'top':'')+'"><span class="pos">'+pos+'º</span><span class="nm">'+esc(p.name)+'</span><span class="pt">'+p.score+'</span></li>';
+    h += '<li class="'+((named ? named.indexOf(p.pid)>=0 : (p.score===best && best>0))?'top':'')+'"><span class="pos">'+pos+'º</span><span class="nm">'+esc(p.name)+'</span><span class="pt">'+p.score+'</span></li>';
   });
   h += '</ol><div class="actions">';
   if(host){
@@ -1347,10 +1395,7 @@ function renderPlay(V){
     me:app.me, host:host,
     playing:(g.order||[]).indexOf(app.me)>=0,
     pending:!!pendingIntent,
-    name:function(pid){
-      for(var i=0;i<V.players.length;i++) if(V.players[i].pid===pid) return V.players[i].name;
-      return 'Alguém';
-    }
+    name:function(pid){ return nameIn(V, g, pid); }
   };
   var h = '<div class="game">';
   h += '<header class="bar"><div class="where"><span class="round">'+esc(M.name)+'</span>'
@@ -1374,6 +1419,22 @@ function renderPlay(V){
   }
   return h + '</footer></div>';
 }
+/* Updates the page in place. Buttons that stay on screen keep being the same element, so a tap that is
+   in progress while another player's move arrives is not lost. */
+function patchNode(a, b){
+  var ac = Array.prototype.slice.call(a.childNodes), bc = Array.prototype.slice.call(b.childNodes), i, k;
+  for(i=0;i<bc.length;i++){
+    var x = ac[i], y = bc[i];
+    if(!x){ a.appendChild(y); continue; }
+    if(x.nodeType!==y.nodeType || x.nodeName!==y.nodeName){ a.replaceChild(y, x); continue; }
+    if(x.nodeType!==1){ if(x.nodeValue!==y.nodeValue) x.nodeValue = y.nodeValue; continue; }
+    for(k=x.attributes.length-1;k>=0;k--){ var nm = x.attributes[k].name; if(!y.hasAttribute(nm)) x.removeAttribute(nm); }
+    for(k=0;k<y.attributes.length;k++){ var at = y.attributes[k]; if(x.getAttribute(at.name)!==at.value) x.setAttribute(at.name, at.value); }
+    patchNode(x, y);
+  }
+  for(i=ac.length-1;i>=bc.length;i--) a.removeChild(ac[i]);
+}
+var lastHtml = null, lastView = '';
 function render(){
   var root = document.getElementById('app');
   var sq = app.V ? app.V.seq : -1;
@@ -1392,15 +1453,24 @@ function render(){
     h = '<div class="wait"><h1>Algo deu errado</h1><p class="lede">Não consegui mostrar esta tela. Recarregue a página para voltar ao jogo.</p></div>';
     try{ console.error(e); }catch(_){}
   }
-  root.innerHTML = h;
+  if(h!==lastHtml){
+    var tpl = document.createElement('div');
+    tpl.innerHTML = h;
+    patchNode(root, tpl);
+    lastHtml = h;
+  }
   /* Text someone is typing must survive a redraw caused by another player's move. */
   Object.keys(keep).forEach(function(id){
     var el = document.getElementById(id);
-    if(el && !el.readOnly) el.value = keep[id];
+    if(el && !el.readOnly && el.value!==keep[id]) el.value = keep[id];
   });
+  /* A new screen starts from the top, so the buttons are in view on a phone. */
+  var g = app.V && app.V.status==='play' ? app.V.g : null;
+  var view = app.screen+'|'+(app.V ? app.V.status : '')+'|'+(g ? app.V.game+'|'+(g.over?'over':'')+'|'+(g.stage||'') : '');
+  if(view!==lastView){ lastView = view; try{ window.scrollTo(0,0); }catch(e){} }
   var f = focusId ? document.getElementById(focusId) : null;
   if(!f && app.screen==='room') f = root.querySelector('[data-autofocus]');
-  if(f && f.tagName==='INPUT') f.focus();
+  if(f && f.tagName==='INPUT' && document.activeElement!==f) f.focus();
 }
 
 /* ---------- Events ---------- */
@@ -1449,7 +1519,7 @@ document.addEventListener('click', function(e){
       app.error='';
       var before = app.S.seq;
       act({t:'start'});
-      if(app.S.seq===before){ app.error='Escolha pelo menos um tema para começar.'; render(); }
+      if(app.S.seq===before){ app.error = M.startError || 'Escolha pelo menos um tema para começar.'; render(); }
       break;
     case 'back': if(app.S && app.S.G && !app.S.G.over){ if(armed('back')) act({t:'back'}); } else act({t:'back'}); break;
     case 'remove': act({t:'remove', pid:b.dataset.pid}); break;
@@ -1512,7 +1582,7 @@ GAMES.pergunta = {
   how:[
     'Na sua vez, escolha uma casinha numerada para revelar uma palavra da pergunta.',
     'Depois de revelar, digite a resposta ou passe a vez.',
-    'A pergunta vale 1 ponto para cada palavra que ela tem. Errar não tira pontos, só passa a vez.'
+    'A pergunta vale 1 ponto para cada palavra ainda escondida, então cada palavra revelada tira 1 ponto do valor. Errar não tira pontos, só passa a vez.'
   ],
   opts:[
     {k:'rounds', label:'Quantas perguntas?', vals:[[5,'5'],[8,'8'],[10,'10'],[15,'15']], def:8},
@@ -1548,7 +1618,7 @@ GAMES.pergunta = {
     G.t = G.timer;
   },
   award:function(G,S){
-    var pid = G.order[G.ti], v = G.rev.length;
+    var pid = G.order[G.ti], v = Math.max(1, this.hidden(G));
     addScore(G,pid,v);
     G.gained = v; G.solver = pid; G.phase = 'solved'; G.just = -1;
   },
@@ -1599,11 +1669,11 @@ GAMES.pergunta = {
     if(!q) return {};
     var list = this.words(G), done = G.phase==='solved'||G.phase==='unsolved', hid = this.hidden(G);
     return {
-      head:'Pergunta '+(G.round+1)+' de '+G.queue.length+', '+PE_CATS[q[0]],
+      head:'Pergunta '+(G.round+1)+' de '+G.queue.length,
       last:G.round===G.queue.length-1,
       words:list.map(function(w,i){ return (done||G.rev[i]) ? w : null; }),
       phase:G.phase, turn:G.order[G.ti], next:G.order[(G.ti+1)%G.order.length],
-      value:list.length, allOpen:hid===0, lastChance:hid===0 && G.finalLeft<=1,
+      value:Math.max(1, hid), allOpen:hid===0, lastChance:hid===0 && G.finalLeft<=1,
       lastGuess:G.phase==='wrong' ? G.lastGuess : '', gained:G.gained, solver:G.solver,
       note:G.note, just:G.just, t:G.t, timed:!!G.timer && (G.phase==='pick'||G.phase==='answer'),
       answer:done ? q[2][0] : null
@@ -1638,7 +1708,7 @@ GAMES.pergunta = {
       }
     }else if(g.phase==='wrong'){
       h += '<p class="verdict bad">'+esc(g.lastGuess)+' não é a resposta.</p>'
-        + '<p class="do">'+tn+' errou. '+(g.lastChance ? 'Essa era a última tentativa desta pergunta.' : 'A pergunta continua valendo '+pts(g.value)+'.')+'</p>'
+        + '<p class="do">'+tn+' errou. '+(g.lastChance ? 'Essa era a última tentativa desta pergunta.' : 'A pergunta ainda vale '+pts(g.value)+'.')+'</p>'
         + '<div class="actions">'+gBtn(g.lastChance ? 'Ver a resposta' : 'Passar a vez para '+ctx.name(g.next),{t:'cont'})
         + (ctx.host ? gBtn('Contar como certa',{t:'override'},'ghost') : '')+'</div>';
       if(ctx.host) h += '<p class="hint">Use o segundo botão se o grupo concordar que a resposta valia.</p>';
