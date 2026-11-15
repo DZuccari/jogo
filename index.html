@@ -252,6 +252,9 @@ h3{margin:0;font-family:var(--display);font-weight:400;text-transform:uppercase;
 .card.secret .idn.q{font-size:4.6rem;line-height:.85}
 .card.now{box-shadow:0 0 0 5px var(--hot)}
 @media (max-width:860px){ .menu li{grid-template-columns:minmax(0,1fr);gap:2px} .pad{grid-template-columns:repeat(4,minmax(0,1fr))} }
+.scores.hist{margin-top:4px}
+.scores.hist .nm small{font-weight:500}
+.end .scores.hist{margin-top:8px}
 </style>
 </head>
 <body>
@@ -779,13 +782,50 @@ function settle(S){
   G.counted = true;
   var best = 0;
   G.order.forEach(function(pid){ best = Math.max(best, G.score[pid]||0); });
+  histRecord(S, best);
   if(best<=0) return;
   S.players.forEach(function(p){ if(G.order.indexOf(p.pid)>=0 && (G.score[p.pid]||0)===best) p.wins = (p.wins||0)+1; });
+}
+/* All-time ranking per game. It lives on the device that creates the rooms and identifies people by name. */
+function histLoad(){
+  var h = load('nj-hist');
+  return h && typeof h==='object' ? h : {};
+}
+function histRecord(S, best){
+  var G = S.G, h = histLoad(), tab = h[S.game] || (h[S.game] = {});
+  S.players.forEach(function(p){
+    if(G.order.indexOf(p.pid)<0) return;
+    var key = norm(p.name) || p.name.toLowerCase(), sc = G.score[p.pid]||0;
+    var r = tab[key] || (tab[key] = {name:p.name, played:0, wins:0, points:0, best:0});
+    r.name = p.name; r.played++; r.points += sc; r.best = Math.max(r.best, sc);
+    if(best>0 && sc===best) r.wins++;
+  });
+  store('nj-hist', h);
+}
+function histTop(id){
+  var tab = histLoad()[id] || {};
+  return Object.keys(tab).map(function(k){ return tab[k]; })
+    .sort(function(a,b){ return (b.wins-a.wins) || (b.points-a.points) || (a.played-b.played); }).slice(0,10);
+}
+function histHtml(V, M){
+  var list = Array.isArray(V.hist) ? V.hist : [];
+  var h = '<aside class="scores hist"><h2>Ranking histórico de '+esc(M.name)+'</h2>';
+  if(!list.length) return h + '<p class="hint">Ninguém terminou uma partida deste jogo ainda. O ranking começa na primeira partida que for até o fim.</p></aside>';
+  h += '<ol>';
+  list.forEach(function(r,i){
+    var n = Number(r.played)||0;
+    h += '<li><span class="nm">'+(i+1)+'º '+esc(r.name)+'<small>'+(n===1?'1 partida':n+' partidas')+', '+pts(r.points)+' no total, recorde de '+pts(r.best)+'</small></span>'
+      + '<span class="pt">'+(Number(r.wins)||0)+'</span></li>';
+  });
+  h += '</ol><p class="hint">O número grande é o total de vitórias. O ranking fica guardado no aparelho de quem cria a sala.</p>';
+  if(app.mode==='host' && V.status==='lobby') h += '<div><button type="button" class="link'+(app.armed==='hist'?' armed':'')+'" data-act="hist-reset">'+(app.armed==='hist'?'Clique de novo para apagar este ranking':'Zerar o ranking deste jogo')+'</button></div>';
+  return h + '</aside>';
 }
 function viewOf(S, code){
   var V = {code:code||'', ts:Date.now(), seq:S.seq, status:S.status, hostPid:S.hostPid, sel:S.sel,
     settings:S.settings[S.sel],
     players:S.players.map(function(p){ return {pid:p.pid, name:p.name, wins:p.wins||0, on:isOn(p.pid)}; })};
+  V.hist = histTop(S.status==='play' && S.G ? S.game : S.sel);
   if(S.status==='play' && S.G){
     V.game = S.game;
     V.g = GAMES[S.game].view(S.G, S) || {};
@@ -1267,6 +1307,7 @@ function renderLobby(V){
     if(V.players.length<M.min) h += '<p class="hint">Este jogo precisa de pelo menos '+M.min+' jogadores na sala.</p>';
     h += '<div class="actions"><button type="button" class="btn big" data-act="start">Começar '+esc(M.name)+'</button></div>';
   }
+  h += histHtml(V, M);
   return h + '</section></div>';
 }
 function renderOver(V, g){
@@ -1293,7 +1334,9 @@ function renderOver(V, g){
   }else{
     h += '<p class="do">Aguarde. Quem criou a sala escolhe o próximo jogo.</p>';
   }
-  return h + '</div></div>';
+  h += '</div>';
+  if(GAMES[V.game]) h += histHtml(V, GAMES[V.game]);
+  return h + '</div>';
 }
 function renderPlay(V){
   var host = app.mode==='host';
@@ -1381,7 +1424,7 @@ document.addEventListener('click', function(e){
   if(!b) return;
   var a = b.dataset.act;
   if(app.screen==='room') keepAwake();
-  if(['back','close','leave'].indexOf(a)<0) app.armed = '';
+  if(['back','close','leave','hist-reset'].indexOf(a)<0) app.armed = '';
   app.copied = false;
   if(app.mode==='guest') app.msg = '';
   switch(a){
@@ -1410,6 +1453,12 @@ document.addEventListener('click', function(e){
       break;
     case 'back': if(app.S && app.S.G && !app.S.G.over){ if(armed('back')) act({t:'back'}); } else act({t:'back'}); break;
     case 'remove': act({t:'remove', pid:b.dataset.pid}); break;
+    case 'hist-reset':
+      if(app.mode==='host' && armed('hist')){
+        var hh = histLoad(); delete hh[app.S.sel]; store('nj-hist', hh);
+        commit();
+      }
+      break;
     case 'close': if(armed('close')) closeRoom(); break;
     case 'leave': if(app.V && app.V.status==='play'){ if(armed('leave')) leaveRoom(); } else leaveRoom(); break;
   }
