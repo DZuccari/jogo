@@ -1973,7 +1973,7 @@ GAMES.proibido = {
   ],
   start:function(S,su){
     var order = orderOf(S);
-    return {order:order, deck:pickQueue('pb', PB_CARDS.length, 60), ci:0, turnNo:0, total:order.length*su.laps, time:su.time, ti:0, phase:'ready', hits:0, t:0, note:''};
+    return {order:order, deck:pickQueue('pb', PB_CARDS.length, 150), ci:0, turnNo:0, total:order.length*su.laps, time:su.time, ti:0, phase:'ready', hits:0, t:0, note:''};
   },
   fiscal:function(G){ var n = G.order.length; return n>=3 ? G.order[(G.ti-1+n)%n] : ''; },
   guessers:function(G){ var e = G.order[G.ti], f = this.fiscal(G); return G.order.filter(function(p){ return p!==e && p!==f; }); },
@@ -2424,6 +2424,1070 @@ GAMES.limite = {
     return h + '</section>';
   }
 };
+
+/* ================= Extra content. New items go at the end so that the record of used items stays valid. ================= */
+function moreLines(text){ return text.split('\n').map(function(l){ return l.trim(); }).filter(Boolean); }
+
+/* Pergunta Escondida: category | question without the question mark | answer ; accepted variations */
+moreLines(`
+geo|Qual é a capital da Argentina|Buenos Aires
+geo|Qual é a capital da Austrália|Camberra;Canberra
+geo|Qual é a capital de Portugal|Lisboa
+geo|Qual oceano fica entre o Brasil e a África|Atlântico;oceano Atlântico
+geo|Em qual país fica a cidade de Dubai|Emirados Árabes Unidos;Emirados Árabes;Emirados
+geo|Qual é o rio que corta a cidade de Paris|Sena;rio Sena
+geo|Qual país é conhecido como a terra do sol nascente|Japão
+geo|Em qual continente fica o Egito|África
+geo|Qual é a capital do Canadá|Ottawa;Otawa
+geo|Qual cidade italiana é famosa pelos canais e pelas gôndolas|Veneza
+geo|Qual é a cordilheira que atravessa a América do Sul|Andes;Cordilheira dos Andes
+geo|Em qual país ficam as pirâmides de Gizé|Egito
+geo|Qual é a maior ilha do mundo|Groenlândia
+geo|Qual país tem a cidade de Nova Délhi como capital|Índia
+geo|Em qual país fica a Grande Muralha|China
+geo|Qual é a capital da Espanha|Madri;Madrid
+geo|Qual mar banha a Grécia e a Itália|Mediterrâneo;mar Mediterrâneo
+geo|Qual é o lago navegável mais alto da América do Sul|Titicaca;lago Titicaca
+his|Quem comandou a frota portuguesa que chegou ao Brasil em 1500|Pedro Álvares Cabral;Cabral
+his|Em que ano começou a Segunda Guerra Mundial|1939
+his|Quem foi o primeiro homem a pisar na Lua|Neil Armstrong;Armstrong
+his|Qual imperador francês foi derrotado na batalha de Waterloo|Napoleão;Napoleão Bonaparte;Bonaparte
+his|Em que ano foi proclamada a República no Brasil|1889
+his|Qual cidade italiana foi destruída pelo vulcão Vesúvio|Pompeia
+his|Quem escreveu a peça Romeu e Julieta|Shakespeare;William Shakespeare
+his|Qual navegador chegou à América em 1492|Cristóvão Colombo;Colombo
+his|Quem pintou o teto da Capela Sistina|Michelangelo;Miguel Ângelo
+his|Qual rainha do Egito se envolveu com Júlio César|Cleópatra
+his|Em que ano terminou a Segunda Guerra Mundial|1945
+his|Qual inventor brasileiro é chamado de pai da aviação|Santos Dumont;Alberto Santos Dumont
+his|Qual pintor holandês cortou a própria orelha|Van Gogh;Vincent van Gogh
+his|Quem escreveu o livro O Pequeno Príncipe|Saint-Exupéry;Antoine de Saint-Exupéry;Exupéry
+his|Qual compositor ficou surdo e continuou compondo sinfonias|Beethoven
+his|Qual era a capital do Brasil antes de Brasília|Rio de Janeiro;Rio
+his|Quem foi o herói enforcado na Inconfidência Mineira|Tiradentes
+his|Qual pintora mexicana ficou famosa pelos autorretratos|Frida Kahlo;Frida
+cie|Qual é o planeta conhecido como planeta vermelho|Marte
+cie|Qual é o maior órgão do corpo humano|Pele
+cie|Quantos dentes tem um adulto com a dentição completa|32;trinta e dois
+cie|Qual gás os seres humanos precisam respirar para viver|Oxigênio
+cie|Qual é o animal que tem o pescoço mais comprido|Girafa
+cie|Qual planeta é famoso pelos seus anéis|Saturno
+cie|Qual é o satélite natural da Terra|Lua
+cie|Qual ave não voa e vive no gelo da Antártida|Pinguim
+cie|Quantos corações tem um polvo|3;três
+cie|Qual é o estado físico da água quando vira gelo|Sólido
+cie|Qual vitamina o corpo produz com a luz do sol|Vitamina D;D
+cie|Qual é o maior mamífero terrestre|Elefante;elefante africano
+cie|Qual é o inseto que transmite a dengue|Mosquito;Aedes aegypti;aedes;mosquito da dengue
+cie|Qual parte da planta fica embaixo da terra|Raiz;raízes
+cie|Como se chama o filhote da vaca|Bezerro;bezerra
+cie|Qual é o metal mais usado em fios elétricos|Cobre
+cie|Qual cientista propôs a teoria da evolução das espécies|Darwin;Charles Darwin
+cie|Qual é a força que nos mantém presos ao chão|Gravidade
+cie|Quantas patas tem um inseto|6;seis
+cie|Qual é o ponto de ebulição da água em graus Celsius|100;cem
+esp|Quantos jogadores cada time tem em campo no futebol|11;onze
+esp|Em qual esporte o objetivo é acertar a bola no buraco|Golfe
+esp|Qual país inventou o futebol moderno|Inglaterra
+esp|Qual esporte é praticado por Gabriel Medina|Surfe;surf
+esp|Quantos sets vence quem ganha uma partida de vôlei|3;três
+esp|Qual esporte tem as posições de levantador e líbero|Vôlei;voleibol
+esp|Em qual cidade brasileira aconteceram as Olimpíadas de 2016|Rio de Janeiro;Rio
+esp|Qual arte marcial brasileira mistura luta e dança|Capoeira
+esp|Quantos minutos dura um tempo de jogo no futebol|45;quarenta e cinco
+esp|Qual velocista jamaicano ficou conhecido como o homem mais rápido do mundo|Usain Bolt;Bolt
+esp|Qual esporte Michael Jordan tornou famoso no mundo inteiro|Basquete;basquetebol
+esp|Qual tenista brasileiro venceu Roland Garros três vezes|Guga;Gustavo Kuerten;Kuerten
+esp|Em qual esporte se faz um strike derrubando dez pinos|Boliche
+esp|Qual é o esporte mais popular do Brasil|Futebol
+esp|Quantos anéis tem o símbolo das Olimpíadas|5;cinco
+esp|Qual esporte de luta usa luvas e um ringue|Boxe
+esp|Qual ginasta brasileira ganhou ouro olímpico no salto em Tóquio|Rebeca Andrade;Rebeca
+esp|Qual cartão o juiz mostra para expulsar um jogador|Vermelho;cartão vermelho
+pop|Qual é o nome do ogro verde dos filmes de animação|Shrek
+pop|Qual super-herói é o alter ego de Bruce Wayne|Batman
+pop|Qual é o nome do rato mais famoso da Disney|Mickey;Mickey Mouse
+pop|Qual cantora é conhecida como a rainha do pop|Madonna
+pop|Qual banda tinha Freddie Mercury como vocalista|Queen
+pop|Qual é o nome do robô amarelo dos Transformers|Bumblebee
+pop|Em qual cidade vive a família Simpson|Springfield
+pop|Qual é o nome da boneca mais famosa do mundo|Barbie
+pop|Qual personagem diz que foi sem querer querendo|Chaves
+pop|Qual é o nome do pirata vivido por Johnny Depp|Jack Sparrow;Sparrow;Capitão Jack Sparrow
+pop|Qual peixe-palhaço é procurado pelo pai em um filme|Nemo
+pop|Qual é o nome do vilão de capa preta em Star Wars|Darth Vader;Vader
+pop|Qual cantor é conhecido como o rei do rock|Elvis Presley;Elvis
+pop|Qual é o nome do cachorro do Mickey|Pluto
+pop|Qual super-herói foi picado por uma aranha radioativa|Homem-Aranha;Spider-Man;Peter Parker
+pop|Qual cantor brasileiro é chamado simplesmente de Rei|Roberto Carlos
+pop|Qual princesa perde o sapatinho de cristal no baile|Cinderela
+pop|Qual é o jogo de blocos mais vendido do mundo|Minecraft
+pop|Qual é o nome do encanador bigodudo dos videogames|Mario;Super Mario
+bra|Qual é a capital do Brasil|Brasília
+bra|Qual é o maior estado brasileiro em área|Amazonas
+bra|Qual é a capital do estado de Minas Gerais|Belo Horizonte;BH
+bra|Em qual estado ficam as Cataratas do Iguaçu|Paraná
+bra|Qual é a árvore que deu nome ao Brasil|Pau-brasil
+bra|Qual estado brasileiro é famoso pelo pão de queijo|Minas Gerais;Minas
+bra|Qual comida típica baiana é feita de feijão-fradinho frito|Acarajé
+bra|Qual prato gaúcho é feito com carne assada na brasa|Churrasco
+bra|Em qual cidade fica o Elevador Lacerda|Salvador
+bra|Qual é a dança típica das festas juninas|Quadrilha
+bra|Qual cidade é a capital do estado do Paraná|Curitiba
+bra|Qual é o bioma brasileiro conhecido pelas áreas alagadas|Pantanal
+bra|Qual instrumento de uma corda só acompanha a capoeira|Berimbau
+bra|Qual é o apelido da seleção brasileira de futebol|Canarinho;seleção canarinho;canarinha
+bra|Qual fruta roxa da Amazônia é servida na tigela|Açaí
+bra|Qual é a cidade mais populosa do Brasil|São Paulo
+bra|Qual personagem do folclore tem uma perna só|Saci;Saci-Pererê
+bra|Qual é a capital do estado de Pernambuco|Recife
+bra|Qual bebida brasileira é feita de cana-de-açúcar destilada|Cachaça;pinga
+dia|Quantos dias tem uma semana|7;sete
+dia|Quantas horas tem um dia|24;vinte e quatro
+dia|Qual é o resultado de nove vezes nove|81;oitenta e um
+dia|Quantos meses do ano têm 31 dias|7;sete
+dia|Qual é a cor do semáforo que manda parar|Vermelho;vermelha
+dia|Qual animal é conhecido como o melhor amigo do homem|Cachorro;cão
+dia|Quantos lados tem um triângulo|3;três
+dia|Qual é o primeiro mês do ano|Janeiro
+dia|Quantos centímetros tem um metro|100;cem
+dia|Qual talher é usado para tomar sopa|Colher
+dia|Qual é a estação mais fria do ano|Inverno
+dia|Quantos anos tem um século|100;cem
+dia|Qual ingrediente principal do pão é feito de trigo|Farinha;farinha de trigo
+dia|Qual cor aparece quando misturamos vermelho com amarelo|Laranja;alaranjado
+dia|Quantos gramas tem um quilo|1000;mil
+dia|Qual é o número de emergência dos bombeiros no Brasil|193
+dia|Qual profissional cuida dos dentes das pessoas|Dentista
+dia|Qual é a metade de cem|50;cinquenta
+dia|Quantos zeros tem o número um milhão|6;seis
+dia|Qual aplicativo de mensagens tem um ícone verde com telefone|WhatsApp;zap
+`).forEach(function(l){ var p = l.split('|'); PE_BANK.push([p[0], p[1], p[2].split(';')]); });
+
+/* Quem Sou Eu: category | identity | short description */
+moreLines(`
+esp|Garrincha|jogador de futebol
+esp|Kaká|jogador de futebol
+esp|Rivaldo|jogador de futebol
+esp|Cafu|jogador de futebol, capitão do penta
+esp|Vini Jr.|jogador de futebol
+esp|Kylian Mbappé|jogador de futebol francês
+esp|Zinedine Zidane|jogador de futebol francês
+esp|David Beckham|jogador de futebol inglês
+esp|Formiga|jogadora de futebol
+esp|Tite|técnico de futebol
+esp|Roger Federer|tenista suíço
+esp|Novak Djokovic|tenista sérvio
+esp|Maria Esther Bueno|tenista brasileira
+esp|Bia Haddad|tenista brasileira
+esp|Emerson Fittipaldi|piloto de Fórmula 1
+esp|Nelson Piquet|piloto de Fórmula 1
+esp|Rubens Barrichello|piloto de Fórmula 1
+esp|Felipe Massa|piloto de Fórmula 1
+esp|Michael Schumacher|piloto alemão de Fórmula 1
+esp|Max Verstappen|piloto de Fórmula 1
+esp|César Cielo|nadador brasileiro
+esp|Giba|jogador de vôlei
+esp|Bernardinho|técnico de vôlei
+esp|Italo Ferreira|surfista
+esp|Bob Burnquist|skatista
+esp|Popó|boxeador brasileiro
+esp|José Aldo|lutador de MMA
+esp|Stephen Curry|jogador de basquete
+esp|Shaquille O'Neal|jogador de basquete
+esp|Tom Brady|jogador de futebol americano
+esp|Tiger Woods|jogador de golfe
+mus|Gal Costa|cantora
+mus|Maria Bethânia|cantora
+mus|Milton Nascimento|cantor e compositor
+mus|Djavan|cantor e compositor
+mus|Jorge Ben Jor|cantor e compositor
+mus|Seu Jorge|cantor e ator
+mus|Cazuza|cantor de rock
+mus|Renato Russo|vocalista da Legião Urbana
+mus|Chorão|vocalista do Charlie Brown Jr.
+mus|Sandy|cantora
+mus|Claudia Leitte|cantora
+mus|Daniela Mercury|cantora
+mus|Zezé Di Camargo|cantor sertanejo
+mus|Leonardo|cantor sertanejo
+mus|Michel Teló|cantor sertanejo
+mus|Thiaguinho|cantor de pagode
+mus|Péricles|cantor de pagode
+mus|Iza|cantora
+mus|Luísa Sonza|cantora
+mus|Gloria Groove|cantora e drag queen
+mus|Emicida|rapper
+mus|Adele|cantora inglesa
+mus|Ed Sheeran|cantor inglês
+mus|Bruno Mars|cantor
+mus|Billie Eilish|cantora
+mus|Ariana Grande|cantora
+mus|Dua Lipa|cantora
+mus|Justin Timberlake|cantor
+mus|Britney Spears|cantora
+mus|Whitney Houston|cantora
+mus|Paul McCartney|integrante dos Beatles
+mus|Mick Jagger|vocalista dos Rolling Stones
+mus|Bono|vocalista do U2
+mus|Kurt Cobain|vocalista do Nirvana
+mus|David Bowie|cantor inglês
+mus|Stevie Wonder|cantor e pianista
+mus|Frank Sinatra|cantor americano
+mus|Luciano Pavarotti|cantor de ópera
+mus|Eminem|rapper
+mus|Bad Bunny|cantor porto-riquenho
+tv|Hebe Camargo|apresentadora de TV
+tv|Gugu Liberato|apresentador de TV
+tv|Ratinho|apresentador de TV
+tv|Eliana|apresentadora de TV
+tv|Angélica|apresentadora de TV
+tv|Rodrigo Faro|apresentador de TV
+tv|Tiago Leifert|apresentador de TV
+tv|Pedro Bial|jornalista e apresentador
+tv|Serginho Groisman|apresentador de TV
+tv|Chacrinha|apresentador de TV
+tv|Sabrina Sato|apresentadora de TV
+tv|Chico Anysio|humorista
+tv|Dercy Gonçalves|atriz e humorista
+tv|Fábio Porchat|humorista
+tv|Marcelo Adnet|humorista
+tv|Ingrid Guimarães|atriz
+tv|Grazi Massafera|atriz
+tv|Juliana Paes|atriz
+tv|Glória Pires|atriz
+tv|Susana Vieira|atriz
+tv|Regina Casé|atriz e apresentadora
+tv|Fernanda Torres|atriz
+tv|Marieta Severo|atriz
+tv|Cauã Reymond|ator
+tv|Reynaldo Gianecchini|ator
+tv|Antônio Fagundes|ator
+tv|Lima Duarte|ator
+tv|Felipe Neto|youtuber
+tv|Casimiro|streamer
+tv|Tom Hanks|ator americano
+tv|Johnny Depp|ator americano
+tv|Julia Roberts|atriz americana
+tv|Meryl Streep|atriz americana
+tv|Keanu Reeves|ator
+tv|Morgan Freeman|ator americano
+tv|Robert Downey Jr.|ator americano
+tv|Scarlett Johansson|atriz americana
+tv|Jim Carrey|ator e comediante
+tv|Adam Sandler|ator e comediante
+tv|Dwayne Johnson|ator, o The Rock
+tv|Sylvester Stallone|ator americano
+tv|Bruce Lee|ator e mestre de artes marciais
+tv|Steven Spielberg|diretor de cinema
+tv|Oprah Winfrey|apresentadora americana
+tv|Audrey Hepburn|atriz
+his|Dom Pedro II|imperador do Brasil
+his|Getúlio Vargas|presidente do Brasil
+his|Juscelino Kubitschek|presidente que construiu Brasília
+his|Oscar Niemeyer|arquiteto
+his|Carlos Drummond de Andrade|poeta
+his|Clarice Lispector|escritora
+his|Monteiro Lobato|escritor
+his|Jorge Amado|escritor
+his|Cecília Meireles|poeta
+his|Vinicius de Moraes|poeta e compositor
+his|Tom Jobim|compositor
+his|Villa-Lobos|compositor
+his|Portinari|pintor brasileiro
+his|Aleijadinho|escultor
+his|Chico Mendes|ambientalista
+his|Anita Garibaldi|heroína da Revolução Farroupilha
+his|Lampião|cangaceiro
+his|Maria Bonita|cangaceira
+his|Vasco da Gama|navegador português
+his|Fernão de Magalhães|navegador
+his|Marco Polo|viajante veneziano
+his|Alexandre, o Grande|rei da Macedônia
+his|Rainha Elizabeth II|rainha do Reino Unido
+his|Rainha Vitória|rainha do Reino Unido
+his|Princesa Diana|princesa britânica
+his|Abraham Lincoln|presidente americano
+his|George Washington|primeiro presidente americano
+his|Winston Churchill|primeiro-ministro britânico
+his|Martin Luther King|líder dos direitos civis
+his|Thomas Edison|inventor
+his|Nikola Tesla|inventor
+his|Graham Bell|inventor do telefone
+his|Stephen Hawking|cientista
+his|Sigmund Freud|pai da psicanálise
+his|Aristóteles|filósofo grego
+his|Platão|filósofo grego
+his|Michelangelo|pintor e escultor
+his|Salvador Dalí|pintor
+his|Claude Monet|pintor francês
+his|Agatha Christie|escritora de mistério
+his|J. K. Rowling|escritora
+his|Coco Chanel|estilista
+his|Yuri Gagarin|primeiro homem no espaço
+his|Amelia Earhart|aviadora
+his|Bill Gates|fundador da Microsoft
+his|Mark Zuckerberg|criador do Facebook
+per|Dumbledore|diretor de Hogwarts
+per|Voldemort|vilão de Harry Potter
+per|Luke Skywalker|herói de Star Wars
+per|Princesa Leia|heroína de Star Wars
+per|Chewbacca|peludo de Star Wars
+per|Capitão América|super-herói
+per|Thor|super-herói, deus do trovão
+per|Viúva Negra|super-heroína
+per|Pantera Negra|super-herói
+per|Thanos|vilão dos Vingadores
+per|Deadpool|anti-herói
+per|Aquaman|super-herói
+per|Flash|super-herói
+per|Robin|parceiro do Batman
+per|Mulher-Gato|personagem do Batman
+per|Arlequina|personagem do Batman
+per|Katniss Everdeen|heroína de Jogos Vorazes
+per|Rocky Balboa|boxeador do cinema
+per|Rambo|soldado do cinema
+per|Forrest Gump|personagem do cinema
+per|E.T.|extraterrestre do cinema
+per|King Kong|gorila gigante
+per|Godzilla|monstro gigante
+per|Frankenstein|monstro
+per|Lobisomem|monstro
+per|Curupira|personagem do folclore
+per|Mula sem cabeça|personagem do folclore
+per|Iara|sereia do folclore
+per|Robin Hood|herói que rouba dos ricos
+per|Rei Arthur|rei das lendas
+per|Merlin|mago das lendas
+per|Hércules|herói da mitologia
+per|Zeus|deus da mitologia grega
+per|Aladdin|herói dos contos
+per|Gênio da lâmpada|personagem dos contos
+per|Mulan|heroína de animação
+per|Moana|heroína de animação
+per|Rapunzel|princesa dos contos
+per|Ariel|a pequena sereia
+per|Bela|de A Bela e a Fera
+per|Pocahontas|heroína de animação
+per|Malévola|vilã dos contos
+per|Capitão Gancho|vilão do Peter Pan
+per|Sininho|fada do Peter Pan
+per|Mogli|menino criado na selva
+per|Dory|peixe esquecida
+per|Nemo|peixe-palhaço
+per|Wall-E|robô de animação
+per|Relâmpago McQueen|carro de corrida de animação
+per|Sulley|monstro azul de Monstros S.A.
+per|Mike Wazowski|monstro verde de um olho só
+per|Gru|vilão de Meu Malvado Favorito
+per|Minion|ajudante amarelo
+per|Po|o Kung Fu Panda
+per|Burro do Shrek|amigo falante do ogro
+per|Gato de Botas|gato espadachim
+per|Kiko|vizinho do Chaves
+per|Chiquinha|vizinha do Chaves
+per|Dona Florinda|mãe do Kiko
+per|Professor Girafales|professor do Chaves
+per|Visconde de Sabugosa|sabugo do Sítio do Picapau Amarelo
+per|Narizinho|menina do Sítio do Picapau Amarelo
+per|Cuca|jacaré do Sítio do Picapau Amarelo
+per|Agostinho Carrara|taxista de A Grande Família
+per|Odete Roitman|vilã de novela
+per|Nazaré Tedesco|vilã de novela
+per|Carminha|vilã de novela
+per|Mr. Bean|personagem de comédia
+per|Eleven|menina de Stranger Things
+per|Wandinha|filha da Família Addams
+per|Sheldon Cooper|cientista de The Big Bang Theory
+des|Minnie|namorada do Mickey
+des|Pateta|amigo do Mickey
+des|Tio Patinhas|pato milionário
+des|Patolino|pato dos desenhos
+des|Frajola|gato dos desenhos
+des|Piu-Piu|passarinho amarelo
+des|Papa-Léguas|ave veloz dos desenhos
+des|Coiote|caçador do Papa-Léguas
+des|Taz|diabo-da-tasmânia
+des|Jerry|rato do Tom e Jerry
+des|Tom|gato do Tom e Jerry
+des|Lisa Simpson|filha dos Simpsons
+des|Marge Simpson|mãe dos Simpsons
+des|Patrick Estrela|amigo do Bob Esponja
+des|Lula Molusco|vizinho do Bob Esponja
+des|Salsicha|dono do Scooby-Doo
+des|Zé Colmeia|urso dos desenhos
+des|Manda-Chuva|gato dos desenhos
+des|Dick Vigarista|vilão da Corrida Maluca
+des|Penélope Charmosa|pilota da Corrida Maluca
+des|He-Man|herói dos desenhos
+des|She-Ra|heroína dos desenhos
+des|Charlie Brown|dono do Snoopy
+des|Hello Kitty|gatinha japonesa
+des|Doraemon|gato robô japonês
+des|Ash|treinador Pokémon
+des|Charizard|Pokémon de fogo
+des|Vegeta|rival do Goku
+des|Sailor Moon|heroína dos animes
+des|Luffy|pirata de One Piece
+des|Seiya|cavaleiro do zodíaco
+des|Luigi|irmão do Mario
+des|Princesa Peach|princesa dos videogames
+des|Bowser|vilão do Mario
+des|Yoshi|dinossauro do Mario
+des|Donkey Kong|gorila dos videogames
+des|Link|herói de Zelda
+des|Kirby|bolinha rosa dos videogames
+des|Crash Bandicoot|marsupial dos videogames
+des|Kratos|guerreiro de God of War
+des|Steve|personagem do Minecraft
+des|Ryu|lutador de Street Fighter
+des|Chun-Li|lutadora de Street Fighter
+des|Sub-Zero|lutador de Mortal Kombat
+des|Scorpion|lutador de Mortal Kombat
+des|Franjinha|cientista da Turma da Mônica
+des|Bidu|cachorro azul dos quadrinhos
+des|Horácio|dinossauro dos quadrinhos
+des|Jotalhão|elefante verde dos quadrinhos
+des|Anjinho|anjo da Turma da Mônica
+des|Bob, o Construtor|construtor dos desenhos
+des|Bluey|cachorrinha azul dos desenhos
+des|Masha|menina do desenho com o urso
+des|Pocoyo|menino dos desenhos
+des|Luluzinha|menina dos quadrinhos
+des|Betty Boop|personagem de desenho antigo
+des|Gasparzinho|fantasminha camarada
+des|Papai Smurf|líder dos Smurfs
+des|Asterix|gaulês dos quadrinhos
+des|Obelix|amigo do Asterix
+des|Tintim|repórter dos quadrinhos
+des|Jimmy Neutron|menino gênio
+des|Dexter|menino do laboratório
+des|Johnny Bravo|galã dos desenhos
+des|Lindinha|menina superpoderosa
+des|Florzinha|menina superpoderosa
+des|Coragem|o cão covarde
+des|Finn|herói de Hora de Aventura
+des|Steven Universo|herói dos desenhos
+des|Shaun|o carneiro
+`).forEach(function(l){ var p = l.split('|'); QS_BANK.push([p[0], p[1], p[2]]); });
+
+/* Duvido: themes */
+moreLines(`
+Países da Europa
+Capitais de países das Américas
+Países que começam com a letra M
+Cidades do Nordeste
+Cidades dos Estados Unidos
+Cidades da Europa
+Ilhas famosas
+Estádios de futebol
+Jogadores de futebol estrangeiros
+Técnicos de futebol
+Campeões mundiais de Fórmula 1
+Atletas olímpicos brasileiros
+Times da NBA
+Lutas e artes marciais
+Esportes com bola
+Marcas de celular e eletrônicos
+Marcas de refrigerante e bebidas
+Redes de fast food e restaurantes
+Lojas e supermercados
+Bancos e empresas brasileiras
+Companhias aéreas
+Tipos de queijo
+Tipos de pão e salgados
+Comidas de boteco
+Temperos e especiarias
+Peixes e frutos do mar
+Cortes de carne
+Drinques e coquetéis
+Sabores de bolo
+Sucos e vitaminas
+Comidas italianas
+Comidas japonesas
+Mamíferos
+Répteis e anfíbios
+Animais da África
+Animais de fazenda
+Animais que voam
+Árvores
+Dinossauros
+Cantoras internacionais
+Cantores de sertanejo
+Rappers e funkeiros
+Músicas infantis
+Bandas brasileiras
+Ritmos e estilos musicais
+Atores e atrizes brasileiros
+Atores e atrizes de Hollywood
+Filmes da Disney e da Pixar
+Filmes de terror
+Filmes brasileiros
+Filmes que ganharam o Oscar
+Personagens de Star Wars
+Personagens da Marvel
+Personagens de novela
+Personagens do Chaves
+Personagens do Sítio do Picapau Amarelo
+Animes e mangás
+Reality shows
+Youtubers e influenciadores
+Humoristas
+Jogos de celular
+Personagens de videogame
+Consoles de videogame
+Brinquedos
+Peças de roupa
+Móveis e eletrodomésticos
+Objetos de escritório e material escolar
+Partes de um carro
+Coisas que existem em um hospital
+Coisas que existem em um aeroporto
+Órgãos do corpo humano
+Cursos de faculdade
+Linguagens de programação e tecnologias
+Invenções
+Cientistas e inventores
+Reis, rainhas e imperadores
+Deuses e heróis da mitologia
+Personagens do folclore brasileiro
+Contos de fadas e histórias infantis
+Livros famosos
+Palavras em inglês que usamos no dia a dia
+Nomes de pessoa que começam com a letra J
+Palavras que começam com a letra Z
+Sobrenomes comuns no Brasil
+Gírias brasileiras
+Signos do zodíaco
+Formas geométricas
+Unidades de medida
+Pedras preciosas e metais
+Tipos de dança
+`).forEach(function(l){ DV_THEMES.push(l); });
+
+/* Proibido: word : five forbidden words */
+moreLines(`
+Cama:dormir,colchão,quarto,lençol,deitar
+Sofá:sala,sentar,almofada,televisão,móvel
+Mesa:cadeira,jantar,móvel,madeira,comer
+Janela:vidro,abrir,cortina,vista,parede
+Porta:abrir,fechar,chave,maçaneta,entrar
+Escada:degrau,subir,descer,andar,corrimão
+Televisão:assistir,tela,controle,canal,novela
+Computador:teclado,mouse,tela,internet,notebook
+Fone de ouvido:música,escutar,orelha,som,bluetooth
+Carregador:bateria,celular,tomada,cabo,energia
+Controle remoto:televisão,botão,canal,pilha,sofá
+Ventilador:vento,calor,hélice,girar,ar
+Ar-condicionado:frio,calor,temperatura,aparelho,gelado
+Micro-ondas:esquentar,comida,cozinha,pipoca,forno
+Liquidificador:bater,suco,vitamina,cozinha,copo
+Fogão:cozinhar,panela,fogo,gás,cozinha
+Panela de pressão:feijão,cozinhar,apito,tampa,fogão
+Garfo:faca,comer,talher,colher,dente
+Copo:beber,água,vidro,suco,xícara
+Guardanapo:papel,limpar,boca,mesa,restaurante
+Vassoura:varrer,chão,limpar,bruxa,cabo
+Sabonete:banho,lavar,espuma,mão,cheiroso
+Escova de dentes:pasta,boca,escovar,cerdas,dentista
+Toalha:secar,banho,praia,molhado,pano
+Perfume:cheiro,frasco,borrifar,fragrância,cheiroso
+Batom:boca,lábio,maquiagem,vermelho,passar
+Pente:cabelo,pentear,escova,dente,careca
+Boné:cabeça,chapéu,aba,sol,usar
+Chinelo:pé,sandália,praia,dedo,borracha
+Tênis:calçado,pé,cadarço,correr,esporte
+Meia:pé,sapato,par,furada,frio
+Casaco:frio,inverno,roupa,vestir,jaqueta
+Gravata:pescoço,terno,nó,formal,camisa
+Vestido:roupa,mulher,saia,festa,noiva
+Biquíni:praia,piscina,banho,sunga,verão
+Aliança:casamento,anel,dedo,ouro,noivo
+Carteira:dinheiro,bolso,documento,cartão,couro
+Mala:viagem,roupa,rodinha,aeroporto,bagagem
+Passaporte:viagem,documento,país,carimbo,aeroporto
+Mapa:localização,caminho,país,GPS,tesouro
+Bússola:norte,direção,agulha,navegar,mapa
+Barraca:acampar,camping,dormir,lona,praia
+Lanterna:luz,escuro,pilha,iluminar,acender
+Vela:fogo,cera,acender,aniversário,luz
+Fósforo:fogo,acender,caixa,palito,riscar
+Martelo:prego,bater,ferramenta,madeira,cabo
+Escada rolante:shopping,subir,degrau,automática,descer
+Semáforo:sinal,vermelho,verde,trânsito,parar
+Ponte:rio,atravessar,passar,carro,construção
+Túnel:passar,montanha,escuro,carro,buraco
+Farol:luz,mar,navio,carro,torre
+Navio:mar,barco,cruzeiro,capitão,porto
+Trem:trilho,vagão,estação,locomotiva,maquinista
+Metrô:subterrâneo,estação,trem,linha,vagão
+Moto:capacete,duas rodas,motoqueiro,acelerar,motocicleta
+Caminhão:carga,estrada,motorista,grande,caminhoneiro
+Helicóptero:hélice,voar,piloto,pousar,céu
+Foguete:espaço,lançar,astronauta,NASA,lua
+Táxi:motorista,corrida,carro,amarelo,passageiro
+Posto de gasolina:combustível,abastecer,carro,bomba,frentista
+Estacionamento:carro,vaga,parar,shopping,garagem
+Farmácia:remédio,comprar,receita,balcão,drogaria
+Padaria:pão,padeiro,café,manhã,sonho
+Açougue:carne,açougueiro,cortar,boi,faca
+Feira:barraca,fruta,verdura,pastel,rua
+Shopping:loja,comprar,praça de alimentação,cinema,passear
+Restaurante:comer,garçom,cardápio,mesa,conta
+Hotel:hospedar,quarto,viagem,recepção,diária
+Aeroporto:avião,voo,embarque,mala,viagem
+Biblioteca:livro,ler,silêncio,estante,emprestar
+Museu:arte,quadro,exposição,história,visitar
+Circo:palhaço,lona,trapézio,mágico,picadeiro
+Zoológico:animal,jaula,visitar,leão,macaco
+Parque de diversões:montanha-russa,brinquedo,roda-gigante,ingresso,carrossel
+Igreja:rezar,padre,missa,fé,casamento
+Fazenda:vaca,campo,roça,cavalo,plantação
+Castelo:rei,princesa,torre,medieval,rainha
+Ilha:mar,água,cercada,deserta,náufrago
+Montanha:alta,subir,pico,escalar,neve
+Caverna:escuro,pedra,morcego,buraco,gruta
+Rio:água,doce,correnteza,peixe,margem
+Lago:água,parado,peixe,pato,margem
+Piscina:nadar,água,cloro,mergulhar,boia
+Jardim:flor,planta,grama,regar,quintal
+Nuvem:céu,branca,chuva,algodão,avião
+Trovão:barulho,raio,tempestade,chuva,relâmpago
+Vento:ar,soprar,forte,pipa,furacão
+Terremoto:tremor,terra,placas,abalo,destruição
+Estrela:céu,noite,brilhar,cadente,sol
+Planeta:Terra,sistema solar,órbita,Marte,espaço
+Arroz:feijão,grão,branco,comida,cozido
+Feijão:arroz,grão,preto,caldo,carioca
+Ovo:galinha,casca,gema,clara,frito
+Leite:vaca,branco,beber,caixinha,café
+Queijo:leite,minas,rato,mussarela,pão
+Manteiga:pão,passar,leite,margarina,derreter
+Macarrão:massa,molho,espaguete,italiano,miojo
+Hambúrguer:pão,carne,lanche,sanduíche,queijo
+Batata frita:óleo,fritar,lanche,sal,palito
+Pipoca:milho,cinema,estourar,sal,panela
+Pastel:feira,frito,recheio,massa,caldo de cana
+Coxinha:frango,salgado,frita,massa,festa
+Pão de queijo:mineiro,polvilho,assado,café,bolinha
+Tapioca:goma,nordeste,recheio,frigideira,mandioca
+Açaí:roxo,tigela,granola,Amazônia,fruta
+Sushi:japonês,peixe,cru,arroz,hashi
+Salada:alface,tomate,folha,saudável,verdura
+Sopa:caldo,colher,quente,legume,prato
+Bolo:aniversário,fatia,forno,farinha,doce
+Pudim:leite condensado,calda,doce,sobremesa,furinho
+Paçoca:amendoim,doce,festa junina,farelo,rolha
+Mel:abelha,doce,colmeia,dourado,urso
+Sal:tempero,salgado,mar,branco,açúcar
+Açúcar:doce,café,branco,cana,adoçar
+Limão:azedo,verde,fruta,caipirinha,suco
+Melancia:fruta,verde,vermelha,semente,grande
+Abacaxi:fruta,coroa,azedo,amarelo,casca
+Morango:fruta,vermelho,chantilly,doce,sementinha
+Coco:água,praia,palmeira,ralado,branco
+Uva:cacho,vinho,roxa,passa,fruta
+Laranja:suco,fruta,gomo,vitamina,cor
+Cenoura:coelho,alaranjada,legume,bolo,raiz
+Cebola:chorar,camada,tempero,cortar,alho
+Refrigerante:gás,cola,lata,bebida,gelado
+Cerveja:álcool,gelada,bar,espuma,garrafa
+Vinho:uva,tinto,taça,garrafa,álcool
+Água:beber,líquido,sede,torneira,transparente
+Gato:miar,felino,animal,rato,cachorro
+Cavalo:montar,galope,crina,sela,cavaleiro
+Vaca:leite,mugir,boi,fazenda,pasto
+Porco:lama,rosa,bacon,chiqueiro,leitão
+Galinha:ovo,ave,cacarejar,pintinho,galo
+Pato:grasnar,lago,ave,bico,nadar
+Coelho:cenoura,orelha,Páscoa,pular,dente
+Rato:queijo,roedor,ratoeira,gato,rabo
+Macaco:banana,árvore,primata,galho,pular
+Leão:juba,rei,selva,rugir,felino
+Tigre:listras,felino,laranja,selva,gato
+Urso:mel,grande,pardo,hibernar,polar
+Lobo:uivar,matilha,mau,lua,cachorro
+Raposa:esperta,laranja,rabo,uva,astuta
+Cobra:veneno,rastejar,réptil,picada,serpente
+Jacaré:réptil,boca,pantanal,dente,crocodilo
+Tartaruga:casco,lenta,réptil,mar,devagar
+Sapo:pular,verde,lagoa,coaxar,príncipe
+Baleia:mar,gigante,mamífero,jato,azul
+Golfinho:mar,inteligente,saltar,mamífero,nadar
+Polvo:tentáculo,oito,mar,tinta,molusco
+Caranguejo:pinça,praia,lado,casca,mangue
+Papagaio:falar,ave,verde,repetir,louro
+Coruja:noite,ave,sábia,olhos,piar
+Morcego:noite,voar,vampiro,caverna,cabeça para baixo
+Formiga:pequena,formigueiro,trabalhar,açúcar,inseto
+Mosquito:picar,dengue,zumbido,sangue,inseto
+Aranha:teia,oito,patas,veneno,homem
+Médico:hospital,doente,consulta,receita,jaleco
+Enfermeiro:hospital,injeção,cuidar,paciente,médico
+Policial:prender,farda,viatura,ladrão,crime
+Advogado:lei,defender,tribunal,juiz,processo
+Juiz:tribunal,julgar,martelo,apito,sentença
+Cozinheiro:comida,cozinha,chef,panela,restaurante
+Garçom:restaurante,servir,bandeja,gorjeta,mesa
+Motorista:dirigir,carro,volante,ônibus,táxi
+Piloto:avião,voar,cabine,corrida,comandante
+Pedreiro:obra,tijolo,cimento,construir,casa
+Carteiro:carta,correio,entregar,correspondência,cachorro
+Jornalista:notícia,repórter,entrevista,jornal,escrever
+Fotógrafo:foto,câmera,clique,imagem,retrato
+Cantor:música,voz,microfone,palco,show
+Ator:novela,filme,teatro,papel,interpretar
+Palhaço:circo,nariz,rir,vermelho,engraçado
+Mágico:truque,cartola,coelho,varinha,ilusão
+Cientista:laboratório,experiência,pesquisa,jaleco,descoberta
+Presidente:país,governo,eleição,república,mandato
+Rei:coroa,rainha,trono,castelo,monarquia
+Bruxa:vassoura,feitiço,caldeirão,chapéu,verruga
+Sereia:mar,cauda,peixe,cantar,mulher
+Zumbi:morto,vivo,cérebro,apocalipse,andar
+Robô:máquina,metal,inteligência artificial,programar,androide
+Alienígena:extraterrestre,disco voador,planeta,verde,espaço
+Super-herói:poder,capa,salvar,vilão,máscara
+Dragão:fogo,asas,cavaleiro,voar,escamas
+Unicórnio:chifre,cavalo,arco-íris,mágico,branco
+Abraço:braços,apertar,carinho,envolver,beijo
+Beijo:boca,lábio,amor,bochecha,abraço
+Sorriso:dente,feliz,boca,rir,alegria
+Choro:lágrima,triste,olho,bebê,soluçar
+Espirro:nariz,saúde,gripe,atchim,alergia
+Bocejo:sono,boca,abrir,cansado,contagioso
+Ronco:dormir,barulho,nariz,noite,alto
+Sonho:dormir,noite,pesadelo,imaginar,desejo
+Fome:comer,barriga,vontade,vazio,roncar
+Sede:água,beber,garganta,seca,vontade
+Medo:susto,pavor,escuro,terror,coragem
+Ciúme:namorado,inveja,desconfiar,sentimento,posse
+Fofoca:falar,vizinha,contar,segredo,boato
+Mentira:verdade,enganar,Pinóquio,falso,nariz
+Segredo:contar,guardar,esconder,ninguém,confidencial
+Promessa:cumprir,jurar,palavra,compromisso,dedinho
+Sorte:azar,trevo,ganhar,loteria,acaso
+Namoro:casal,amor,beijo,relacionamento,namorado
+Amizade:amigo,companheiro,colega,confiar,parceria
+Família:pai,mãe,irmão,parente,casa
+Vizinho:casa,lado,morar,barulho,muro
+Chefe:trabalho,mandar,patrão,empresa,funcionário
+Reunião:trabalho,encontro,sala,pauta,e-mail
+Salário:dinheiro,trabalho,mês,pagamento,receber
+Imposto:governo,pagar,taxa,renda,leão
+Boleto:pagar,conta,vencimento,código de barras,banco
+Senha:secreta,digitar,acesso,esquecer,login
+Wi-Fi:internet,sinal,rede,roteador,sem fio
+Aplicativo:celular,baixar,app,loja,instalar
+Rede social:postar,curtir,seguidor,perfil,internet
+Videogame:jogar,controle,console,fase,tela
+Fotografia:câmera,imagem,retrato,tirar,álbum
+Música:som,cantar,ouvir,melodia,canção
+Dança:música,corpo,ritmo,passo,bailar
+Teatro:palco,peça,ator,cortina,plateia
+Show:palco,cantor,plateia,ingresso,banda
+Festa:comemorar,música,convidado,bolo,balada
+Feriado:folga,descanso,data,trabalhar,emendar
+Páscoa:ovo,chocolate,coelho,domingo,ressurreição
+Ano-Novo:réveillon,fogos,virada,branco,janeiro
+Dia das Mães:maio,presente,filho,domingo,homenagem
+Festa junina:quadrilha,fogueira,milho,caipira,junho
+Halloween:bruxa,abóbora,doce,fantasia,travessura
+Copa do Mundo:futebol,seleção,taça,quatro anos,país
+Gol:bola,rede,futebol,chute,trave
+Pênalti:falta,cobrar,goleiro,área,marca
+Medalha:ouro,pódio,prêmio,pescoço,olimpíada
+Corrida:correr,rápido,largada,chegada,maratona
+Natação:nadar,piscina,água,braçada,touca
+Vôlei:rede,bola,cortada,saque,quadra
+Basquete:cesta,bola,quicar,quadra,arremesso
+Tênis de mesa:raquete,bolinha,pingue-pongue,mesa,rede
+Ioga:alongamento,postura,meditação,tapete,respiração
+Pescaria:peixe,vara,anzol,rio,isca
+Acampamento:barraca,fogueira,mato,natureza,dormir
+`).forEach(function(l){ var k = l.indexOf(':'); PB_CARDS.push([l.slice(0,k), l.slice(k+1).split(',')]); });
+
+/* Nota: topics */
+moreLines(`
+Sorvete de pistache
+Pizza doce
+Hambúrguer artesanal
+Comida japonesa
+Comida mexicana
+Lasanha
+Strogonoff
+Farofa
+Quiabo
+Beterraba
+Abacate com açúcar
+Chá gelado
+Água com gás
+Café com leite
+Chocolate amargo
+Chocolate branco
+Bolo de cenoura
+Pavê
+Sagu
+Cuscuz
+Tapioca
+Pamonha
+Caldo de cana
+Água de coco
+Comer na frente da TV
+Almoçar sozinho
+Fazer dieta
+Acordar tarde no domingo
+Fazer hora extra
+Trabalhar no feriado
+Reunião por vídeo
+Grupo de trabalho no WhatsApp
+Figurinhas no WhatsApp
+Mensagem de bom dia
+Postar foto de comida
+Tirar selfie
+Assistir vídeos curtos
+Podcast
+Audiolivro
+Ir ao cinema
+Maratonar série
+Filme de romance
+Filme de ação
+Comédia romântica
+Desenho animado
+Documentário
+Show de rock
+Balada
+Barzinho
+Dançar forró
+Samba
+Música eletrônica
+MPB
+K-pop
+Tocar violão
+Cantar no chuveiro
+Jogar futebol
+Assistir vôlei
+Correr na rua
+Caminhada
+Pilates
+Natação
+Praia no inverno
+Piscina
+Cachoeira
+Trilha
+Viajar de ônibus
+Viajar de carro
+Cruzeiro
+Hotel fazenda
+Viajar sozinho
+Fazer mala
+Fila de aeroporto
+Museu
+Zoológico
+Circo
+Feira livre
+Supermercado lotado
+Comprar pela internet
+Provador de loja
+Ir ao cabeleireiro
+Cortar o cabelo em casa
+Barba
+Perfume forte
+Roupa social
+Pijama o dia todo
+Usar relógio
+Frio com sol
+Trovoada
+Lua cheia
+Passear com cachorro
+Peixe de aquário
+Plantas em casa
+Cozinhar para visita
+Receber visita sem aviso
+Morar sozinho
+Dividir apartamento
+Mudança de casa
+Trânsito
+Andar de moto
+Patinete elétrico
+Carro elétrico
+Vale-presente
+Cartão de aniversário
+Festa infantil
+Chá de bebê
+Formatura
+Casamento na praia
+Fogos de artifício
+Jogo de cartas
+Quebra-cabeça
+Palavras cruzadas
+Bingo
+Estudar de madrugada
+Prova oral
+Trabalho em grupo
+Apresentar em público
+Aprender outro idioma
+Matemática
+Educação física
+Acordar com despertador
+Tomar banho de manhã
+Dormir de meia
+Dormir com ventilador
+Ar-condicionado no máximo
+`).forEach(function(l){ NT_TOPICS.push(l); });
+
+/* Tem ou Não Tem: question | five answers separated by commas, each one with variations separated by semicolons */
+moreLines(`
+Coisas que tem em uma sala de aula|Lousa;quadro;quadro negro,Carteira;mesa;cadeira;carteiras,Professor;professora,Caderno;livro;livros,Giz;caneta;lápis
+Coisas que se leva para um piquenique|Toalha;pano;canga,Sanduíche;lanche;pão,Fruta;frutas,Suco;bebida;refrigerante;água,Cesta;cesto
+Coisas que tem em um carro|Volante;direção,Banco;bancos;assento,Roda;pneu;rodas;pneus,Motor,Cinto de segurança;cinto
+Coisas que se faz antes de dormir|Escovar os dentes;escovar dente;escovar dentes,Tomar banho;banho,Colocar pijama;pijama;trocar de roupa,Olhar o celular;celular;mexer no celular,Ler;livro;ler um livro
+Coisas que tem em um hospital|Médico;médica;médicos,Enfermeiro;enfermeira;enfermeiros,Maca;cama;leito,Remédio;remédios;medicamento,Ambulância
+Coisas que tem em uma festa junina|Fogueira,Quadrilha;dança,Bandeirinha;bandeirinhas;bandeira,Pipoca;milho;comida,Chapéu de palha;chapéu
+Objetos que tem em um escritório|Computador;notebook,Mesa,Cadeira,Caneta;papel,Impressora;telefone
+Coisas que as pessoas colecionam|Figurinhas;figurinha;álbum,Moedas;moeda,Selos;selo,Carrinhos;carrinho;miniaturas,Bonecos;boneco;bonecas;boneca
+Coisas que se compra no supermercado|Arroz,Feijão,Leite,Carne;frango,Pão
+Coisas que tem em um parque|Árvore;árvores,Banco;bancos,Balanço;brinquedo;brinquedos;escorregador,Grama;gramado,Lago;pista
+Coisas que tem na geladeira|Leite,Ovo;ovos,Água,Queijo;manteiga;margarina,Fruta;frutas;legumes;verdura
+Coisas que fazem barulho|Buzina;carro,Cachorro;latido,Despertador;alarme,Trovão;trovoada,Obra;furadeira;britadeira
+Meios de transporte|Carro,Ônibus,Avião,Bicicleta;bike,Moto;motocicleta
+Coisas que se usa no frio|Casaco;blusa;jaqueta;agasalho,Cachecol,Luva;luvas,Touca;gorro,Meia;meias;bota
+Coisas que se usa na chuva|Guarda-chuva;guarda chuva;sombrinha,Capa de chuva;capa,Bota;galocha;botas,Casaco;jaqueta,Carro
+Coisas que tem em um quarto|Cama,Guarda-roupa;armário;guarda roupa,Travesseiro,Televisão;tv,Espelho;abajur
+Coisas redondas|Bola,Roda;pneu,Moeda,Sol;lua,Pizza;prato
+Coisas que são amarelas|Sol,Banana,Ouro,Gema;ovo,Girassol;milho
+Coisas que são vermelhas|Sangue,Morango;maçã,Tomate,Coração,Rosa;fogo
+Coisas geladas|Sorvete;picolé,Gelo,Cerveja;refrigerante,Água gelada;água,Neve
+Coisas que voam|Avião,Pássaro;passarinho;ave,Borboleta,Helicóptero,Pipa;balão
+Animais da fazenda|Vaca;boi,Cavalo,Galinha;galo,Porco,Ovelha;carneiro;cabra
+Animais que vivem no mar|Tubarão,Baleia,Golfinho,Peixe;peixes,Polvo;tartaruga
+Coisas que tem em um circo|Palhaço,Mágico,Trapezista;trapézio,Malabarista;malabares,Lona;picadeiro
+Coisas que se faz na praia|Nadar;banho de mar;mergulhar,Tomar sol;bronzear;sol,Jogar bola;futebol;vôlei;frescobol,Castelo de areia;castelo,Caminhar;andar;correr
+Coisas que se faz em uma festa|Dançar,Comer,Beber,Conversar;bater papo,Cantar parabéns;cantar;parabéns
+Profissões que as crianças sonham ter|Jogador de futebol;jogador,Médico;médica,Bombeiro,Astronauta,Professor;professora;policial
+Coisas que se pede em uma lanchonete|Hambúrguer;x-burguer;lanche,Batata frita;batata;fritas,Refrigerante;refri,Milk-shake;milkshake;sorvete,Suco
+Recheios de pastel|Carne,Queijo,Frango;frango com catupiry,Pizza,Palmito;camarão
+Sabores de sorvete|Chocolate,Morango,Creme;baunilha,Flocos,Napolitano
+Coisas que tem em um aeroporto|Avião;aviões,Mala;malas;bagagem,Passaporte;passagem;bilhete,Esteira,Portão de embarque;portão;embarque
+Motivos para faltar ao trabalho|Doença;doente;gripe;atestado,Médico;consulta,Filho doente;filho;filhos,Trânsito;greve;ônibus,Chuva;enchente;alagamento
+Coisas que as pessoas fazem nas férias|Viajar;viagem,Descansar;dormir,Ir à praia;praia,Passear;sair,Visitar a família;família;visitar parentes
+Presentes de Natal|Brinquedo;brinquedos,Roupa;roupas,Perfume,Chocolate;panetone,Celular;eletrônico
+Coisas que tem na ceia de Natal|Peru;chester,Arroz;arroz com passas,Farofa,Panetone;rabanada,Salpicão;maionese
+Coisas que tem em um estádio de futebol|Torcida;torcedor;torcedores,Gramado;campo;grama,Trave;gol,Arquibancada;cadeiras,Placar;telão
+Coisas que se leva para a escola|Mochila,Caderno,Lápis;caneta,Lanche;lancheira,Estojo;livro
+Coisas que tem em um bolo de aniversário|Vela;velas;velinha,Chantilly;cobertura;glacê,Recheio,Chocolate;granulado,Morango;fruta
+Coisas que se encontra na carteira|Dinheiro;nota;notas,Cartão;cartões,Documento;rg;identidade;cnh,Foto;fotos,Moeda;moedas
+Coisas que dão sono|Aula;palestra,Chuva;barulho de chuva,Filme;televisão;tv,Almoço;comer;comida,Ler;livro;leitura
+Coisas que as pessoas esquecem em casa|Chave;chaves,Celular,Carteira,Guarda-chuva;guarda chuva,Óculos;documento
+Coisas que crescem|Cabelo,Unha;unhas,Planta;árvore;plantas,Criança;filho;bebê,Barba
+Aplicativos que todo mundo tem no celular|WhatsApp;zap,Instagram,YouTube,Banco;aplicativo do banco;app do banco,Câmera;calculadora;calendário
+Coisas que se compra na farmácia|Remédio;remédios;medicamento,Curativo;band-aid;esparadrapo,Protetor solar;protetor,Xampu;shampoo;sabonete,Vitamina;vitaminas
+Coisas que tem em uma mesa de café da manhã|Pão,Café,Manteiga;margarina,Leite,Queijo;presunto;frutas;fruta
+Brinquedos clássicos|Bola,Boneca,Carrinho,Pipa,Pião;ioiô;bambolê
+Coisas que se vê no céu|Sol,Lua,Estrela;estrelas,Nuvem;nuvens,Avião;pássaro
+Coisas que tem em um casamento|Noivos;noiva;noivo,Bolo,Aliança;alianças,Padrinhos;padrinho;madrinha;convidados,Buquê;flores;flor
+Instrumentos de uma banda|Guitarra,Bateria,Baixo;contrabaixo,Teclado,Microfone;vocal;voz
+Línguas mais lembradas|Inglês,Espanhol,Português,Francês,Italiano;alemão
+`).forEach(function(l){ var p = l.split('|'); TM_BANK.push([p[0], p[1].split(',').map(function(a){ return a.split(';'); })]); });
+
+/* Limite: question | number */
+moreLines(`
+Quantos dias tem o mês de fevereiro em um ano comum?|28
+Quantos anos tem uma década?|10
+Quantos anos tem um milênio?|1000
+Quantas semanas tem um ano, arredondando?|52
+Quantos dias tem um ano comum?|365
+Quantos minutos tem uma partida de basquete da NBA?|48
+Quantos minutos dura cada tempo de uma partida de futsal?|20
+Quantos jogadores de cada time ficam em quadra no handebol?|7
+Quantos jogadores de cada time ficam em campo no beisebol?|9
+Quantos pontos vale um touchdown no futebol americano?|6
+Quantos buracos tem um campo de golfe oficial?|18
+Quantas peças cada jogador tem no início de uma partida de xadrez?|16
+Quantos quadradinhos tem cada face de um cubo mágico tradicional?|9
+Quantas faces tem um cubo?|6
+Quantos lados tem um octógono?|8
+Quantos graus tem um ângulo reto?|90
+Quantos graus somam os ângulos internos de um triângulo?|180
+Quantos metros tem um quilômetro?|1000
+Quantos mililitros tem um litro?|1000
+Quantos quilos tem uma tonelada?|1000
+Quantas unidades tem uma dúzia?|12
+Quantas unidades tem uma grosa?|144
+Quantos signos tem o zodíaco?|12
+Quantas notas musicais tem a escala básica?|7
+Quantas cordas tem um violino?|4
+Quantas teclas pretas tem um piano tradicional?|36
+Quantos planetas do Sistema Solar têm anéis?|4
+Quantas luas tem Marte?|2
+Quantos minutos a luz do Sol leva para chegar à Terra, arredondando?|8
+Quantos países fazem fronteira com o Brasil?|10
+Quantos estados tem a região Nordeste do Brasil?|9
+Quantos estados tem a região Sul do Brasil?|3
+Quantos estados tem a região Norte do Brasil?|7
+Quantos estados tem a região Sudeste do Brasil?|4
+Quantos estados têm os Estados Unidos?|50
+Quantas listras tem a bandeira dos Estados Unidos?|13
+Quantos países formam o Reino Unido?|4
+Quantos andares tem o Empire State Building?|102
+Quantos metros de altura tem a Torre Eiffel, arredondando?|330
+Quantos metros de altura tem o Burj Khalifa, arredondando?|828
+Em que ano foi fundada a cidade de São Paulo?|1554
+Em que ano foi fundada a cidade do Rio de Janeiro?|1565
+Em que ano o Brasil ganhou a sua primeira Copa do Mundo?|1958
+Em que ano o Brasil sediou a Copa do Mundo pela primeira vez?|1950
+Em que ano aconteceram as Olimpíadas do Rio de Janeiro?|2016
+Em que ano aconteceram os primeiros Jogos Olímpicos da era moderna?|1896
+Em que ano foi criado o Plano Real?|1994
+Em que ano foi promulgada a atual Constituição do Brasil?|1988
+Em que ano a família real portuguesa chegou ao Brasil?|1808
+Em que ano Cristóvão Colombo chegou à América?|1492
+Em que ano foi declarada a independência dos Estados Unidos?|1776
+Em que ano terminou a Primeira Guerra Mundial?|1918
+Em que ano começou a Segunda Guerra Mundial?|1939
+Em que ano aconteceu a Semana de Arte Moderna?|1922
+Em que ano foi lançado o primeiro filme de Star Wars?|1977
+Em que ano foi lançado o primeiro livro de Harry Potter?|1997
+Em que ano foi lançado o filme Titanic?|1997
+Em que ano foi criado o YouTube?|2005
+Em que ano foi criado o Facebook?|2004
+Em que ano foi lançado o WhatsApp?|2009
+Em que ano morreu Ayrton Senna?|1994
+Em que ano Pelé marcou o milésimo gol?|1969
+Em que ano nasceu Pelé?|1940
+Em que ano o Brasil conquistou o pentacampeonato mundial de futebol?|2002
+Em que ano foi inaugurado o Cristo Redentor?|1931
+Em que ano foi inaugurado o estádio do Maracanã?|1950
+Quantos gols a Alemanha fez no Brasil na semifinal da Copa de 2014?|7
+Quantos títulos mundiais de Fórmula 1 Ayrton Senna conquistou?|3
+Quantos títulos mundiais de Fórmula 1 Michael Schumacher conquistou?|7
+Quantas medalhas de ouro olímpicas Michael Phelps conquistou?|23
+Quantos metros tem a prova mais curta e rápida do atletismo olímpico?|100
+Quantos centímetros mede uma régua escolar comum?|30
+Quantos dentes de leite tem uma criança?|20
+Quantos pares de costelas tem o ser humano?|12
+Quantas vértebras tem a coluna humana, contando as fundidas?|33
+Quantos dedos tem uma pessoa, somando mãos e pés?|20
+Quantas patas tem um caranguejo?|10
+Quantos braços tem um polvo?|8
+Quantos compartimentos tem o estômago de uma vaca?|4
+Quantas semanas dura uma gestação humana completa?|40
+Quantos graus Celsius tem a temperatura normal do corpo humano, arredondando?|37
+A quantos graus Celsius a água congela?|0
+Quantos graus Fahrenheit equivalem a 100 graus Celsius?|212
+Quantos algarismos tem um CPF?|11
+Quantos algarismos tem um CEP?|8
+Quantos números existem no volante da Mega-Sena?|60
+Quantos números são sorteados em cada concurso da Mega-Sena?|6
+Quantas cartas cada jogador recebe no início de uma partida de Uno?|7
+Quantas pedras cada jogador recebe no dominó com quatro jogadores?|7
+Quantos pinos tem uma pista de boliche?|10
+Quantas cores tem a bandeira do Brasil?|4
+Quantas letras tem a palavra paralelepípedo?|14
+Quantos anões acompanham a Branca de Neve?|7
+Quantos dálmatas aparecem no título do filme da Disney?|101
+Quantos livros tem a série principal de Harry Potter?|7
+`).forEach(function(l){ var p = l.split('|'); LM_BANK.push([p[0], Number(p[1])]); });
 
 boot();
 </script>
